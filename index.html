@@ -1,120 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TinkerVision — CAD · 3D · Design</title>
-  <meta name="description" content="CAD &amp; 3D development, digital products, 3D scanning, prototyping and design. Models on Cults3D and Printables.">
+  <title>TinkerVision</title>
+  <meta name="description" content="TinkerVision — CAD, 3D, Design.">
   <link rel="icon" href="emblem.png">
   <link rel="apple-touch-icon" href="emblem.png">
-  <meta property="og:title" content="TinkerVision — CAD · 3D · Design">
-  <meta property="og:description" content="3D models and digital design. products available via DM and on Cults.">
+  <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:400,500,600" rel="stylesheet">
+  <meta property="og:title" content="TinkerVision">
+  <meta property="og:description" content="Ideas become geometry.">
   <meta property="og:image" content="emblem.png">
   <style>
     :root {
-      --ink: #111111;
-      --muted: #5c5c5c;
-      --line: #e4e4e4;
-      --bg: #f4f4f2;
-      --card: #ffffff;
+      --ink: #101114;
+      --muted: #6d6f78;
+      --line: #e4e5ea;
+      --bg0: #ececf1;
       --cults: #6b2d91;
       --printables: #fa6831;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
     body {
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-      background:
-        radial-gradient(circle at 50% -10%, #ffffff 0%, var(--bg) 55%);
+      font-family: Outfit, system-ui, sans-serif;
       color: var(--ink);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      background-color: var(--bg0);
+      background-image:
+        radial-gradient(ellipse 70% 45% at 50% 0%, #ffffff 0%, transparent 70%),
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: auto, 28px 28px, 28px 28px;
+    }
+    .top {
+      width: min(440px, calc(100% - 28px));
+      display: flex;
+      justify-content: flex-end;
+      padding: 16px 0 0;
+    }
+    .lang {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255,255,255,.86);
+      backdrop-filter: blur(8px);
+    }
+    .lang button {
+      font-family: Outfit, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 7px 12px;
+      cursor: pointer;
+    }
+    .lang button[aria-pressed="true"] {
+      background: var(--ink);
+      color: #fff;
     }
     main {
-      width: min(420px, calc(100% - 32px));
-      margin: 48px auto 24px;
+      width: min(440px, calc(100% - 28px));
+      margin: 14px auto 28px;
       text-align: center;
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(14px);
+      border: 1px solid #fff;
+      border-radius: 28px;
+      padding: 36px 22px 22px;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,.9) inset,
+        0 24px 50px rgba(16,17,20,.08);
     }
     .logo {
-      width: 148px;
-      height: 148px;
+      width: 140px;
+      height: 140px;
       object-fit: contain;
       display: block;
-      margin: 0 auto 22px;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,.06));
+      margin: 0 auto 18px;
+      filter: drop-shadow(0 10px 20px rgba(16,17,20,.08));
     }
     h1 {
-      font-size: 1.45rem;
-      letter-spacing: 0.14em;
+      font-family: Orbitron, sans-serif;
+      font-size: 1.18rem;
+      letter-spacing: 0.24em;
       margin: 0 0 8px;
-      font-weight: 750;
-      text-transform: uppercase;
+      font-weight: 700;
     }
     .tag {
       color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.5;
-      margin: 0 0 28px;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      margin: 0;
     }
-    .section {
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 0 10px;
-      font-weight: 600;
+    .rule {
+      width: 28px;
+      height: 2px;
+      background: var(--ink);
+      margin: 20px auto 22px;
+      opacity: .22;
+      border-radius: 2px;
     }
-    .shops { display: grid; gap: 12px; margin-bottom: 28px; }
+    .shops { display: grid; gap: 10px; }
     a.shop {
       display: grid;
-      grid-template-columns: 52px 1fr 18px;
+      grid-template-columns: 48px 1fr 16px;
       gap: 12px;
       align-items: center;
       text-align: left;
-      padding: 14px 16px;
-      background: var(--card);
+      padding: 12px 14px;
+      background: #fff;
       border: 1px solid var(--line);
-      border-radius: 14px;
+      border-radius: 16px;
       text-decoration: none;
       color: var(--ink);
-      box-shadow: 0 6px 18px rgba(0,0,0,.04);
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      box-shadow: 0 6px 16px rgba(16,17,20,.04);
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
     }
     a.shop:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(0,0,0,.08);
-      border-color: #cfcfcf;
+      border-color: #d0d1d8;
+      box-shadow: 0 14px 28px rgba(16,17,20,.08);
     }
+    .cults { border-left: 3px solid var(--cults); }
+    .printables { border-left: 3px solid var(--printables); }
     .mark {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       border-radius: 12px;
       display: grid;
       place-items: center;
       color: #fff;
     }
-    .mark svg { width: 26px; height: 26px; fill: currentColor; }
+    .mark svg { width: 22px; height: 22px; fill: currentColor; }
     .cults .mark { background: var(--cults); }
     .printables .mark { background: var(--printables); }
     .shop strong {
       display: block;
-      font-size: 1.02rem;
-      letter-spacing: 0.01em;
+      font-size: 0.98rem;
+      font-weight: 600;
     }
     .shop span {
       display: block;
       color: var(--muted);
-      font-size: 0.8rem;
+      font-size: 0.76rem;
       margin-top: 2px;
     }
-    .ext { color: #b0b0b0; }
+    .ext { color: #c4c5cc; }
+    .contact {
+      margin-top: 18px;
+      text-align: left;
+      background: #f6f6f8;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+    }
+    .contact h2 {
+      font-family: Orbitron, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      margin: 0 0 14px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .contact label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin: 0 0 5px;
+    }
+    .contact input,
+    .contact textarea {
+      width: 100%;
+      font-family: Outfit, sans-serif;
+      font-size: 0.92rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 11px 12px;
+      margin-bottom: 10px;
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+    }
+    .contact input:focus,
+    .contact textarea:focus { border-color: #b8b9c2; }
+    .contact textarea { min-height: 92px; resize: vertical; }
+    .actions { display: grid; gap: 8px; margin-top: 4px; }
+    .btn-send {
+      font-family: Outfit, sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: var(--ink);
+      color: #fff;
+      cursor: pointer;
+    }
+    .btn-mail {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.82rem;
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      padding: 11px 14px;
+      color: var(--muted);
+      background: transparent;
+    }
+    .btn-mail:hover { color: var(--ink); border-color: #c5c6ce; }
+    .sent {
+      display: none;
+      background: #e8f5ea;
+      color: #1d6b2a;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 0.84rem;
+      margin-bottom: 10px;
+    }
+    .sent.on { display: block; }
     footer {
       margin-top: auto;
-      padding: 8px 16px 32px;
+      padding: 4px 16px 28px;
       color: var(--muted);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
@@ -125,40 +243,116 @@
   </style>
 </head>
 <body>
+  <div class="top">
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-set-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
   <main>
-    <img class="logo" src="emblem.png" alt="TinkerVision emblem">
+    <img class="logo" src="emblem.png" alt="TinkerVision">
     <h1>TinkerVision</h1>
-    <p class="tag">CAD &amp; <br>3D scanning · prototyping · design</p>
-
-    <p class="section">Shops &amp; models</p>
-    <nav class="shops" aria-label="3D shops">
+    <p class="tag" data-i18n="slogan"></p>
+    <div class="rule" aria-hidden="true"></div>
+    <nav class="shops" aria-label="Shops">
       <a class="shop cults" href="https://cults3d.com/@TinkerVision" rel="noopener noreferrer" target="_blank">
         <div class="mark" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5zm0 2.2 6.2 3.45v.2L12 11.3 5.8 7.85v-.2L12 4.2zM5 9.2l6 3.35V19l-6-3.33V9.2zm8 9.15v-6.45L19 9.2v6.47L13 18.35z"/></svg>
         </div>
         <div>
           <strong>Cults3D</strong>
-          <span>3D models for download</span>
+          <span data-i18n="cults"></span>
         </div>
         <svg class="ext" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg>
       </a>
-
       <a class="shop printables" href="https://www.printables.com/@TinkerVision_2450000" rel="noopener noreferrer" target="_blank">
         <div class="mark" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M4 3h16v4H4V3zm2 6h12l1 12H5L6 9zm4 2v8h4v-8h-4z"/></svg>
         </div>
         <div>
           <strong>Printables</strong>
-          <span>Free &amp; premium models</span>
+          <span data-i18n="printables"></span>
         </div>
         <svg class="ext" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg>
       </a>
     </nav>
+    <section class="contact" id="kontakt">
+      <h2 data-i18n="contact"></h2>
+      <p class="sent" id="sent" data-i18n="sent"></p>
+      <form action="https://formsubmit.co/tinkervision.de@protonmail.com" method="POST">
+        <input type="hidden" name="_subject" value="TinkerVision Kontakt">
+        <input type="hidden" name="_next" value="https://tinkervision.de/index.html?sent=1">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none">
+        <label for="name" data-i18n="name"></label>
+        <input id="name" name="name" required>
+        <label for="email" data-i18n="email"></label>
+        <input id="email" name="email" type="email" required>
+        <label for="message" data-i18n="message"></label>
+        <textarea id="message" name="message" required></textarea>
+        <div class="actions">
+          <button class="btn-send" type="submit" data-i18n="send"></button>
+          <a class="btn-mail" href="mailto:tinkervision.de@protonmail.com" data-i18n="mailto"></a>
+        </div>
+      </form>
+    </section>
   </main>
   <footer>
     <span>© 2026 TinkerVision</span>
-    <a href="impressum.html">Imprint</a>
-    <a href="datenschutz.html">Privacy</a>
+    <a href="impressum.html" data-i18n="imprint"></a>
+    <a href="datenschutz.html" data-i18n="privacy"></a>
   </footer>
+  <script>
+    const T = {
+      de: {
+        slogan: "Idee wird Geometrie.",
+        cults: "3D-Modelle zum Download",
+        printables: "Kostenlose & Premium-Modelle",
+        imprint: "Impressum",
+        privacy: "Datenschutz",
+        contact: "Kontakt",
+        name: "Name",
+        email: "E-Mail",
+        message: "Nachricht",
+        send: "Absenden",
+        mailto: "Direkt an tinkervision.de@protonmail.com",
+        sent: "Nachricht unterwegs. Bitte beim ersten Mal den Bestätigungslink in Proton Mail öffnen."
+      },
+      en: {
+        slogan: "Ideas become geometry.",
+        cults: "3D models for download",
+        printables: "Free & premium models",
+        imprint: "Imprint",
+        privacy: "Privacy",
+        contact: "Contact",
+        name: "Name",
+        email: "Email",
+        message: "Message",
+        send: "Send",
+        mailto: "Email tinkervision.de@protonmail.com",
+        sent: "Message on its way. The first time, open the confirmation link in Proton Mail."
+      }
+    };
+    function applyLang(lang) {
+      const pack = T[lang] || T.de;
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (pack[key]) el.textContent = pack[key];
+      });
+      document.querySelectorAll("[data-set-lang]").forEach((btn) => {
+        btn.setAttribute("aria-pressed", btn.getAttribute("data-set-lang") === lang ? "true" : "false");
+      });
+      localStorage.setItem("tv-lang", lang);
+    }
+    const start = localStorage.getItem("tv-lang") || (navigator.language || "de").slice(0, 2);
+    applyLang(start === "en" ? "en" : "de");
+    document.querySelectorAll("[data-set-lang]").forEach((btn) => {
+      btn.addEventListener("click", () => applyLang(btn.getAttribute("data-set-lang")));
+    });
+    if (new URLSearchParams(location.search).get("sent") === "1") {
+      document.getElementById("sent").classList.add("on");
+    }
+  </script>
 </body>
 </html>
