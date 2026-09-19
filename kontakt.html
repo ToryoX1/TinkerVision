@@ -31,13 +31,13 @@
       background-size: auto, 28px 28px, 28px 28px;
     }
     .top {
-      width: min(440px, calc(100% - 28px));
+      width: min(528px, calc(100% - 28px));
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 16px 0 0;
     }
-    .back { color: var(--muted); text-decoration: none; font-size: 0.88rem; }
+    .back { color: var(--muted); text-decoration: none; font-size: 1.06rem; }
     .back:hover { color: var(--ink); }
     .lang {
       display: inline-flex;
@@ -59,24 +59,24 @@
     }
     .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
     main {
-      width: min(440px, calc(100% - 28px));
+      width: min(528px, calc(100% - 28px));
       margin: 14px auto 28px;
       background: rgba(255,255,255,.78);
       border: 1px solid #fff;
       border-radius: 28px;
-      padding: 28px 22px 22px;
+      padding: 34px 26px 26px;
       box-shadow: 0 24px 50px rgba(16,17,20,.08);
     }
     h1 {
       font-family: Orbitron, sans-serif;
-      font-size: 0.95rem;
+      font-size: 1.14rem;
       letter-spacing: 0.18em;
       margin: 0 0 6px;
     }
-    .lead { color: var(--muted); font-size: 0.88rem; margin: 0 0 18px; }
+    .lead { color: var(--muted); font-size: 1.06rem; margin: 0 0 22px; }
     label {
       display: block;
-      font-size: 0.72rem;
+      font-size: 0.86rem;
       letter-spacing: 0.04em;
       color: var(--muted);
       margin: 0 0 5px;
@@ -84,23 +84,24 @@
     input, textarea {
       width: 100%;
       font-family: Outfit, sans-serif;
-      font-size: 0.92rem;
+      font-size: 1.1rem;
       border: 1px solid var(--line);
       border-radius: 12px;
-      padding: 11px 12px;
-      margin-bottom: 10px;
+      padding: 13px 14px;
+      margin-bottom: 12px;
       background: #fff;
       color: var(--ink);
       outline: none;
     }
-    textarea { min-height: 110px; resize: vertical; }
+    textarea { min-height: 132px; resize: vertical; }
     .actions { display: grid; gap: 8px; margin-top: 6px; }
     .btn-send {
       font-family: Outfit, sans-serif;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 1.12rem;
       border: 0;
       border-radius: 12px;
-      padding: 12px 14px;
+      padding: 14px 17px;
       background: var(--ink);
       color: #fff;
       cursor: pointer;
@@ -109,11 +110,11 @@
       display: block;
       text-align: center;
       text-decoration: none;
-      font-weight: 500;
-      font-size: 0.82rem;
+      font-weight: 700;
+      font-size: 1.05rem;
       border: 1px dashed var(--line);
       border-radius: 12px;
-      padding: 11px 14px;
+      padding: 13px 17px;
       color: var(--muted);
     }
     .btn-mail:hover { color: var(--ink); }
@@ -123,7 +124,7 @@
       color: #1d6b2a;
       border-radius: 12px;
       padding: 10px 12px;
-      font-size: 0.84rem;
+      font-size: 1rem;
       margin-bottom: 12px;
     }
     .sent.on { display: block; }
@@ -135,15 +136,15 @@
       border: 0;
       border-radius: 12px;
       overflow: hidden;
-      min-height: 48px;
+      min-height: 58px;
       padding: 0;
       cursor: default;
       position: relative;
       background: linear-gradient(135deg, #25d366 0 50%, #101114 50% 100%);
       color: #fff;
       font-family: Outfit, sans-serif;
-      font-weight: 600;
-      font-size: 0.72rem;
+      font-weight: 700;
+      font-size: 0.95rem;
       letter-spacing: 0.02em;
     }
     .soon span {
@@ -151,14 +152,14 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      padding: 12px 8px;
+      padding: 14px 10px;
       text-align: center;
       position: relative;
       z-index: 1;
     }
     .soon img {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
       object-fit: contain;
       flex-shrink: 0;
     }
