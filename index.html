@@ -106,9 +106,16 @@
       width: 28px;
       height: 2px;
       background: var(--ink);
-      margin: 20px auto 22px;
+      margin: 18px auto 12px;
       opacity: .22;
       border-radius: 2px;
+    }
+    .line {
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      margin: 0 0 22px;
+      text-transform: none;
     }
     .shops { display: grid; gap: 10px; }
     a.shop {
@@ -186,6 +193,7 @@
     <h1>TinkerVision</h1>
     <p class="tag" data-i18n="slogan"></p>
     <div class="rule" aria-hidden="true"></div>
+    <p class="line" data-i18n="line"></p>
     <nav class="shops" aria-label="Shops">
       <a class="shop cults" href="https://cults3d.com/@TinkerVision" rel="noopener noreferrer" target="_blank">
         <div class="mark" aria-hidden="true">
@@ -238,6 +246,7 @@
     const T = {
       de: {
         slogan: "Idee wird Geometrie.",
+        line: "3D-Scan · CAD-Entwicklung · Prototypen",
         cults: "3D-Modelle zum Download",
         printables: "Kostenlose & Premium-Modelle",
         imprint: "Impressum",
@@ -249,6 +258,7 @@
       },
       en: {
         slogan: "Ideas become geometry.",
+        line: "3D scan · CAD development · Prototypes",
         cults: "3D models for download",
         printables: "Free & premium models",
         imprint: "Imprint",
