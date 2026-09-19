@@ -21,6 +21,7 @@
       --cults: #6b2d91;
       --printables: #fa6831;
       --contact: #101114;
+      --services: #2f4a63;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -132,6 +133,7 @@
     }
     .cults { border-left: 3px solid var(--cults); }
     .printables { border-left: 3px solid var(--printables); }
+    .services-btn { border-left: 3px solid var(--services); }
     .contact-btn { border-left: 3px solid var(--contact); }
     .mark {
       width: 48px;
@@ -144,6 +146,7 @@
     .mark svg { width: 22px; height: 22px; fill: currentColor; }
     .cults .mark { background: var(--cults); }
     .printables .mark { background: var(--printables); }
+    .services-btn .mark { background: var(--services); }
     .contact-btn .mark { background: var(--contact); }
     .shop strong {
       display: block;
@@ -204,6 +207,16 @@
         </div>
         <svg class="ext" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg>
       </a>
+      <a class="shop services-btn" href="leistungen.html">
+        <div class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 3.5 2.2 2.2L20 14l-1.4-1.4-3.4 3.4-1-1L13 16.5z"/></svg>
+        </div>
+        <div>
+          <strong data-i18n="services"></strong>
+          <span data-i18n="servicesSub"></span>
+        </div>
+        <svg class="ext" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M10 6l6 6-6 6-1.4-1.4L13.2 12 8.6 7.4 10 6z"/></svg>
+      </a>
       <a class="shop contact-btn" href="kontakt.html">
         <div class="mark" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M3 5h18v14H3V5zm2 2v.2l7 4.6 7-4.6V7H5zm14 10V10.1l-7 4.6-7-4.6V17h14z"/></svg>
@@ -230,7 +243,9 @@
         imprint: "Impressum",
         privacy: "Datenschutz",
         contact: "Kontakt",
-        contactSub: "Nachricht senden"
+        contactSub: "Nachricht senden",
+        services: "Leistungen",
+        servicesSub: "Zeichnung, Scan, Modell"
       },
       en: {
         slogan: "Ideas become geometry.",
@@ -239,7 +254,9 @@
         imprint: "Imprint",
         privacy: "Privacy",
         contact: "Contact",
-        contactSub: "Send a message"
+        contactSub: "Send a message",
+        services: "Services",
+        servicesSub: "Drawings, scan, models"
       }
     };
     function applyLang(lang) {
