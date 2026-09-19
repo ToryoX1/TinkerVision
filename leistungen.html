@@ -31,7 +31,7 @@
       background-size: auto, 28px 28px, 28px 28px;
     }
     .top {
-      width: min(440px, calc(100% - 28px));
+      width: min(520px, calc(100% - 28px));
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -59,7 +59,7 @@
     }
     .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
     main {
-      width: min(440px, calc(100% - 28px));
+      width: min(520px, calc(100% - 28px));
       margin: 14px auto 28px;
       background: rgba(255,255,255,.78);
       border: 1px solid #fff;
@@ -73,22 +73,43 @@
       letter-spacing: 0.18em;
       margin: 0 0 6px;
     }
-    .lead { color: var(--muted); font-size: 0.88rem; margin: 0 0 18px; }
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 10px;
+    .lead { color: var(--muted); font-size: 0.9rem; line-height: 1.5; margin: 0 0 22px; }
+    h2 {
+      font-family: Orbitron, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      margin: 0 0 6px;
+      color: var(--ink);
     }
-    li {
+    article {
       background: #fff;
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 12px 14px 12px 16px;
-      line-height: 1.45;
-      font-size: 0.92rem;
+      border-radius: 16px;
+      padding: 14px 16px 16px;
+      margin-bottom: 10px;
     }
+    article p { margin: 0; font-size: 0.9rem; line-height: 1.5; }
+    .meta {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .faq { margin-top: 22px; }
+    .faq h2 { margin-bottom: 10px; }
+    details {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+    details p { margin: 8px 0 2px; font-size: 0.86rem; line-height: 1.5; color: var(--muted); }
     .cta {
       display: block;
       margin-top: 18px;
@@ -124,12 +145,48 @@
   <main>
     <h1 data-i18n="title"></h1>
     <p class="lead" data-i18n="lead"></p>
-    <ul>
-      <li data-i18n="b1"></li>
-      <li data-i18n="b2"></li>
-      <li data-i18n="b3"></li>
-      <li data-i18n="b4"></li>
-    </ul>
+
+    <article>
+      <h2 data-i18n="t1"></h2>
+      <p data-i18n="d1"></p>
+      <p class="meta" data-i18n="m1"></p>
+    </article>
+    <article>
+      <h2 data-i18n="t2"></h2>
+      <p data-i18n="d2"></p>
+      <p class="meta" data-i18n="m2"></p>
+    </article>
+    <article>
+      <h2 data-i18n="t3"></h2>
+      <p data-i18n="d3"></p>
+      <p class="meta" data-i18n="m3"></p>
+    </article>
+    <article>
+      <h2 data-i18n="t4"></h2>
+      <p data-i18n="d4"></p>
+      <p class="meta" data-i18n="m4"></p>
+    </article>
+
+    <div class="faq">
+      <h2 data-i18n="faq"></h2>
+      <details>
+        <summary data-i18n="q1"></summary>
+        <p data-i18n="a1"></p>
+      </details>
+      <details>
+        <summary data-i18n="q2"></summary>
+        <p data-i18n="a2"></p>
+      </details>
+      <details>
+        <summary data-i18n="q3"></summary>
+        <p data-i18n="a3"></p>
+      </details>
+      <details>
+        <summary data-i18n="q4"></summary>
+        <p data-i18n="a4"></p>
+      </details>
+    </div>
+
     <a class="cta" href="kontakt.html" data-i18n="cta"></a>
   </main>
   <footer>
@@ -141,11 +198,28 @@
       de: {
         back: "← Zurück",
         title: "Leistungen",
-        lead: "Von der Zeichnung bis zum Teil.",
-        b1: "Technische Zeichnungen",
-        b2: "3D-Scans",
-        b3: "Parametrische 3D-Dateien in gängigen Formaten — für 3D-Druck (FDM, SLA), CNC und Lasergravur",
-        b4: "Anfertigung vom Prototyp bis zum fertigen Produkt",
+        lead: "TinkerVision konstruiert, digitalisiert und bereitet Geometrie so auf, dass sie sich fertigen lässt — Druck, Zerspanung oder Gravur. Fertige Modelle liegen zusätzlich in den Shops.",
+        t1: "Technische Zeichnungen",
+        d1: "Ableitung und Aufbereitung von Fertigungszeichnungen aus dem 3D-Modell: Ansichten, Schnitte, Bemaßung, Toleranzen soweit für das Bauteil nötig. Geeignet als Grundlage für Werkstatt, Lieferanten oder Dokumentation.",
+        m1: "Typisch: PDF und die zugehörige CAD-Datei. Ausgang oft eine Skizze, ein bestehendes Modell oder ein Scan.",
+        t2: "3D-Scans",
+        d2: "Erfassung vorhandener Teile mit aktuellem Creality CR-Scan Otter, danach Bereinigung und Überführung in ein nutzbares Modell. Sinnvoll bei Ersatzteilen ohne Zeichnung, Reverse Engineering oder Passung an ein bestehendes Gehäuse.",
+        m2: "Typisch kleine bis mittelgroße Objekte; glänzende oder sehr dunkle Flächen ggf. mattieren. Ergebnis: Netz oder daraus abgeleitetes CAD. Genauigkeit hängt von Größe, Oberfläche und Nutzung ab — im Zweifel Fotos und Maße mitschicken.",
+        t3: "Parametrische 3D-Dateien",
+        d3: "Konstruktion oder Nachbau als editierbares Modell, ausgelegt auf den Folgeprozess: 3D-Druck FDM und SLA, 3-Achs-CNC, Lasergravur. Parameter bleiben erhalten, wo das Zielformat das zulässt.",
+        m3: "Export je nach Bedarf: STEP, IGES, STL, 3MF, OBJ, 3D-PDF, DXF, SVG, DWG — weitere gängige Formate auf Anfrage. Wandstärke, Toleranz und Ausrichtung werden mitgedacht.",
+        t4: "Vom Prototyp zum Produkt",
+        d4: "Begleitung vom ersten funktionsfähigen Stand bis zu einer fertigungstauglichen Version. Physische Muster auf Anfrage: FDM, SLA und 3-Achs-CNC. Nicht jeder Auftrag endet im Teil — oft reicht die lieferfertige Datei.",
+        m4: "Ob Datei, Druck oder Fräsung, steht mit dem Auftrag fest. Fertige Downloads liegen parallel in den Shops.",
+        faq: "Häufige Fragen",
+        q1: "Was muss ich zur Anfrage mitschicken?",
+        a1: "Kurz das Ziel (passt, ersetzt, wird gedruckt, wird gefräst), vorhandene Dateien oder Fotos, ungefähre Größe und Werkstoff, plus Termin wenn es einen gibt. Unvollständige Angaben sind in Ordnung — Nachfragen kommen über das Kontaktformular.",
+        q2: "Welche Dateiformate bekomme ich?",
+        a2: "Was der Folgeprozess braucht. Üblich: STEP und IGES für CAD-Weitergabe, STL und 3MF für Druck, OBJ, DXF/SVG/DWG für 2D und Laser, Zeichnung als PDF. Weitere gängige Formate auf Anfrage.",
+        q3: "Ist das dasselbe wie die Shop-Modelle?",
+        a3: "Nein. Cults3D und Printables sind fertige Downloads. Die Leistungen hier sind Aufträge: eigenes Teil, Scan, Zeichnung oder Anpassung. Shop-Dateien eignen sich, wenn ein vorhandenes Modell reicht.",
+        q4: "Wie läuft ein Auftrag ab — und was kostet es?",
+        a4: "Anfrage über Kontakt, Klärung von Umfang und Lieferumfang, Konstruktion oder Scan, Freigabe, danach Dateien und — falls gewünscht — Prototyp in FDM, SLA oder 3-Achs-CNC. Preise ausschließlich auf Anfrage. Änderungen nach der Freigabe sind ein neuer Schritt.",
         cta: "Anfrage senden",
         imprint: "Impressum",
         privacy: "Datenschutz"
@@ -153,11 +227,28 @@
       en: {
         back: "← Back",
         title: "Services",
-        lead: "From drawing to part.",
-        b1: "Technical drawings",
-        b2: "3D scans",
-        b3: "Parametric 3D files in common formats — for 3D printing (FDM, SLA), CNC and laser engraving",
-        b4: "From prototype through to the finished product",
+        lead: "TinkerVision designs, digitises and prepares geometry so it can be made — print, machining or engraving. Ready-made models also live in the shops.",
+        t1: "Technical drawings",
+        d1: "Manufacturing drawings derived from the 3D model: views, sections, dimensions and tolerances as the part requires. Used as a brief for a workshop, a supplier or documentation.",
+        m1: "Typical delivery: PDF plus the related CAD file. Input is often a sketch, an existing model or a scan.",
+        t2: "3D scans",
+        d2: "Capture of existing parts with a current Creality CR-Scan Otter, then cleanup and conversion into a usable model. Useful for spare parts without drawings, reverse engineering or fitting to an existing housing.",
+        m2: "Typically small to mid-size objects; glossy or very dark surfaces may need matting. Output: a mesh or CAD derived from it. Accuracy depends on size, surface and use — send photos and dimensions if unsure.",
+        t3: "Parametric 3D files",
+        d3: "Design or rebuild as an editable model, aimed at the next process: FDM and SLA printing, 3-axis CNC, laser engraving. Parameters are kept where the target format allows.",
+        m3: "Exports as needed: STEP, IGES, STL, 3MF, OBJ, 3D-PDF, DXF, SVG, DWG — other common formats on request. Wall thickness, tolerance and orientation are designed in.",
+        t4: "From prototype to product",
+        d4: "From a first working version to a manufacturable one. Physical samples on request: FDM, SLA and 3-axis CNC. Not every job ends as a part — often the deliverable is the file.",
+        m4: "File, print or milling is fixed with the brief. Ready-made downloads also sit in the shops.",
+        faq: "Common questions",
+        q1: "What should I send with an enquiry?",
+        a1: "The goal in one line (fit, replace, print, machine), any files or photos, rough size and material, and a deadline if there is one. Incomplete briefs are fine — follow-up goes through the contact form.",
+        q2: "Which file formats do I receive?",
+        a2: "Whatever the next process needs. Typical: STEP and IGES for CAD hand-off, STL and 3MF for printing, OBJ, DXF/SVG/DWG for 2D and laser, drawings as PDF. Other common formats on request.",
+        q3: "Is this the same as the shop models?",
+        a3: "No. Cults3D and Printables are ready downloads. The services here are commissions: your part, a scan, a drawing or an adaptation. Use the shops when an existing model is enough.",
+        q4: "How does a job run — and what does it cost?",
+        a4: "Enquiry via contact, scope and deliverables agreed, design or scan, approval, then files and — if wanted — a prototype in FDM, SLA or 3-axis CNC. Prices on request only. Changes after approval are a new step.",
         cta: "Send an enquiry",
         imprint: "Imprint",
         privacy: "Privacy"
