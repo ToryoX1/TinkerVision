@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TinkerVision — Datenschutz</title>
+  <link rel="icon" href="emblem.png">
+  <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:400,500,600" rel="stylesheet">
+  <style>
+    :root { --ink: #0c0c0d; --muted: #6a6a70; --line: #e2e2e6; --bg: #f3f3f6; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Outfit, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+    .wrap { width: min(640px, calc(100% - 40px)); margin: 0 auto; padding: 18px 0 48px; }
+    .bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+    .back { color: var(--muted); text-decoration: none; font-size: 0.88rem; }
+    .back:hover { color: var(--ink); }
+    .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: #fff; }
+    .lang button {
+      font-family: Outfit, sans-serif; font-size: 0.72rem; letter-spacing: 0.08em;
+      font-weight: 600; border: 0; background: transparent; color: var(--muted);
+      padding: 6px 11px; cursor: pointer;
+    }
+    .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+    h1 { font-family: Orbitron, sans-serif; font-size: 1.05rem; letter-spacing: 0.14em; margin: 0 0 8px; }
+    .updated { color: var(--muted); font-size: 0.8rem; margin: 0 0 24px; }
+    h2 { font-size: 0.95rem; margin: 22px 0 8px; }
+    p { line-height: 1.6; margin: 0 0 10px; }
+    a { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="bar">
+      <a class="back" href="index.html" data-i18n="back"></a>
+      <div class="lang" role="group">
+        <button type="button" data-set-lang="de" aria-pressed="true">DE</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+    <h1 data-i18n="title"></h1>
+    <p class="updated" data-i18n="updated"></p>
+
+    <h2 data-i18n="h1"></h2>
+    <p data-i18n="p1"></p>
+
+    <h2 data-i18n="h2"></h2>
+    <p data-i18n="p2"></p>
+
+    <h2 data-i18n="h3"></h2>
+    <p data-i18n="p3"></p>
+
+    <h2 data-i18n="h4"></h2>
+    <p data-i18n="p4"></p>
+
+    <h2 data-i18n="h5"></h2>
+    <p data-i18n="p5"></p>
+
+    <h2 data-i18n="h6"></h2>
+    <p data-i18n="p6"></p>
+
+    <h2 data-i18n="h7"></h2>
+    <p data-i18n="p7"></p>
+
+    <h2 data-i18n="h8"></h2>
+    <p data-i18n="p8"></p>
+
+    <h2 data-i18n="h9"></h2>
+    <p data-i18n="p9"></p>
+  </div>
+  <script>
+    const T = {
+      de: {
+        back: "← Zurück",
+        title: "Datenschutz",
+        updated: "Stand: 19. September 2026",
+        h1: "Verantwortliche Stelle",
+        p1: "TinkerVision, E-Mail tinkervision.de@protonmail.com, Website tinkervision.de. Weitere Angaben: Impressum.",
+        h2: "Hosting",
+        p2: "Die statischen Seiten werden über GitHub Pages (GitHub, Inc., USA) ausgeliefert. Beim Aufruf entstehen serverseitig übliche Verbindungsdaten: IP-Adresse, Zeitpunkt, aufgerufene Datei, Referrer, Browserkennung. Zweck: Bereitstellung, Sicherheit, Missbrauchsabwehr. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. GitHub kann Daten in den USA verarbeiten; GitHub stützt Übermittlungen auf Standardvertragsklauseln.",
+        h3: "Keine Analyse, keine Tracking-Cookies",
+        p3: "Es laufen keine Analyse-Dienste (kein Google Analytics, kein Pixel). Diese Website setzt keine Tracking-Cookies. Ein Session- oder Werbeprofil wird nicht gebildet.",
+        h4: "Sprachwahl",
+        p4: "Die Einstellung DE/EN speichert der Browser lokal unter dem Schlüssel tv-lang (localStorage). Das bleibt auf dem Gerät, wird nicht an TinkerVision gesendet und ist für die Anzeige der Sprache erforderlich. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.",
+        h5: "Schriften",
+        p5: "Die Schriftarten Orbitron und Outfit werden von fonts.bunny.net (BunnyWay) geladen. Dabei wird eine technische Anfrage (IP, User-Agent) an den Schrift-Anbieter gesendet. Zweck: einheitliche Darstellung. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.",
+        h6: "Kontaktformular und E-Mail",
+        p6: "Auf kontakt.html können Name, E-Mail-Adresse und Nachricht übermittelt werden. Der Versand läuft über Formsubmit (formsubmit.co) an tinkervision.de@protonmail.com. Formsubmit nimmt die Formulardaten entgegen und leitet sie per E-Mail weiter; Proton Mail stellt das Postfach bereit. Alternativ öffnet der Mailto-Button das eigene E-Mail-Programm, ohne Formsubmit. Zweck und Rechtsgrundlage: Bearbeitung der Anfrage, Art. 6 Abs. 1 lit. b DSGVO, sonst Art. 6 Abs. 1 lit. f DSGVO. Speicherdauer: solange die Vorgangsbearbeitung und gesetzliche Pflichten es erfordern.",
+        h7: "Externe Shops",
+        p7: "Links zu Cults3D und Printables führen auf Seiten Dritter. Beim Anklicken gelten deren Datenschutzerklärungen. TinkerVision erhält darüber keine automatische Kopie der dortigen Nutzungsdaten.",
+        h8: "Rechte",
+        p8: "Es bestehen die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch gegen Verarbeitungen nach Art. 6 Abs. 1 lit. f DSGVO. Beschwerde ist bei der zuständigen Datenschutz-Aufsichtsbehörde möglich.",
+        h9: "Keine automatisierte Entscheidung",
+        p9: "Es findet keine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne von Art. 22 DSGVO statt."
+      },
+      en: {
+        back: "← Back",
+        title: "Privacy",
+        updated: "Last updated: 19 September 2026",
+        h1: "Controller",
+        p1: "TinkerVision, email tinkervision.de@protonmail.com, website tinkervision.de. Further details: Imprint.",
+        h2: "Hosting",
+        p2: "The static pages are served via GitHub Pages (GitHub, Inc., USA). Each visit creates standard server logs: IP address, time, requested file, referrer, browser identifier. Purpose: delivery, security, abuse prevention. Legal basis: Art. 6 (1)(f) GDPR. GitHub may process data in the US and relies on standard contractual clauses.",
+        h3: "No analytics, no tracking cookies",
+        p3: "No analytics tools run (no Google Analytics, no pixels). This site does not set tracking cookies and does not build an advertising or session profile.",
+        h4: "Language choice",
+        p4: "The DE/EN setting is stored locally in the browser under tv-lang (localStorage). It stays on the device, is not sent to TinkerVision, and is needed to show the chosen language. Legal basis: Art. 6 (1)(f) GDPR.",
+        h5: "Fonts",
+        p5: "Orbitron and Outfit are loaded from fonts.bunny.net (BunnyWay). That request includes technical data (IP, user agent) to the font provider. Purpose: consistent type. Legal basis: Art. 6 (1)(f) GDPR.",
+        h6: "Contact form and email",
+        p6: "On kontakt.html, name, email address and message can be submitted. Delivery goes through Formsubmit (formsubmit.co) to tinkervision.de@protonmail.com. Formsubmit receives the form data and forwards it by email; Proton Mail hosts the inbox. The mailto button opens the visitor’s own mail app and does not use Formsubmit. Purpose and legal basis: handling the enquiry, Art. 6 (1)(b) GDPR, otherwise Art. 6 (1)(f) GDPR. Retention: as long as handling the request and legal duties require.",
+        h7: "External shops",
+        p7: "Links to Cults3D and Printables lead to third-party sites. Their privacy notices apply after you leave. TinkerVision does not automatically receive a copy of usage data from those sites.",
+        h8: "Rights",
+        p8: "You have the rights of access, rectification, erasure, restriction, portability and objection to processing based on Art. 6 (1)(f) GDPR. You may lodge a complaint with the competent supervisory authority.",
+        h9: "No automated decision-making",
+        p9: "There is no automated decision-making including profiling within the meaning of Art. 22 GDPR."
+      }
+    };
+    function applyLang(lang) {
+      const pack = T[lang] || T.de;
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (pack[key]) el.textContent = pack[key];
+      });
+      document.querySelectorAll("[data-set-lang]").forEach((btn) => {
+        btn.setAttribute("aria-pressed", btn.getAttribute("data-set-lang") === lang ? "true" : "false");
+      });
+      localStorage.setItem("tv-lang", lang);
+    }
+    const start = localStorage.getItem("tv-lang") || (navigator.language || "de").slice(0, 2);
+    applyLang(start === "en" ? "en" : "de");
+    document.querySelectorAll("[data-set-lang]").forEach((btn) => {
+      btn.addEventListener("click", () => applyLang(btn.getAttribute("data-set-lang")));
+    });
+  </script>
+</body>
+</html>
