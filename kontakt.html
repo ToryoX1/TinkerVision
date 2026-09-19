@@ -67,11 +67,20 @@
       padding: 34px 26px 26px;
       box-shadow: 0 24px 50px rgba(16,17,20,.08);
     }
+    .brand {
+      font-family: Orbitron, sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.24em;
+      font-weight: 700;
+      margin: 0 0 10px;
+      text-align: center;
+    }
     h1 {
       font-family: Orbitron, sans-serif;
-      font-size: 1.14rem;
-      letter-spacing: 0.18em;
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
       margin: 0 0 6px;
+      text-align: center;
     }
     .lead { color: var(--muted); font-size: 1.06rem; margin: 0 0 22px; }
     label {
@@ -128,8 +137,16 @@
       margin-bottom: 12px;
     }
     .sent.on { display: block; }
+    .split-rule {
+      width: 36px;
+      height: 1px;
+      background: var(--ink);
+      opacity: .22;
+      margin: 22px auto 16px;
+      border: 0;
+    }
     .soon {
-      margin-top: 16px;
+      margin-top: 0;
       display: grid;
       grid-template-columns: 1fr 1fr;
       width: 100%;
@@ -188,6 +205,7 @@
     </div>
   </div>
   <main>
+    <p class="brand">TinkerVision</p>
     <h1 data-i18n="title"></h1>
     <p class="lead" data-i18n="lead"></p>
     <p class="sent" id="sent" data-i18n="sent"></p>
