@@ -171,11 +171,23 @@
     }
     details p { margin: 8px 0 2px; font-size: 0.86rem; line-height: 1.5; color: var(--muted); }
     .swatch {
+      position: relative;
       width: min(240px, 80%);
       margin: 12px auto 14px;
+      background: transparent;
+    }
+    .swatch .fill {
+      position: absolute;
+      inset: 0;
       background: #EFF0F1;
-      border-radius: 12px;
-      overflow: hidden;
+      -webkit-mask-image: url("filamente/filament_mask.png");
+      mask-image: url("filamente/filament_mask.png");
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
     }
     .swatch img {
       display: block;
@@ -317,6 +329,7 @@
         <summary>PETG</summary>
         <p data-i18n="petg"></p>
         <div class="swatch" id="petg-swatch">
+          <div class="fill" id="petg-fill"></div>
           <img src="filamente/filament.png" alt="Filament">
         </div>
         <p class="color-label" id="petg-label">Weiß — #EFF0F1</p>
@@ -435,9 +448,9 @@
       return document.documentElement.lang === "en" ? "en" : "de";
     }
     function setPetg(color) {
-      const swatch = document.getElementById("petg-swatch");
+      const fill = document.getElementById("petg-fill");
       const label = document.getElementById("petg-label");
-      swatch.style.background = color.hex;
+      fill.style.background = color.hex;
       const name = petgLang() === "en" ? color.nameEn : color.nameDe;
       label.textContent = name + " — " + color.hex;
       document.querySelectorAll("#petg-chips button").forEach((btn) => {
