@@ -79,14 +79,14 @@
       font-family: Orbitron, sans-serif;
       font-size: 0.95rem;
       letter-spacing: 0.16em;
-      margin: 0 0 6px;
+      margin: 0 0 18px;
       text-align: center;
     }
     .tabs {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6px;
-      margin: 0 0 18px;
+      margin: 0 0 28px;
       background: #fff;
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -169,6 +169,15 @@
       margin-bottom: 10px;
     }
     details[open] { padding-bottom: 14px; }
+    .job img {
+      width: 100%;
+      max-height: 140px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin: 12px 0 8px;
+      display: block;
+      background: #eef0f3;
+    }
     summary {
       cursor: pointer;
       font-weight: 600;
@@ -290,38 +299,50 @@
     <div class="panel" id="panel-svc" role="tabpanel">
     <p class="lead" data-i18n="lead"></p>
 
-    <article>
+    <details class="job">
+      <summary>
+        <span class="mat-name" data-i18n="t1"></span>
+        <span class="mat-note" data-i18n="s1"></span>
+      </summary>
       <img src="TechDraw.png" alt="" onerror="this.remove()">
-      <div class="copy">
-        <h2 data-i18n="t1"></h2>
-        <p data-i18n="d1"></p>
-        <p class="meta" data-i18n="m1"></p>
-      </div>
-    </article>
-    <article>
+      <p data-i18n="d1"></p>
+      <p class="meta" data-i18n="m1"></p>
+    </details>
+    <details class="job">
+      <summary>
+        <span class="mat-name" data-i18n="t2"></span>
+        <span class="mat-note" data-i18n="s2"></span>
+      </summary>
       <img src="Scan.png" alt="" onerror="this.remove()">
-      <div class="copy">
-        <h2 data-i18n="t2"></h2>
-        <p data-i18n="d2"></p>
-        <p class="meta" data-i18n="m2"></p>
-      </div>
-    </article>
-    <article>
+      <p data-i18n="d2"></p>
+      <p class="meta" data-i18n="m2"></p>
+    </details>
+    <details class="job">
+      <summary>
+        <span class="mat-name" data-i18n="t3"></span>
+        <span class="mat-note" data-i18n="s3"></span>
+      </summary>
       <img src="Geomerty.png" alt="" onerror="this.remove()">
-      <div class="copy">
-        <h2 data-i18n="t3"></h2>
-        <p data-i18n="d3"></p>
-        <p class="meta" data-i18n="m3"></p>
-      </div>
-    </article>
-    <article>
+      <p data-i18n="d3"></p>
+      <p class="meta" data-i18n="m3"></p>
+    </details>
+    <details class="job">
+      <summary>
+        <span class="mat-name" data-i18n="t5"></span>
+        <span class="mat-note" data-i18n="s5"></span>
+      </summary>
+      <p data-i18n="d5"></p>
+      <p class="meta" data-i18n="m5"></p>
+    </details>
+    <details class="job">
+      <summary>
+        <span class="mat-name" data-i18n="t4"></span>
+        <span class="mat-note" data-i18n="s4"></span>
+      </summary>
       <img src="prototyp.png" alt="" onerror="this.remove()">
-      <div class="copy">
-        <h2 data-i18n="t4"></h2>
-        <p data-i18n="d4"></p>
-        <p class="meta" data-i18n="m4"></p>
-      </div>
-    </article>
+      <p data-i18n="d4"></p>
+      <p class="meta" data-i18n="m4"></p>
+    </details>
 
     <div class="faq">
       <h2 data-i18n="faq"></h2>
@@ -397,19 +418,27 @@
       de: {
         back: "← Zurück",
         title: "Leistungen",
-        lead: "TinkerVision konstruiert, digitalisiert und bereitet Geometrie so auf, dass sie sich fertigen lässt — Druck, Zerspanung oder Gravur. Fertige Modelle liegen zusätzlich in den Shops.",
+        lead: "Auftrag statt Download: Wir scannen, konstruieren, rechnen und fertigen — vom ersten Modell bis zur Sonderanfertigung. Fertige Shop-Dateien liegen zusätzlich bei Cults3D und Printables.",
         t1: "Technische Zeichnungen",
-        d1: "Ableitung und Aufbereitung von Fertigungszeichnungen aus dem 3D-Modell: Ansichten, Schnitte, Bemaßung, Toleranzen soweit für das Bauteil nötig. Geeignet als Grundlage für Werkstatt, Lieferanten oder Dokumentation.",
-        m1: "Typisch: PDF und die zugehörige CAD-Datei. Ausgang oft eine Skizze, ein bestehendes Modell oder ein Scan.",
+        s1: "Fertigungszeichnung aus dem 3D-Modell — für Werkstatt, Lieferant oder Akte.",
+        d1: "Aus dem CAD entstehen Ansichten, Schnitte, Maße und die Toleranzen, die das Bauteil wirklich braucht. Die Zeichnung ist die gemeinsame Sprache mit Dreherei, Fräserei oder Montage — nicht nur ein Bild vom Modell.",
+        m1: "Typisch: PDF plus zugehörige CAD-Datei. Ausgang ist oft eine Skizze, ein vorhandenes Modell oder ein Scan.",
         t2: "3D-Scans",
-        d2: "Erfassung vorhandener Teile mit aktuellem Creality CR-Scan Otter, danach Bereinigung und Überführung in ein nutzbares Modell. Sinnvoll bei Ersatzteilen ohne Zeichnung, Reverse Engineering oder Passung an ein bestehendes Gehäuse.",
-        m2: "Typisch kleine bis mittelgroße Objekte; glänzende oder sehr dunkle Flächen ggf. mattieren. Ergebnis: Netz oder daraus abgeleitetes CAD. Genauigkeit hängt von Größe, Oberfläche und Nutzung ab — im Zweifel Fotos und Maße mitschicken.",
+        s2: "Vorhandenes Teil digitalisieren, wenn Zeichnung oder CAD fehlen.",
+        d2: "Handgeführter Scan mit strukturiertem Licht (Blau und Infrarot). Typische Genauigkeit bis etwa 0,02 mm an kleinen, gut erfassten Flächen. Objektgröße grob von 1 cm bis etwa 2 m. Farbe/Textur ist möglich. Sehr glänzende oder tiefdunkle Flächen brauchen oft eine matte Schicht, sonst reißt die Erfassung ab.",
+        m2: "Ergebnis ist zuerst ein Netz, auf Wunsch ein daraus abgeleitetes CAD. Genauigkeit hängt von Größe, Oberfläche und Nutzung ab — Fotos und ungefähre Maße mit der Anfrage schicken.",
         t3: "Parametrische 3D-Dateien",
-        d3: "Konstruktion oder Nachbau als editierbares Modell, ausgelegt auf den Folgeprozess: 3D-Druck FDM und SLA, 3-Achs-CNC, Lasergravur. Parameter bleiben erhalten, wo das Zielformat das zulässt.",
-        m3: "Export je nach Bedarf: STEP, IGES, STL, 3MF, OBJ, 3D-PDF, DXF, SVG, DWG — weitere gängige Formate auf Anfrage. Wandstärke, Toleranz und Ausrichtung werden mitgedacht.",
-        t4: "Vom Prototyp zum Produkt",
-        d4: "Begleitung vom ersten funktionsfähigen Stand bis zu einer fertigungstauglichen Version. Physische Muster auf Anfrage: FDM, SLA und 3-Achs-CNC. Nicht jeder Auftrag endet im Teil — oft reicht die lieferfertige Datei.",
-        m4: "Ob Datei, Druck oder Fräsung, steht mit dem Auftrag fest. Fertige Downloads liegen parallel in den Shops.",
+        s3: "Editierbares CAD, ausgelegt auf Druck, Fräsung oder Gravur.",
+        d3: "Neukonstruktion oder Nachbau als parametrisches Modell. Wandstärke, Toleranz und Ausrichtung sitzen schon im Modell, nicht erst in der Werkstatt. Parameter bleiben erhalten, wo das Zielformat das zulässt.",
+        m3: "Export je nach Bedarf: STEP, IGES, STL, 3MF, OBJ, 3D-PDF, DXF, SVG, DWG — weitere gängige Formate auf Anfrage.",
+        t5: "FEM-Analyse",
+        s5: "Ob das Teil unter Last hält — grobe Prüfung am CAD, bevor gefertigt wird.",
+        d5: "Statische Betrachtung von Spannung und Verformung am Modell: typische Lagerung, Last und Werkstoff. Sinnvoll vor dem ersten Druck oder der Fräsung, wenn unklar ist, ob Rippen, Wandstärke oder Lage der Schrauben reichen.",
+        m5: "Das ist eine konstruktionsbegleitende Abschätzung, kein zertifiziertes Gutachten. Annahmen und Grenzen stehen in der Auswertung.",
+        t4: "Vom Prototypen zur Sonderanfertigung",
+        s4: "Erstes physisches Teil, Iteration, danach Einzelstück oder Kleinserie.",
+        d4: "Zuerst ein funktionsfähiger Stand zum Anfassen und Prüfen. Danach Änderungen am Modell und, wenn gewünscht, das nächste Teil. Fertigung auf Anfrage: FDM, SLA und 3-Achs-CNC. Nicht jeder Auftrag endet im physischen Stück — oft reicht die freigegebene Datei. Sonderanfertigung heißt: genau dieses Teil, nicht ein Katalogmodell aus dem Shop.",
+        m4: "Ob Datei, Druck oder Fräsung, steht mit dem Auftrag fest. Preise nur auf Anfrage.",
         faq: "Häufige Fragen",
         q1: "Was muss ich zur Anfrage mitschicken?",
         a1: "Kurz das Ziel (passt, ersetzt, wird gedruckt, wird gefräst), vorhandene Dateien oder Fotos, ungefähre Größe und Werkstoff, plus Termin wenn es einen gibt. Unvollständige Angaben sind in Ordnung — Nachfragen kommen über das Kontaktformular.",
@@ -433,19 +462,27 @@
       en: {
         back: "← Back",
         title: "Services",
-        lead: "TinkerVision designs, digitises and prepares geometry so it can be made — print, machining or engraving. Ready-made models also live in the shops.",
+        lead: "A commission, not a download: we scan, design, analyse and make parts — from the first model to a one-off. Ready shop files also live on Cults3D and Printables.",
         t1: "Technical drawings",
-        d1: "Manufacturing drawings derived from the 3D model: views, sections, dimensions and tolerances as the part requires. Used as a brief for a workshop, a supplier or documentation.",
+        s1: "A manufacturing drawing from the 3D model — for a shop, a supplier or the file.",
+        d1: "Views, sections, dimensions and the tolerances the part actually needs. The drawing is the shared language with a mill, lathe or assembly — not just a picture of the model.",
         m1: "Typical delivery: PDF plus the related CAD file. Input is often a sketch, an existing model or a scan.",
         t2: "3D scans",
-        d2: "Capture of existing parts with a current Creality CR-Scan Otter, then cleanup and conversion into a usable model. Useful for spare parts without drawings, reverse engineering or fitting to an existing housing.",
-        m2: "Typically small to mid-size objects; glossy or very dark surfaces may need matting. Output: a mesh or CAD derived from it. Accuracy depends on size, surface and use — send photos and dimensions if unsure.",
+        s2: "Digitise an existing part when drawings or CAD are missing.",
+        d2: "Handheld structured-light scan (blue and infrared). Typical accuracy around 0.02 mm on small, well-captured surfaces. Object size roughly 1 cm to about 2 m. Colour/texture is available. Very glossy or very dark surfaces often need a matte coat or tracking drops.",
+        m2: "First output is a mesh, then CAD if wanted. Accuracy depends on size, surface and use — send photos and rough dimensions with the enquiry.",
         t3: "Parametric 3D files",
-        d3: "Design or rebuild as an editable model, aimed at the next process: FDM and SLA printing, 3-axis CNC, laser engraving. Parameters are kept where the target format allows.",
-        m3: "Exports as needed: STEP, IGES, STL, 3MF, OBJ, 3D-PDF, DXF, SVG, DWG — other common formats on request. Wall thickness, tolerance and orientation are designed in.",
-        t4: "From prototype to product",
-        d4: "From a first working version to a manufacturable one. Physical samples on request: FDM, SLA and 3-axis CNC. Not every job ends as a part — often the deliverable is the file.",
-        m4: "File, print or milling is fixed with the brief. Ready-made downloads also sit in the shops.",
+        s3: "Editable CAD aimed at print, milling or engraving.",
+        d3: "New design or rebuild as a parametric model. Wall thickness, tolerance and orientation sit in the model, not later on the shop floor. Parameters are kept where the file format allows.",
+        m3: "Exports as needed: STEP, IGES, STL, 3MF, OBJ, 3D-PDF, DXF, SVG, DWG — other common formats on request.",
+        t5: "FEA",
+        s5: "A check on whether the part holds under load — before it is made.",
+        d5: "Static look at stress and deflection on the model: typical supports, load and material. Useful before the first print or milling job if ribs, wall thickness or screw positions are still a guess.",
+        m5: "This is a design-aid estimate, not a certified report. Assumptions and limits come with the write-up.",
+        t4: "From prototype to custom one-off",
+        s4: "First physical part, then iteration, then a one-off or short run.",
+        d4: "First a working piece you can hold and test. Then model changes and, if wanted, the next part. Making on request: FDM, SLA and 3-axis CNC. Not every job ends as a physical part — often the approved file is enough. Custom one-off means this part, not a catalogue file from the shop.",
+        m4: "File, print or milling is fixed with the brief. Prices on request only.",
         faq: "Common questions",
         q1: "What should I send with an enquiry?",
         a1: "The goal in one line (fit, replace, print, machine), any files or photos, rough size and material, and a deadline if there is one. Incomplete briefs are fine — follow-up goes through the contact form.",
