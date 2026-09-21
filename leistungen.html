@@ -31,7 +31,7 @@
       background-size: auto, 28px 28px, 28px 28px;
     }
     .top {
-      width: min(520px, calc(100% - 28px));
+      width: min(560px, calc(100% - 28px));
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -59,7 +59,7 @@
     }
     .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
     main {
-      width: min(520px, calc(100% - 28px));
+      width: min(560px, calc(100% - 28px));
       margin: 14px auto 28px;
       background: rgba(255,255,255,.78);
       border: 1px solid #fff;
@@ -202,7 +202,7 @@
     details p { margin: 8px 0 2px; font-size: 0.86rem; line-height: 1.5; color: var(--muted); }
     .swatch {
       position: relative;
-      width: min(200px, 72%);
+      width: min(220px, 80%);
       margin: 14px auto 10px;
       background: transparent;
     }
@@ -285,6 +285,17 @@
       justify-content: center;
     }
     footer a { color: var(--muted); text-decoration: none; }
+    .rule {
+      width: 28px;
+      height: 2px;
+      background: var(--ink);
+      margin: 14px auto;
+      opacity: .22;
+      border-radius: 2px;
+    }
+    @media (min-width: 900px) {
+      .top, main { width: min(680px, calc(100% - 48px)); }
+    }
   </style>
 </head>
 <body>
@@ -298,6 +309,7 @@
   <main>
     <p class="brand">TinkerVision</p>
     <h1 data-i18n="title"></h1>
+    <div class="rule" aria-hidden="true"></div>
     <div class="tabs" role="tablist">
       <button type="button" role="tab" id="tab-svc" aria-selected="true" aria-controls="panel-svc" data-tab="svc" data-i18n="tabSvc"></button>
       <button type="button" role="tab" id="tab-mat" aria-selected="false" aria-controls="panel-mat" data-tab="mat" data-i18n="tabMat"></button>
@@ -306,6 +318,7 @@
     <div class="panel" id="panel-svc" role="tabpanel">
     <p class="lead" data-i18n="lead"></p>
     <p class="credo" data-i18n="credo"></p>
+    <div class="rule" aria-hidden="true"></div>
 
     <details class="job">
       <summary>
@@ -377,19 +390,8 @@
 
     <div class="panel" id="panel-mat" role="tabpanel" hidden>
       <p class="lead" data-i18n="matLead"></p>
+      <div class="rule" aria-hidden="true"></div>
       <h2 data-i18n="fdm"></h2>
-      <details id="pla-box">
-        <summary>
-          <span class="mat-name">PLA</span>
-          <span class="mat-note" data-i18n="pla"></span>
-        </summary>
-        <div class="swatch" id="pla-swatch">
-          <div class="fill" id="pla-fill"></div>
-          <img src="filamente/filament_mask.png" alt="Filament">
-        </div>
-        <p class="color-label" id="pla-label">Tannengrün</p>
-        <div class="chips" id="pla-chips"></div>
-      </details>
       <details id="petg-box">
         <summary>
           <span class="mat-name">PETG</span>
@@ -401,6 +403,18 @@
         </div>
         <p class="color-label" id="petg-label">Weiß</p>
         <div class="chips" id="petg-chips"></div>
+      </details>
+      <details id="pla-box">
+        <summary>
+          <span class="mat-name">PLA</span>
+          <span class="mat-note" data-i18n="pla"></span>
+        </summary>
+        <div class="swatch" id="pla-swatch">
+          <div class="fill" id="pla-fill"></div>
+          <img src="filamente/filament_mask.png" alt="Filament">
+        </div>
+        <p class="color-label" id="pla-label">Tannengrün</p>
+        <div class="chips" id="pla-chips"></div>
       </details>
       <details id="tpu-box">
         <summary>
@@ -490,9 +504,9 @@
         d5: "Static look at stress and deflection on the model: typical supports, load and material. Useful before the first print or milling job if ribs, wall thickness or screw positions are still a guess.",
         m5: "This is a design-aid estimate, not a certified report. Assumptions and limits come with the write-up.",
         t4: "From prototype to custom one-off",
-        s4: "First physical part, then iteration, then a one-off or short run.",
-        d4: "First a working piece you can hold and test. Then model changes and, if wanted, the next part. Making on request: FDM, SLA and 3-axis CNC. Not every job ends as a physical part — often the approved file is enough. Custom one-off means this part, not a catalogue file from the shop.",
-        m4: "File, print or milling is fixed with the brief. Prices on request only.",
+        s4: "Test first, then the piece that stays.",
+        d4: "A prototype is for learning: does it fit, hold, feel right. What fails goes back into the model. The custom part comes after approval — one piece or a few, in FDM, SLA or on a 3-axis mill. If you only need the file, you get the file.",
+        m4: "Process and quantity are fixed with the brief. Prices on request only.",
         faq: "Common questions",
         q1: "What should I send with an enquiry?",
         a1: "The goal in one line (fit, replace, print, machine), any files or photos, rough size and material, and a deadline if there is one. Incomplete briefs are fine — follow-up goes through the contact form.",
@@ -592,8 +606,8 @@
       setPla(PLA[0]);
     })();
     const TPU = [
-      { id: "digitalblau", nameDe: "Digitalblau", nameEn: "Digital blue", hex: "#0057B8", shore: "95A" },
-      { id: "airgreen", nameDe: "Air Green Flex", nameEn: "Air Green Flex", hex: "#4CAF6A", shore: "65–82A" },
+      { id: "digitalblau", nameDe: "Digitalblau", nameEn: "Digital blue", hex: "#7ED4C9", shore: "95A" },
+      { id: "airgreen", nameDe: "Air Green Flex", nameEn: "Air Green Flex", hex: "#7A9A7E", shore: "65–82A" },
       { id: "tpu-orange", nameDe: "Orange", nameEn: "Orange", hex: "#FF7F32", shore: "95A" }
     ];
     function tpuLabel(color) {
