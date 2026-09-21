@@ -82,6 +82,33 @@
       margin: 0 0 6px;
       text-align: center;
     }
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin: 0 0 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 4px;
+    }
+    .tabs button {
+      font-family: Outfit, sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      border: 0;
+      border-radius: 9px;
+      padding: 9px 8px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .tabs button[aria-selected="true"] {
+      background: var(--ink);
+      color: #fff;
+    }
+    .panel[hidden] { display: none; }
     .lead { color: var(--muted); font-size: 0.9rem; line-height: 1.5; margin: 0 0 22px; }
     h2 {
       font-family: Orbitron, sans-serif;
@@ -91,13 +118,37 @@
       color: var(--ink);
     }
     article {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: stretch;
       background: #fff;
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 14px 16px 16px;
+      padding: 10px 12px;
       margin-bottom: 10px;
     }
+    article:nth-of-type(even) {
+      grid-template-columns: 1fr auto;
+    }
+    article:nth-of-type(even) img { order: 2; }
+    article img {
+      height: 100%;
+      width: auto;
+      max-width: 46%;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+      background: #eef0f3;
+    }
+    article .copy { min-width: 0; }
     article p { margin: 0; font-size: 0.9rem; line-height: 1.5; }
+    @media (max-width: 420px) {
+      article,
+      article:nth-of-type(even) { grid-template-columns: 1fr; }
+      article:nth-of-type(even) img { order: 0; }
+      article img { width: 100%; max-width: none; height: auto; }
+    }
     .meta {
       margin-top: 8px;
       font-size: 0.78rem;
@@ -154,27 +205,45 @@
   <main>
     <p class="brand">TinkerVision</p>
     <h1 data-i18n="title"></h1>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tab-svc" aria-selected="true" aria-controls="panel-svc" data-tab="svc" data-i18n="tabSvc"></button>
+      <button type="button" role="tab" id="tab-mat" aria-selected="false" aria-controls="panel-mat" data-tab="mat" data-i18n="tabMat"></button>
+    </div>
+
+    <div class="panel" id="panel-svc" role="tabpanel">
     <p class="lead" data-i18n="lead"></p>
 
     <article>
-      <h2 data-i18n="t1"></h2>
-      <p data-i18n="d1"></p>
-      <p class="meta" data-i18n="m1"></p>
+      <img src="TechDraw.png" alt="">
+      <div class="copy">
+        <h2 data-i18n="t1"></h2>
+        <p data-i18n="d1"></p>
+        <p class="meta" data-i18n="m1"></p>
+      </div>
     </article>
     <article>
-      <h2 data-i18n="t2"></h2>
-      <p data-i18n="d2"></p>
-      <p class="meta" data-i18n="m2"></p>
+      <img src="Scan.png" alt="">
+      <div class="copy">
+        <h2 data-i18n="t2"></h2>
+        <p data-i18n="d2"></p>
+        <p class="meta" data-i18n="m2"></p>
+      </div>
     </article>
     <article>
-      <h2 data-i18n="t3"></h2>
-      <p data-i18n="d3"></p>
-      <p class="meta" data-i18n="m3"></p>
+      <img src="Geomerty.png" alt="">
+      <div class="copy">
+        <h2 data-i18n="t3"></h2>
+        <p data-i18n="d3"></p>
+        <p class="meta" data-i18n="m3"></p>
+      </div>
     </article>
     <article>
-      <h2 data-i18n="t4"></h2>
-      <p data-i18n="d4"></p>
-      <p class="meta" data-i18n="m4"></p>
+      <img src="prototyp.png" alt="">
+      <div class="copy">
+        <h2 data-i18n="t4"></h2>
+        <p data-i18n="d4"></p>
+        <p class="meta" data-i18n="m4"></p>
+      </div>
     </article>
 
     <div class="faq">
@@ -198,6 +267,25 @@
     </div>
 
     <a class="cta" href="kontakt.html" data-i18n="cta"></a>
+    </div>
+
+    <div class="panel" id="panel-mat" role="tabpanel" hidden>
+      <p class="lead" data-i18n="matLead"></p>
+      <h2 data-i18n="fdm"></h2>
+      <details>
+        <summary>PLA</summary>
+        <p data-i18n="pla"></p>
+      </details>
+      <details>
+        <summary>PETG</summary>
+        <p data-i18n="petg"></p>
+      </details>
+      <details>
+        <summary>TPU</summary>
+        <p data-i18n="tpu"></p>
+      </details>
+      <a class="cta" href="kontakt.html" data-i18n="cta"></a>
+    </div>
   </main>
   <footer>
     <a href="impressum.html" data-i18n="imprint"></a>
@@ -231,6 +319,13 @@
         q4: "Wie läuft ein Auftrag ab — und was kostet es?",
         a4: "Anfrage über Kontakt, Klärung von Umfang und Lieferumfang, Konstruktion oder Scan, Freigabe, danach Dateien und — falls gewünscht — Prototyp in FDM, SLA oder 3-Achs-CNC. Preise ausschließlich auf Anfrage. Änderungen nach der Freigabe sind ein neuer Schritt.",
         cta: "Anfrage senden",
+        tabSvc: "Leistungen",
+        tabMat: "Materialien",
+        matLead: "Aktuell FDM-Filamente. Weitere Verfahren folgen.",
+        fdm: "FDM — Filamente",
+        pla: "Steif, detailreich, gut für Anschauungs- und Passmodelle. Innen und kurzzeitig draußen. Einfach zu drucken, begrenzte Wärme- und Schlagfestigkeit.",
+        petg: "Zäher als PLA, etwas nachgiebiger, besser gegen Feuchte und viele Alltagschemikalien. Gut für funktionale Gehäuse und Halter.",
+        tpu: "Flexibel. Dichtungen, Puffer, Clips, weiche Auflagen. Härte und Wandstärke nach Bauteil — kurz beschreiben, wie weich es sein soll.",
         imprint: "Impressum",
         privacy: "Datenschutz"
       },
@@ -260,6 +355,13 @@
         q4: "How does a job run — and what does it cost?",
         a4: "Enquiry via contact, scope and deliverables agreed, design or scan, approval, then files and — if wanted — a prototype in FDM, SLA or 3-axis CNC. Prices on request only. Changes after approval are a new step.",
         cta: "Send an enquiry",
+        tabSvc: "Services",
+        tabMat: "Materials",
+        matLead: "FDM filaments for now. Other processes will follow.",
+        fdm: "FDM — filaments",
+        pla: "Stiff and detailed. Good for fit and display models. Indoor use and short outdoor spells. Easy to print; limited heat and impact strength.",
+        petg: "Tougher than PLA, a little more flexible, better against moisture and many household chemicals. Good for functional housings and brackets.",
+        tpu: "Flexible. Seals, bumpers, clips, soft pads. Shore hardness and wall thickness follow the part — say how soft it should feel.",
         imprint: "Imprint",
         privacy: "Privacy"
       }
@@ -281,6 +383,17 @@
     document.querySelectorAll("[data-set-lang]").forEach((btn) => {
       btn.addEventListener("click", () => applyLang(btn.getAttribute("data-set-lang")));
     });
+    function showTab(id) {
+      const svc = id !== "mat";
+      document.getElementById("panel-svc").hidden = !svc;
+      document.getElementById("panel-mat").hidden = svc;
+      document.getElementById("tab-svc").setAttribute("aria-selected", svc ? "true" : "false");
+      document.getElementById("tab-mat").setAttribute("aria-selected", svc ? "false" : "true");
+    }
+    document.querySelectorAll("[data-tab]").forEach((btn) => {
+      btn.addEventListener("click", () => showTab(btn.getAttribute("data-tab")));
+    });
+    if (location.hash === "#materialien" || location.hash === "#materials") showTab("mat");
   </script>
 </body>
 </html>
