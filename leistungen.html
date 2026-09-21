@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("tv-theme") || "light");
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("tv-theme", theme);
+      document.querySelectorAll("[data-theme-toggle]").forEach((el) => {
+        el.checked = theme === "dark";
+      });
+    }
+    applyTheme(localStorage.getItem("tv-theme") || "light");
+    document.addEventListener("DOMContentLoaded", () => {
+      applyTheme(localStorage.getItem("tv-theme") || "light");
+      document.querySelectorAll("[data-theme-toggle]").forEach((el) => {
+        el.addEventListener("change", () => applyTheme(el.checked ? "dark" : "light"));
+      });
+    });
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TinkerVision — Leistungen</title>
@@ -296,14 +312,51 @@
     @media (min-width: 900px) {
       .top, main { width: min(680px, calc(100% - 48px)); }
     }
+  
+    html[data-theme="dark"] {
+      --ink: #f3f4f8;
+      --muted: #9aa0ab;
+      --line: #2c2e36;
+      --bg0: #0e0f12;
+      --bg: #0e0f12;
+      --card: rgba(22,24,29,.82);
+      --card-solid: #1c1e24;
+      --card-border: #2c2e36;
+    }
+    .tools { display: flex; align-items: center; gap: 10px; }
+    .ios-switch {
+      position: relative;
+      width: 51px;
+      height: 31px;
+      flex: 0 0 51px;
+    }
+    .ios-switch input { opacity: 0; width: 0; height: 0; }
+    .ios-slider {
+      position: absolute; inset: 0;
+      background: #e9e9eb; border-radius: 31px; transition: .2s;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+    }
+    .ios-slider:before {
+      content: ""; position: absolute; height: 27px; width: 27px;
+      left: 2px; top: 2px; background: #fff; border-radius: 50%;
+      transition: .2s; box-shadow: 0 3px 8px rgba(0,0,0,.18);
+    }
+    .ios-switch input:checked + .ios-slider { background: #34c759; }
+    .ios-switch input:checked + .ios-slider:before { transform: translateX(20px); }
   </style>
 </head>
 <body>
   <div class="top">
     <a class="back" href="index.html" data-i18n="back"></a>
-    <div class="lang" role="group">
-      <button type="button" data-set-lang="de" aria-pressed="true">DE</button>
-      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    <div class="tools">
+      <label class="ios-switch" title="Dark Mode">
+        <input type="checkbox" data-theme-toggle>
+        <span class="ios-slider"></span>
+      </label>
+      <div class="lang" role="group">
+        <button type="button" data-set-lang="de" aria-pressed="true">DE</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
   </div>
   <main>
@@ -448,8 +501,8 @@
         m1: "Verkauf nur digital. Formate: PDF, SVG, PNG, DXF, DWG. Formate der Blätter: DIN A5 bis A1.",
         t2: "3D-Scans",
         s2: "Vorhandenes Teil digitalisieren, wenn Zeichnung oder CAD fehlen.",
-        d2: "Handgeführter Scan mit strukturiertem Licht (Blau und Infrarot). Typische Genauigkeit bis etwa 0,02 mm an kleinen, gut erfassten Flächen. Objektgröße grob von 1 cm bis etwa 2 m. Farbe/Textur ist möglich. Sehr glänzende oder tiefdunkle Flächen brauchen oft eine matte Schicht, sonst reißt die Erfassung ab.",
-        m2: "Ergebnis ist zuerst ein Netz, auf Wunsch ein daraus abgeleitetes CAD. Genauigkeit hängt von Größe, Oberfläche und Nutzung ab — Fotos und ungefähre Maße mit der Anfrage schicken.",
+        d2: "Handgeführter Scan mit strukturiertem Licht (Blau und Infrarot). Typische Genauigkeit bis etwa 0,02 mm an kleinen, gut erfassten Flächen. Objektgröße grob von 1 cm bis etwa 2 m. Farbe/Textur ist möglich. Sehr glänzende oder tiefdunkle Flächen brauchen oft eine matte Schicht, sonst reißt die Erfassung ab. Physische Objekte werden ausschließlich per DHL-Paket angenommen. Der Versand muss vorher über das Kontaktformular beantragt werden und erfolgt auf Kosten des Kunden.",
+        m2: "Ergebnis ist zuerst ein Netz, auf Wunsch ein daraus abgeleitetes CAD. Genauigkeit hängt von Größe, Oberfläche und Nutzung ab — Fotos und ungefähre Maße mit der Anfrage schicken. Einsendung nur nach Freigabe und nur per DHL, Porto trägt der Kunde.",
         t3: "Parametrische 3D-Dateien",
         s3: "Standardisierte 3D-Dateien in gängigen Formaten — auf Wunsch druckfertig.",
         d3: "Parametrische, standardisierte 3D-Dateien in den üblichen Formaten. Auf Wunsch wird die Datei auf den vorhandenen Drucker abgestimmt, inklusive angepasstem G-Code, damit die Druckqualität stimmt. Darüber geht Individualisierung: mehrfarbig, mehrere Werkstoffe, Relief, Schrift, Personalisierung.",
@@ -493,8 +546,8 @@
         m1: "Sold digitally only. Formats: PDF, SVG, PNG, DXF, DWG. Sheet sizes: ISO A5 to A1.",
         t2: "3D scans",
         s2: "Digitise an existing part when drawings or CAD are missing.",
-        d2: "Handheld structured-light scan (blue and infrared). Typical accuracy around 0.02 mm on small, well-captured surfaces. Object size roughly 1 cm to about 2 m. Colour/texture is available. Very glossy or very dark surfaces often need a matte coat or tracking drops.",
-        m2: "First output is a mesh, then CAD if wanted. Accuracy depends on size, surface and use — send photos and rough dimensions with the enquiry.",
+        d2: "Handheld structured-light scan (blue and infrared). Typical accuracy around 0.02 mm on small, well-captured surfaces. Object size roughly 1 cm to about 2 m. Colour/texture is available. Very glossy or very dark surfaces often need a matte coat or tracking drops. Physical objects are accepted exclusively via DHL parcel. Shipping must be requested through the contact form first and is paid by the customer.",
+        m2: "First output is a mesh, then CAD if wanted. Accuracy depends on size, surface and use — send photos and rough dimensions with the enquiry. Send-in only after approval and only via DHL; postage is paid by the customer.",
         t3: "Parametric 3D files",
         s3: "Standard 3D files in common formats — print-ready if you want.",
         d3: "Parametric, standard 3D files in the usual formats. On request the file is tuned to your printer, including custom G-code, so print quality holds. That also covers custom work: multi-colour, multi-material, relief, lettering, personalisation.",
