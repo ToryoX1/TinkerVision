@@ -109,7 +109,14 @@
       color: #fff;
     }
     .panel[hidden] { display: none; }
-    .lead { color: var(--muted); font-size: 0.88rem; line-height: 1.5; margin: 0 0 16px; }
+    .lead { color: var(--muted); font-size: 0.88rem; line-height: 1.5; margin: 0 0 10px; }
+    .credo {
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      margin: 0 0 20px;
+    }
     #panel-mat .lead { margin-bottom: 12px; }
     h2 {
       font-family: Orbitron, sans-serif;
@@ -298,6 +305,7 @@
 
     <div class="panel" id="panel-svc" role="tabpanel">
     <p class="lead" data-i18n="lead"></p>
+    <p class="credo" data-i18n="credo"></p>
 
     <details class="job">
       <summary>
@@ -418,27 +426,28 @@
       de: {
         back: "← Zurück",
         title: "Leistungen",
-        lead: "Auftrag statt Download: Wir scannen, konstruieren, rechnen und fertigen — vom ersten Modell bis zur Sonderanfertigung. Fertige Shop-Dateien liegen zusätzlich bei Cults3D und Printables.",
+        lead: "Egal ob am Anfang nur eine Idee steht oder ein vorhandenes, beschädigtes Bauteil ersetzt oder verändert werden soll: von der Zeichnung bis zum Produkt finden Sie hier die passende Unterstützung für Ihr Projekt.",
+        credo: "Individuell · praxisnah · persönlich",
         t1: "Technische Zeichnungen",
-        s1: "Fertigungszeichnung aus dem 3D-Modell — für Werkstatt, Lieferant oder Akte.",
-        d1: "Aus dem CAD entstehen Ansichten, Schnitte, Maße und die Toleranzen, die das Bauteil wirklich braucht. Die Zeichnung ist die gemeinsame Sprache mit Dreherei, Fräserei oder Montage — nicht nur ein Bild vom Modell.",
-        m1: "Typisch: PDF plus zugehörige CAD-Datei. Ausgang ist oft eine Skizze, ein vorhandenes Modell oder ein Scan.",
+        s1: "Standardisierte Zeichnungen — von der groben Skizze bis zur Bauanleitung.",
+        d1: "Zeichnungen von einzelnen Objekten oder ganzen Gruppen: als grobe Skizze, als ausführliche Bauanleitung oder als grafische Darstellung. Sie entstehen aus vorhandenen Teilen oder begleitend im Projekt, zusätzlich zum Hauptprodukt.",
+        m1: "Verkauf nur digital. Formate: PDF, SVG, PNG, DXF, DWG. Formate der Blätter: DIN A5 bis A1.",
         t2: "3D-Scans",
         s2: "Vorhandenes Teil digitalisieren, wenn Zeichnung oder CAD fehlen.",
         d2: "Handgeführter Scan mit strukturiertem Licht (Blau und Infrarot). Typische Genauigkeit bis etwa 0,02 mm an kleinen, gut erfassten Flächen. Objektgröße grob von 1 cm bis etwa 2 m. Farbe/Textur ist möglich. Sehr glänzende oder tiefdunkle Flächen brauchen oft eine matte Schicht, sonst reißt die Erfassung ab.",
         m2: "Ergebnis ist zuerst ein Netz, auf Wunsch ein daraus abgeleitetes CAD. Genauigkeit hängt von Größe, Oberfläche und Nutzung ab — Fotos und ungefähre Maße mit der Anfrage schicken.",
         t3: "Parametrische 3D-Dateien",
-        s3: "Editierbares CAD, ausgelegt auf Druck, Fräsung oder Gravur.",
-        d3: "Neukonstruktion oder Nachbau als parametrisches Modell. Wandstärke, Toleranz und Ausrichtung sitzen schon im Modell, nicht erst in der Werkstatt. Parameter bleiben erhalten, wo das Zielformat das zulässt.",
-        m3: "Export je nach Bedarf: STEP, IGES, STL, 3MF, OBJ, 3D-PDF, DXF, SVG, DWG — weitere gängige Formate auf Anfrage.",
+        s3: "Standardisierte 3D-Dateien in gängigen Formaten — auf Wunsch druckfertig.",
+        d3: "Parametrische, standardisierte 3D-Dateien in den üblichen Formaten. Auf Wunsch wird die Datei auf den vorhandenen Drucker abgestimmt, inklusive angepasstem G-Code, damit die Druckqualität stimmt. Darüber geht Individualisierung: mehrfarbig, mehrere Werkstoffe, Relief, Schrift, Personalisierung.",
+        m3: "Üblich: STEP, IGES, STL, 3MF, OBJ, 3D-PDF, DXF, SVG, DWG — weitere Formate auf Anfrage.",
         t5: "FEM-Analyse",
         s5: "Ob das Teil unter Last hält — grobe Prüfung am CAD, bevor gefertigt wird.",
         d5: "Statische Betrachtung von Spannung und Verformung am Modell: typische Lagerung, Last und Werkstoff. Sinnvoll vor dem ersten Druck oder der Fräsung, wenn unklar ist, ob Rippen, Wandstärke oder Lage der Schrauben reichen.",
         m5: "Das ist eine konstruktionsbegleitende Abschätzung, kein zertifiziertes Gutachten. Annahmen und Grenzen stehen in der Auswertung.",
         t4: "Vom Prototypen zur Sonderanfertigung",
-        s4: "Erstes physisches Teil, Iteration, danach Einzelstück oder Kleinserie.",
-        d4: "Zuerst ein funktionsfähiger Stand zum Anfassen und Prüfen. Danach Änderungen am Modell und, wenn gewünscht, das nächste Teil. Fertigung auf Anfrage: FDM, SLA und 3-Achs-CNC. Nicht jeder Auftrag endet im physischen Stück — oft reicht die freigegebene Datei. Sonderanfertigung heißt: genau dieses Teil, nicht ein Katalogmodell aus dem Shop.",
-        m4: "Ob Datei, Druck oder Fräsung, steht mit dem Auftrag fest. Preise nur auf Anfrage.",
+        s4: "Erst prüfen, dann das Stück, das bleiben soll.",
+        d4: "Der Prototyp ist zum Lernen da: sitzt es, hält es, fühlt es sich richtig an. Was nicht stimmt, geht zurück ins Modell. Die Sonderanfertigung kommt nach der Freigabe — ein Stück oder wenige, in FDM, SLA oder auf der 3-Achs-Fräse. Wer nur die Datei braucht, bekommt die Datei.",
+        m4: "Fertigung und Stückzahl stehen mit dem Auftrag fest. Preise nur auf Anfrage.",
         faq: "Häufige Fragen",
         q1: "Was muss ich zur Anfrage mitschicken?",
         a1: "Kurz das Ziel (passt, ersetzt, wird gedruckt, wird gefräst), vorhandene Dateien oder Fotos, ungefähre Größe und Werkstoff, plus Termin wenn es einen gibt. Unvollständige Angaben sind in Ordnung — Nachfragen kommen über das Kontaktformular.",
@@ -462,19 +471,20 @@
       en: {
         back: "← Back",
         title: "Services",
-        lead: "A commission, not a download: we scan, design, analyse and make parts — from the first model to a one-off. Ready shop files also live on Cults3D and Printables.",
+        lead: "Whether you start with an idea or need a damaged part replaced or changed: from drawing to finished piece, this is support for your project.",
+        credo: "Individual · practical · personal",
         t1: "Technical drawings",
-        s1: "A manufacturing drawing from the 3D model — for a shop, a supplier or the file.",
-        d1: "Views, sections, dimensions and the tolerances the part actually needs. The drawing is the shared language with a mill, lathe or assembly — not just a picture of the model.",
-        m1: "Typical delivery: PDF plus the related CAD file. Input is often a sketch, an existing model or a scan.",
+        s1: "Standard drawings — from a rough sketch to an assembly guide.",
+        d1: "Drawings of single objects or groups: a rough sketch, a full build guide or a graphic sheet. They come from existing parts or grow with the project, alongside the main deliverable.",
+        m1: "Sold digitally only. Formats: PDF, SVG, PNG, DXF, DWG. Sheet sizes: ISO A5 to A1.",
         t2: "3D scans",
         s2: "Digitise an existing part when drawings or CAD are missing.",
         d2: "Handheld structured-light scan (blue and infrared). Typical accuracy around 0.02 mm on small, well-captured surfaces. Object size roughly 1 cm to about 2 m. Colour/texture is available. Very glossy or very dark surfaces often need a matte coat or tracking drops.",
         m2: "First output is a mesh, then CAD if wanted. Accuracy depends on size, surface and use — send photos and rough dimensions with the enquiry.",
         t3: "Parametric 3D files",
-        s3: "Editable CAD aimed at print, milling or engraving.",
-        d3: "New design or rebuild as a parametric model. Wall thickness, tolerance and orientation sit in the model, not later on the shop floor. Parameters are kept where the file format allows.",
-        m3: "Exports as needed: STEP, IGES, STL, 3MF, OBJ, 3D-PDF, DXF, SVG, DWG — other common formats on request.",
+        s3: "Standard 3D files in common formats — print-ready if you want.",
+        d3: "Parametric, standard 3D files in the usual formats. On request the file is tuned to your printer, including custom G-code, so print quality holds. That also covers custom work: multi-colour, multi-material, relief, lettering, personalisation.",
+        m3: "Typical: STEP, IGES, STL, 3MF, OBJ, 3D-PDF, DXF, SVG, DWG — other formats on request.",
         t5: "FEA",
         s5: "A check on whether the part holds under load — before it is made.",
         d5: "Static look at stress and deflection on the model: typical supports, load and material. Useful before the first print or milling job if ribs, wall thickness or screw positions are still a guess.",
