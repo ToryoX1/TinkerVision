@@ -31,7 +31,7 @@
       background-size: auto, 28px 28px, 28px 28px;
     }
     .top {
-      width: min(520px, calc(100% - 28px));
+      width: min(560px, calc(100% - 28px));
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -59,7 +59,7 @@
     }
     .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
     main {
-      width: min(520px, calc(100% - 28px));
+      width: min(560px, calc(100% - 28px));
       margin: 14px auto 28px;
       background: rgba(255,255,255,.78);
       border: 1px solid #fff;
@@ -82,7 +82,18 @@
       margin: 0 0 6px;
       text-align: center;
     }
-    .lead { color: var(--muted); font-size: 1.06rem; margin: 0 0 22px; }
+    .lead { color: var(--muted); font-size: 1.06rem; margin: 0 0 16px; }
+    .rule {
+      width: 28px;
+      height: 2px;
+      background: var(--ink);
+      margin: 12px auto 18px;
+      opacity: .22;
+      border-radius: 2px;
+    }
+    @media (min-width: 900px) {
+      .top, main { width: min(680px, calc(100% - 48px)); }
+    }
     label {
       display: block;
       font-size: 0.86rem;
@@ -207,7 +218,9 @@
   <main>
     <p class="brand">TinkerVision</p>
     <h1 data-i18n="title"></h1>
+    <div class="rule" aria-hidden="true"></div>
     <p class="lead" data-i18n="lead"></p>
+    <div class="rule" aria-hidden="true"></div>
     <p class="sent" id="sent" data-i18n="sent"></p>
     <form action="https://formsubmit.co/tinkervision.de@protonmail.com" method="POST">
       <input type="hidden" name="_subject" value="TinkerVision Kontakt">
