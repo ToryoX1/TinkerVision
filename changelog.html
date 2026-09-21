@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("tv-theme") || "light");</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>TinkerVision — Changelog</title>
+  <link rel="icon" href="emblem.png">
+  <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:400,500,600" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #101114;
+      --muted: #6d6f78;
+      --line: #e4e5ea;
+      --bg0: #ececf1;
+      --card: #fff;
+    }
+    html[data-theme="dark"] {
+      --ink: #f3f4f8;
+      --muted: #9aa0ab;
+      --line: #2c2e36;
+      --bg0: #0e0f12;
+      --card: #1c1e24;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Outfit, system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--bg0);
+      min-height: 100vh;
+    }
+    .wrap { width: min(680px, calc(100% - 36px)); margin: 0 auto; padding: 18px 0 56px; }
+    .bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .back { color: var(--muted); text-decoration: none; font-size: 0.88rem; }
+    .back:hover { color: var(--ink); }
+    .tools { display: flex; align-items: center; gap: 10px; }
+    .ios-switch { position: relative; width: 51px; height: 31px; flex: 0 0 51px; }
+    .ios-switch input { opacity: 0; width: 0; height: 0; }
+    .ios-slider {
+      position: absolute; inset: 0; background: #e9e9eb; border-radius: 31px; transition: .2s;
+    }
+    .ios-slider:before {
+      content: ""; position: absolute; height: 27px; width: 27px; left: 2px; top: 2px;
+      background: #fff; border-radius: 50%; transition: .2s; box-shadow: 0 3px 8px rgba(0,0,0,.18);
+    }
+    .ios-switch input:checked + .ios-slider { background: #34c759; }
+    .ios-switch input:checked + .ios-slider:before { transform: translateX(20px); }
+    .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--card); }
+    .lang button {
+      font-family: Outfit, sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; font-weight: 600;
+      border: 0; background: transparent; color: var(--muted); padding: 7px 12px; cursor: pointer;
+    }
+    .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+    .brand { font-family: Orbitron, sans-serif; font-size: 1.5rem; letter-spacing: 0.24em; font-weight: 700; margin: 0 0 8px; }
+    h1 { font-family: Orbitron, sans-serif; font-size: 0.95rem; letter-spacing: 0.16em; margin: 0 0 6px; }
+    .ver {
+      display: inline-block; font-family: Orbitron, sans-serif; font-size: 0.78rem; letter-spacing: 0.12em;
+      border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; margin: 8px 0 18px;
+    }
+    .rule { width: 28px; height: 2px; background: var(--ink); opacity: .22; margin: 16px 0; border-radius: 2px; }
+    h2 { font-size: 0.95rem; margin: 22px 0 8px; }
+    p, li { line-height: 1.55; color: var(--ink); }
+    p { margin: 0 0 10px; }
+    ul { margin: 0 0 14px; padding-left: 18px; }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      padding: 16px 16px 10px; margin: 0 0 12px;
+    }
+    .card h3 { margin: 0 0 8px; font-size: 0.88rem; letter-spacing: 0.04em; }
+    .muted { color: var(--muted); font-size: 0.86rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="bar">
+      <a class="back" href="index.html" data-i18n="back">← Zurück</a>
+      <div class="tools">
+        <label class="ios-switch" title="Dark Mode">
+          <input type="checkbox" data-theme-toggle>
+          <span class="ios-slider"></span>
+        </label>
+        <div class="lang" role="group">
+          <button type="button" data-set-lang="de" aria-pressed="true">DE</button>
+          <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </div>
+    <p class="brand">TinkerVision</p>
+    <h1 data-i18n="title">Changelog</h1>
+    <p class="ver">b114</p>
+    <div class="rule"></div>
+
+    <h2 data-i18n="infoTitle">Info</h2>
+    <p class="muted" data-i18n="info">Statische GitHub-Pages-Seite für tinkervision.de. Kein Baukasten, kein CMS. Texte und Layout werden in HTML gepflegt. Hosting über GitHub Pages, Domain bei INWX. Shops: Cults3D und Printables. Kontakt über Formular (Formsubmit → Proton Mail) und Mailto.</p>
+
+    <div class="card">
+      <h3 data-i18n="stackTitle">Technik</h3>
+      <ul>
+        <li data-i18n="s1">Hosting: GitHub Pages, Branch website</li>
+        <li data-i18n="s2">Domain: tinkervision.de (INWX)</li>
+        <li data-i18n="s3">Sprache: DE / EN, localStorage</li>
+        <li data-i18n="s4">Theme: Hell / Dunkel, iOS-Schalter</li>
+      </ul>
+    </div>
+
+    <h2>Changelog</h2>
+    <div class="card">
+      <h3>b114</h3>
+      <ul>
+        <li data-i18n="b114a">Zähler 5 Sekunden, Downloads 422, Text „Digitale Produkte Gedownloaded“</li>
+        <li data-i18n="b114b">iOS-Schalter für Dark Mode vor DE/EN</li>
+        <li data-i18n="b114c">Diese ungelistete Seite</li>
+        <li data-i18n="b114d">3D-Scan: Annahme nur per DHL, Antrag über Kontakt, Porto Kunde</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>b113</h3>
+      <ul>
+        <li data-i18n="b113a">TPU-Farben Tiffany / entsättigtes Grün, Spule größer, PETG über PLA</li>
+        <li data-i18n="b113b">Desktop-Karte breiter, Trennstriche, Zähler auf der Startseite</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>b112</h3>
+      <ul>
+        <li data-i18n="b112a">Landing: Leistungen → Kontakt → Cults → Printables</li>
+        <li data-i18n="b112b">Neue Leistungs- und Prototyp-Texte</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>b111</h3>
+      <ul>
+        <li data-i18n="b111a">CAD-Konstruktion, FEM, zweite Slogan-Zeile</li>
+        <li data-i18n="b111b">Leistungen als Klappen, Scan ohne Markenname</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    const T = {
+      de: {
+        back: "← Zurück",
+        title: "Changelog",
+        infoTitle: "Info",
+        info: "Statische GitHub-Pages-Seite für tinkervision.de. Kein Baukasten, kein CMS. Texte und Layout werden in HTML gepflegt. Hosting über GitHub Pages, Domain bei INWX. Shops: Cults3D und Printables. Kontakt über Formular (Formsubmit → Proton Mail) und Mailto.",
+        stackTitle: "Technik",
+        s1: "Hosting: GitHub Pages, Branch website",
+        s2: "Domain: tinkervision.de (INWX)",
+        s3: "Sprache: DE / EN, localStorage",
+        s4: "Theme: Hell / Dunkel, iOS-Schalter",
+        b114a: "Zähler 5 Sekunden, Downloads 422, Text „Digitale Produkte Gedownloaded“",
+        b114b: "iOS-Schalter für Dark Mode vor DE/EN",
+        b114c: "Diese ungelistete Seite",
+        b114d: "3D-Scan: Annahme nur per DHL, Antrag über Kontakt, Porto Kunde",
+        b113a: "TPU-Farben Tiffany / entsättigtes Grün, Spule größer, PETG über PLA",
+        b113b: "Desktop-Karte breiter, Trennstriche, Zähler auf der Startseite",
+        b112a: "Landing: Leistungen → Kontakt → Cults → Printables",
+        b112b: "Neue Leistungs- und Prototyp-Texte",
+        b111a: "CAD-Konstruktion, FEM, zweite Slogan-Zeile",
+        b111b: "Leistungen als Klappen, Scan ohne Markenname"
+      },
+      en: {
+        back: "← Back",
+        title: "Changelog",
+        infoTitle: "Notes",
+        info: "Static GitHub Pages site for tinkervision.de. No site builder, no CMS. Copy and layout live in HTML. Hosting via GitHub Pages, domain at INWX. Shops: Cults3D and Printables. Contact via form (Formsubmit → Proton Mail) and mailto.",
+        stackTitle: "Stack",
+        s1: "Hosting: GitHub Pages, website branch",
+        s2: "Domain: tinkervision.de (INWX)",
+        s3: "Language: DE / EN, localStorage",
+        s4: "Theme: light / dark, iOS switch",
+        b114a: "Counter 5 seconds, downloads 422, label “Digital products downloaded”",
+        b114b: "iOS dark-mode switch before DE/EN",
+        b114c: "This unlisted page",
+        b114d: "3D scan: intake only via DHL, request via contact, postage paid by customer",
+        b113a: "TPU Tiffany / desaturated green, larger spool, PETG above PLA",
+        b113b: "Wider desktop card, rules, landing counters",
+        b112a: "Landing order: Services → Contact → Cults → Printables",
+        b112b: "New service and prototype copy",
+        b111a: "CAD design, FEA, second slogan line",
+        b111b: "Services as accordions, scan without brand name"
+      }
+    };
+    function applyLang(lang) {
+      const pack = T[lang] || T.de;
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (pack[key]) el.textContent = pack[key];
+      });
+      document.querySelectorAll("[data-set-lang]").forEach((btn) => {
+        btn.setAttribute("aria-pressed", btn.getAttribute("data-set-lang") === lang ? "true" : "false");
+      });
+      localStorage.setItem("tv-lang", lang);
+    }
+    const start = localStorage.getItem("tv-lang") || (navigator.language || "de").slice(0, 2);
+    applyLang(start === "en" ? "en" : "de");
+    document.querySelectorAll("[data-set-lang]").forEach((btn) => {
+      btn.addEventListener("click", () => applyLang(btn.getAttribute("data-set-lang")));
+    });
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("tv-theme", theme);
+      document.querySelectorAll("[data-theme-toggle]").forEach((el) => {
+        el.checked = theme === "dark";
+      });
+    }
+    applyTheme(localStorage.getItem("tv-theme") || "light");
+    document.querySelectorAll("[data-theme-toggle]").forEach((el) => {
+      el.addEventListener("change", () => applyTheme(el.checked ? "dark" : "light"));
+    });
+  </script>
+</body>
+</html>
