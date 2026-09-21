@@ -169,6 +169,15 @@
       font-weight: 600;
       font-size: 0.88rem;
     }
+    summary .mat-name { display: block; }
+    summary .mat-note {
+      display: block;
+      font-weight: 400;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+      margin-top: 4px;
+    }
     details p { margin: 8px 0 2px; font-size: 0.86rem; line-height: 1.5; color: var(--muted); }
     .swatch {
       position: relative;
@@ -336,8 +345,10 @@
       <p class="lead" data-i18n="matLead"></p>
       <h2 data-i18n="fdm"></h2>
       <details id="pla-box">
-        <summary>PLA</summary>
-        <p data-i18n="pla"></p>
+        <summary>
+          <span class="mat-name">PLA</span>
+          <span class="mat-note" data-i18n="pla"></span>
+        </summary>
         <div class="swatch" id="pla-swatch">
           <div class="fill" id="pla-fill"></div>
           <img src="filamente/filament.png" alt="Filament">
@@ -346,8 +357,10 @@
         <div class="chips" id="pla-chips"></div>
       </details>
       <details id="petg-box">
-        <summary>PETG</summary>
-        <p data-i18n="petg"></p>
+        <summary>
+          <span class="mat-name">PETG</span>
+          <span class="mat-note" data-i18n="petg"></span>
+        </summary>
         <div class="swatch" id="petg-swatch">
           <div class="fill" id="petg-fill"></div>
           <img src="filamente/filament.png" alt="Filament">
@@ -356,8 +369,10 @@
         <div class="chips" id="petg-chips"></div>
       </details>
       <details id="tpu-box">
-        <summary>TPU</summary>
-        <p data-i18n="tpu"></p>
+        <summary>
+          <span class="mat-name">TPU</span>
+          <span class="mat-note" data-i18n="tpu"></span>
+        </summary>
         <div class="swatch" id="tpu-swatch">
           <div class="fill" id="tpu-fill"></div>
           <img src="filamente/filament.png" alt="Filament">
