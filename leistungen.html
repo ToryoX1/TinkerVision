@@ -180,8 +180,8 @@
       position: absolute;
       inset: 0;
       background: #EFF0F1;
-      -webkit-mask-image: url("filamente/filament_mask.png");
-      mask-image: url("filamente/filament_mask.png");
+      -webkit-mask-image: url("filamente/filemant_mask.png");
+      mask-image: url("filamente/filemant_mask.png");
       -webkit-mask-size: contain;
       mask-size: contain;
       -webkit-mask-repeat: no-repeat;
@@ -213,6 +213,20 @@
     .chips button[aria-pressed="true"] {
       outline: 2px solid var(--ink);
       outline-offset: 2px;
+    }
+    .chips button.translucent {
+      background:
+        linear-gradient(180deg, rgba(255,127,50,.72), rgba(255,160,80,.38)),
+        repeating-conic-gradient(#d9d9d9 0 25%, #fff 0 50%) 0 0 / 8px 8px;
+    }
+    .chips button.gloss {
+      background: radial-gradient(circle at 32% 28%, #5a5a5a 0%, #111 58%, #000 100%);
+    }
+    .chips button.marble {
+      background:
+        radial-gradient(ellipse at 20% 30%, #fff 0 12%, transparent 28%),
+        radial-gradient(ellipse at 70% 60%, #cfc8be 0 10%, transparent 26%),
+        linear-gradient(115deg, #f3f0ea 0%, #d9d4cb 38%, #efece6 52%, #c5bfb4 78%, #f7f5f1 100%);
     }
     .color-label {
       font-size: 0.78rem;
@@ -321,9 +335,15 @@
     <div class="panel" id="panel-mat" role="tabpanel" hidden>
       <p class="lead" data-i18n="matLead"></p>
       <h2 data-i18n="fdm"></h2>
-      <details>
+      <details id="pla-box">
         <summary>PLA</summary>
         <p data-i18n="pla"></p>
+        <div class="swatch" id="pla-swatch">
+          <div class="fill" id="pla-fill"></div>
+          <img src="filamente/filament.png" alt="Filament">
+        </div>
+        <p class="color-label" id="pla-label">Tannengrün</p>
+        <div class="chips" id="pla-chips"></div>
       </details>
       <details id="petg-box">
         <summary>PETG</summary>
@@ -332,12 +352,18 @@
           <div class="fill" id="petg-fill"></div>
           <img src="filamente/filament.png" alt="Filament">
         </div>
-        <p class="color-label" id="petg-label">Weiß — #EFF0F1</p>
+        <p class="color-label" id="petg-label">Weiß</p>
         <div class="chips" id="petg-chips"></div>
       </details>
-      <details>
+      <details id="tpu-box">
         <summary>TPU</summary>
         <p data-i18n="tpu"></p>
+        <div class="swatch" id="tpu-swatch">
+          <div class="fill" id="tpu-fill"></div>
+          <img src="filamente/filament.png" alt="Filament">
+        </div>
+        <p class="color-label" id="tpu-label">Digitalblau</p>
+        <div class="chips" id="tpu-chips"></div>
       </details>
       <a class="cta" href="kontakt.html" data-i18n="cta"></a>
     </div>
@@ -376,7 +402,7 @@
         cta: "Anfrage senden",
         tabSvc: "Leistungen",
         tabMat: "Materialien",
-        matLead: "Aktuell FDM-Filamente. Weitere Verfahren folgen.",
+        matLead: "Folgende Filamente stehen aktuell für das Prototyping zur Verfügung. Bei Bedarf bitte in der Anfrage angeben.",
         fdm: "FDM — Filamente",
         pla: "Steif, detailreich, gut für Anschauungs- und Passmodelle. Innen und kurzzeitig draußen. Einfach zu drucken, begrenzte Wärme- und Schlagfestigkeit.",
         petg: "Zäher als PLA, etwas nachgiebiger, besser gegen Feuchte und viele Alltagschemikalien. Gut für funktionale Gehäuse und Halter.",
@@ -412,7 +438,7 @@
         cta: "Send an enquiry",
         tabSvc: "Services",
         tabMat: "Materials",
-        matLead: "FDM filaments for now. Other processes will follow.",
+        matLead: "The following filaments are currently available for prototyping. Please name your choice in the enquiry.",
         fdm: "FDM — filaments",
         pla: "Stiff and detailed. Good for fit and display models. Indoor use and short outdoor spells. Easy to print; limited heat and impact strength.",
         petg: "Tougher than PLA, a little more flexible, better against moisture and many household chemicals. Good for functional housings and brackets.",
@@ -434,37 +460,110 @@
       localStorage.setItem("tv-lang", lang);
     }
     const PETG = [
-      { nameDe: "Weiß", nameEn: "White", hex: "#EFF0F1", file: "filament_EFF0F1.png" },
-      { nameDe: "Gelb", nameEn: "Yellow", hex: "#F3E500", file: "filament_F3E500.png" },
-      { nameDe: "Orange", nameEn: "Orange", hex: "#FF7F32", file: "filament_FF7F32.png" },
-      { nameDe: "Rot", nameEn: "Red", hex: "#C8102E", file: "filament_C8102E.png" },
-      { nameDe: "Pink", nameEn: "Pink", hex: "#FB637E", file: "filament_FB637E.png" },
-      { nameDe: "Lila", nameEn: "Purple", hex: "#6A6DCD", file: "filament_6A6DCD.png" },
-      { nameDe: "Blau", nameEn: "Blue", hex: "#003594", file: "filament_003594.png" },
-      { nameDe: "Grün", nameEn: "Green", hex: "#009639", file: "filament_009639.png" },
-      { nameDe: "Schwarz", nameEn: "Black", hex: "#212721", file: "filament_212721.png" }
+      { id: "weiss", nameDe: "Weiß", nameEn: "White", hex: "#EFF0F1" },
+      { id: "black", nameDe: "Black", nameEn: "Black", hex: "#212721" },
+      { id: "gelb", nameDe: "Gelb", nameEn: "Yellow", hex: "#F3E500" },
+      { id: "rot", nameDe: "Rot", nameEn: "Red", hex: "#C8102E" },
+      { id: "blau", nameDe: "Blau", nameEn: "Blue", hex: "#003594" },
+      { id: "gruen", nameDe: "Grün", nameEn: "Green", hex: "#009639" },
+      { id: "grau", nameDe: "Grau", nameEn: "Grey", hex: "#97999B" },
+      { id: "purple", nameDe: "Purple", nameEn: "Purple", hex: "#6A6DCD" },
+      { id: "orange", nameDe: "Orange", nameEn: "Orange", hex: "#FF7F32" },
+      { id: "pink", nameDe: "Pink", nameEn: "Pink", hex: "#FB637E" },
+      { id: "peanut", nameDe: "Peanut Brown", nameEn: "Peanut Brown", hex: "#A9754F" },
+      { id: "lime", nameDe: "Lime Green", nameEn: "Lime Green", hex: "#78D64B" },
+      { id: "himmel", nameDe: "Himmelblau", nameEn: "Sky blue", hex: "#7EC8E3" },
+      { id: "orange-t", nameDe: "Orange Transparent", nameEn: "Transparent orange", hex: "#FFB36A", look: "translucent" },
+      { id: "schwarz-g", nameDe: "Schwarz glänzend", nameEn: "Glossy black", hex: "#141414", look: "gloss" }
     ];
     function petgLang() {
       return document.documentElement.lang === "en" ? "en" : "de";
+    }
+    function petgLabel(color) {
+      const name = petgLang() === "en" ? color.nameEn : color.nameDe;
+      if (name) return name;
+      return color.hex || "";
     }
     function setPetg(color) {
       const fill = document.getElementById("petg-fill");
       const label = document.getElementById("petg-label");
       fill.style.background = color.hex;
-      const name = petgLang() === "en" ? color.nameEn : color.nameDe;
-      label.textContent = name + " — " + color.hex;
+      label.textContent = petgLabel(color);
       document.querySelectorAll("#petg-chips button").forEach((btn) => {
-        btn.setAttribute("aria-pressed", btn.dataset.hex === color.hex ? "true" : "false");
+        btn.setAttribute("aria-pressed", btn.dataset.id === color.id ? "true" : "false");
       });
     }
+    const PLA = [
+      { id: "tanne", nameDe: "Tannengrün", nameEn: "Fir green", hex: "#1F4D2B" },
+      { id: "marmor", nameDe: "Marmor", nameEn: "Marble", hex: "#E6E1D8", look: "marble" },
+      { id: "pla-schwarz", nameDe: "Schwarz", nameEn: "Black", hex: "#212721" },
+      { id: "pla-weiss", nameDe: "Weiß", nameEn: "White", hex: "#EFF0F1" }
+    ];
+    function setPla(color) {
+      const fill = document.getElementById("pla-fill");
+      const label = document.getElementById("pla-label");
+      fill.style.background = color.look === "marble"
+        ? "linear-gradient(115deg, #f3f0ea 0%, #d9d4cb 40%, #efece6 55%, #c5bfb4 78%, #f7f5f1 100%)"
+        : color.hex;
+      label.textContent = petgLang() === "en" ? color.nameEn : color.nameDe;
+      document.querySelectorAll("#pla-chips button").forEach((btn) => {
+        btn.setAttribute("aria-pressed", btn.dataset.id === color.id ? "true" : "false");
+      });
+    }
+    (function buildPla() {
+      const wrap = document.getElementById("pla-chips");
+      PLA.forEach((color) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.id = color.id;
+        if (color.look) btn.classList.add(color.look);
+        else btn.style.background = color.hex;
+        btn.title = color.nameDe;
+        btn.addEventListener("click", () => setPla(color));
+        wrap.appendChild(btn);
+      });
+      setPla(PLA[0]);
+    })();
+    const TPU = [
+      { id: "digitalblau", nameDe: "Digitalblau", nameEn: "Digital blue", hex: "#0057B8", shore: "95A" },
+      { id: "airgreen", nameDe: "Air Green Flex", nameEn: "Air Green Flex", hex: "#4CAF6A", shore: "65–82A" },
+      { id: "tpu-orange", nameDe: "Orange", nameEn: "Orange", hex: "#FF7F32", shore: "95A" }
+    ];
+    function tpuLabel(color) {
+      const name = petgLang() === "en" ? color.nameEn : color.nameDe;
+      return name + " · " + color.shore;
+    }
+    function setTpu(color) {
+      const fill = document.getElementById("tpu-fill");
+      const label = document.getElementById("tpu-label");
+      fill.style.background = color.hex;
+      label.textContent = tpuLabel(color);
+      document.querySelectorAll("#tpu-chips button").forEach((btn) => {
+        btn.setAttribute("aria-pressed", btn.dataset.id === color.id ? "true" : "false");
+      });
+    }
+    (function buildTpu() {
+      const wrap = document.getElementById("tpu-chips");
+      TPU.forEach((color) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.id = color.id;
+        btn.style.background = color.hex;
+        btn.title = tpuLabel(color);
+        btn.addEventListener("click", () => setTpu(color));
+        wrap.appendChild(btn);
+      });
+      setTpu(TPU[0]);
+    })();
     (function buildPetg() {
       const wrap = document.getElementById("petg-chips");
       PETG.forEach((color) => {
         const btn = document.createElement("button");
         btn.type = "button";
-        btn.dataset.hex = color.hex;
-        btn.style.background = color.hex;
-        btn.title = color.nameDe + " " + color.hex;
+        btn.dataset.id = color.id;
+        if (color.look) btn.classList.add(color.look);
+        else btn.style.background = color.hex;
+        btn.title = petgLabel(color);
         btn.addEventListener("click", () => setPetg(color));
         wrap.appendChild(btn);
       });
@@ -475,8 +574,12 @@
     document.querySelectorAll("[data-set-lang]").forEach((btn) => {
       btn.addEventListener("click", () => {
         applyLang(btn.getAttribute("data-set-lang"));
-        const hex = document.querySelector("#petg-chips [aria-pressed='true']")?.dataset.hex;
-        setPetg(PETG.find((c) => c.hex === hex) || PETG[0]);
+        const id = document.querySelector("#petg-chips [aria-pressed='true']")?.dataset.id;
+        setPetg(PETG.find((c) => c.id === id) || PETG[0]);
+        const tid = document.querySelector("#tpu-chips [aria-pressed='true']")?.dataset.id;
+        setTpu(TPU.find((c) => c.id === tid) || TPU[0]);
+        const pid = document.querySelector("#pla-chips [aria-pressed='true']")?.dataset.id;
+        setPla(PLA.find((c) => c.id === pid) || PLA[0]);
       });
     });
     function showTab(id) {
