@@ -170,6 +170,44 @@
       font-size: 0.88rem;
     }
     details p { margin: 8px 0 2px; font-size: 0.86rem; line-height: 1.5; color: var(--muted); }
+    .swatch {
+      position: relative;
+      width: min(220px, 70%);
+      aspect-ratio: 1;
+      margin: 12px auto 14px;
+    }
+    .swatch img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .swatch .fill { z-index: 1; }
+    .swatch .mask { z-index: 2; pointer-events: none; }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 6px;
+    }
+    .chips button {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(16,17,20,.2);
+      padding: 0;
+      cursor: pointer;
+    }
+    .chips button[aria-pressed="true"] {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
+    }
+    .color-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
     .cta {
       display: block;
       margin-top: 18px;
@@ -276,9 +314,15 @@
         <summary>PLA</summary>
         <p data-i18n="pla"></p>
       </details>
-      <details>
+      <details id="petg-box">
         <summary>PETG</summary>
         <p data-i18n="petg"></p>
+        <div class="swatch" id="petg-swatch">
+          <img class="fill" id="petg-fill" src="filamente/filament_EFF0F1.png" alt="">
+          <img class="mask" src="filamente/filament.png" alt="">
+        </div>
+        <p class="color-label" id="petg-label">Weiß — #EFF0F1</p>
+        <div class="chips" id="petg-chips"></div>
       </details>
       <details>
         <summary>TPU</summary>
@@ -378,6 +422,43 @@
       });
       localStorage.setItem("tv-lang", lang);
     }
+    const PETG = [
+      { nameDe: "Weiß", nameEn: "White", hex: "#EFF0F1", file: "filament_EFF0F1.png" },
+      { nameDe: "Gelb", nameEn: "Yellow", hex: "#F3E500", file: "filament_F3E500.png" },
+      { nameDe: "Orange", nameEn: "Orange", hex: "#FF7F32", file: "filament_FF7F32.png" },
+      { nameDe: "Rot", nameEn: "Red", hex: "#C8102E", file: "filament_C8102E.png" },
+      { nameDe: "Pink", nameEn: "Pink", hex: "#FB637E", file: "filament_FB637E.png" },
+      { nameDe: "Lila", nameEn: "Purple", hex: "#6A6DCD", file: "filament_6A6DCD.png" },
+      { nameDe: "Blau", nameEn: "Blue", hex: "#003594", file: "filament_003594.png" },
+      { nameDe: "Grün", nameEn: "Green", hex: "#009639", file: "filament_009639.png" },
+      { nameDe: "Schwarz", nameEn: "Black", hex: "#212721", file: "filament_212721.png" }
+    ];
+    function petgLang() {
+      return document.documentElement.lang === "en" ? "en" : "de";
+    }
+    function setPetg(color) {
+      const fill = document.getElementById("petg-fill");
+      const label = document.getElementById("petg-label");
+      fill.src = "filamente/" + color.file;
+      const name = petgLang() === "en" ? color.nameEn : color.nameDe;
+      label.textContent = name + " — " + color.hex;
+      document.querySelectorAll("#petg-chips button").forEach((btn) => {
+        btn.setAttribute("aria-pressed", btn.dataset.hex === color.hex ? "true" : "false");
+      });
+    }
+    (function buildPetg() {
+      const wrap = document.getElementById("petg-chips");
+      PETG.forEach((color) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.hex = color.hex;
+        btn.style.background = color.hex;
+        btn.title = color.nameDe + " " + color.hex;
+        btn.addEventListener("click", () => setPetg(color));
+        wrap.appendChild(btn);
+      });
+      setPetg(PETG[0]);
+    })();
     const start = localStorage.getItem("tv-lang") || (navigator.language || "de").slice(0, 2);
     applyLang(start === "en" ? "en" : "de");
     document.querySelectorAll("[data-set-lang]").forEach((btn) => {
