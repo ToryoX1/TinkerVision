@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("tv-theme") || "light");</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TinkerVision</title>
@@ -18,10 +19,26 @@
       --muted: #6d6f78;
       --line: #e4e5ea;
       --bg0: #ececf1;
+      --card: rgba(255,255,255,.78);
+      --card-solid: #fff;
+      --card-border: #fff;
+      --glow: #ffffff;
       --cults: #6b2d91;
       --printables: #fa6831;
       --contact: #101114;
       --services: #2f4a63;
+    }
+    html[data-theme="dark"] {
+      --ink: #f3f4f8;
+      --muted: #9aa0ab;
+      --line: #2c2e36;
+      --bg0: #0e0f12;
+      --card: rgba(22,24,29,.82);
+      --card-solid: #1c1e24;
+      --card-border: #2c2e36;
+      --glow: #16181d;
+      --contact: #f3f4f8;
+      --services: #8aa0b8;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -34,7 +51,7 @@
       align-items: center;
       background-color: var(--bg0);
       background-image:
-        radial-gradient(ellipse 70% 45% at 50% 0%, #ffffff 0%, transparent 70%),
+        radial-gradient(ellipse 70% 45% at 50% 0%, var(--glow) 0%, transparent 70%),
         linear-gradient(var(--line) 1px, transparent 1px),
         linear-gradient(90deg, var(--line) 1px, transparent 1px);
       background-size: auto, 28px 28px, 28px 28px;
@@ -45,12 +62,46 @@
       justify-content: flex-end;
       padding: 16px 0 0;
     }
+    .tools { display: flex; align-items: center; gap: 10px; }
+    .ios-switch {
+      position: relative;
+      width: 51px;
+      height: 31px;
+      flex: 0 0 51px;
+    }
+    .ios-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .ios-slider {
+      position: absolute;
+      inset: 0;
+      background: #e9e9eb;
+      border-radius: 31px;
+      transition: .2s;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+    }
+    .ios-slider:before {
+      content: "";
+      position: absolute;
+      height: 27px;
+      width: 27px;
+      left: 2px;
+      top: 2px;
+      background: #fff;
+      border-radius: 50%;
+      transition: .2s;
+      box-shadow: 0 3px 8px rgba(0,0,0,.18);
+    }
+    .ios-switch input:checked + .ios-slider { background: #34c759; }
+    .ios-switch input:checked + .ios-slider:before { transform: translateX(20px); }
     .lang {
       display: inline-flex;
       border: 1px solid var(--line);
       border-radius: 999px;
       overflow: hidden;
-      background: rgba(255,255,255,.86);
+      background: var(--card-solid);
       backdrop-filter: blur(8px);
     }
     .lang button {
@@ -72,9 +123,9 @@
       width: min(520px, calc(100% - 28px));
       margin: 14px auto 28px;
       text-align: center;
-      background: rgba(255,255,255,.78);
+      background: var(--card);
       backdrop-filter: blur(14px);
-      border: 1px solid #fff;
+      border: 1px solid var(--card-border);
       border-radius: 28px;
       padding: 36px 22px 22px;
       box-shadow:
@@ -221,9 +272,15 @@
 </head>
 <body>
   <div class="top">
-    <div class="lang" role="group" aria-label="Language">
-      <button type="button" data-set-lang="de" aria-pressed="true">DE</button>
-      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    <div class="tools">
+      <label class="ios-switch" title="Dark Mode">
+        <input type="checkbox" data-theme-toggle>
+        <span class="ios-slider"></span>
+      </label>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="de" aria-pressed="true">DE</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
   </div>
   <main>
@@ -305,7 +362,7 @@
         contactSub: "Den besten Weg zur Kontaktaufnahme finden",
         services: "Leistungen",
         servicesSub: "Scan, Konstruktion, Analyse, Sonderanfertigungen",
-        statDl: "Digitale Downloads",
+        statDl: "Digitale Produkte Gedownloaded",
         statCad: "Konstruktionen erstellt"
       },
       en: {
@@ -320,7 +377,7 @@
         contactSub: "Find the best way to get in touch",
         services: "Services",
         servicesSub: "Scan, design, analysis, custom parts",
-        statDl: "Digital downloads",
+        statDl: "Digital products downloaded",
         statCad: "Designs completed"
       }
     };
@@ -341,6 +398,18 @@
     document.querySelectorAll("[data-set-lang]").forEach((btn) => {
       btn.addEventListener("click", () => applyLang(btn.getAttribute("data-set-lang")));
     });
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("tv-theme", theme);
+      document.querySelectorAll("[data-theme-toggle]").forEach((el) => {
+        el.checked = theme === "dark";
+      });
+    }
+    applyTheme(localStorage.getItem("tv-theme") || "light");
+    document.querySelectorAll("[data-theme-toggle]").forEach((el) => {
+      el.addEventListener("change", () => applyTheme(el.checked ? "dark" : "light"));
+    });
     function countUp(el, to, ms) {
       const start = performance.now();
       function tick(now) {
@@ -351,8 +420,8 @@
       }
       requestAnimationFrame(tick);
     }
-    countUp(document.getElementById("stat-dl"), 1420, 1400);
-    countUp(document.getElementById("stat-cad"), 200, 1400);
+    countUp(document.getElementById("stat-dl"), 422, 5000);
+    countUp(document.getElementById("stat-cad"), 200, 5000);
   </script>
 </body>
 </html>
