@@ -109,45 +109,49 @@
       color: #fff;
     }
     .panel[hidden] { display: none; }
-    .lead { color: var(--muted); font-size: 0.9rem; line-height: 1.5; margin: 0 0 22px; }
+    .lead { color: var(--muted); font-size: 0.88rem; line-height: 1.5; margin: 0 0 16px; }
+    #panel-mat .lead { margin-bottom: 12px; }
     h2 {
       font-family: Orbitron, sans-serif;
       font-size: 0.68rem;
       letter-spacing: 0.14em;
-      margin: 0 0 6px;
+      margin: 0 0 10px;
       color: var(--ink);
     }
     article {
       display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 12px;
-      align-items: stretch;
+      grid-template-columns: minmax(92px, 34%) 1fr;
+      gap: 14px;
+      align-items: center;
       background: #fff;
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 10px 12px;
+      padding: 14px;
       margin-bottom: 10px;
     }
     article:nth-of-type(even) {
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 1fr minmax(92px, 34%);
     }
     article:nth-of-type(even) img { order: 2; }
+    article:not(:has(img)) {
+      grid-template-columns: 1fr;
+    }
     article img {
-      height: 100%;
-      width: auto;
-      max-width: 46%;
+      width: 100%;
+      height: auto;
+      max-height: 128px;
       object-fit: cover;
       border-radius: 10px;
       display: block;
       background: #eef0f3;
     }
     article .copy { min-width: 0; }
-    article p { margin: 0; font-size: 0.9rem; line-height: 1.5; }
+    article p { margin: 0; font-size: 0.88rem; line-height: 1.5; }
     @media (max-width: 420px) {
       article,
       article:nth-of-type(even) { grid-template-columns: 1fr; }
       article:nth-of-type(even) img { order: 0; }
-      article img { width: 100%; max-width: none; height: auto; }
+      article img { max-height: none; }
     }
     .meta {
       margin-top: 8px;
@@ -161,38 +165,39 @@
       background: #fff;
       border: 1px solid var(--line);
       border-radius: 12px;
-      padding: 10px 14px;
-      margin-bottom: 8px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
     }
+    details[open] { padding-bottom: 14px; }
     summary {
       cursor: pointer;
       font-weight: 600;
       font-size: 0.88rem;
     }
-    summary .mat-name { display: block; }
+    summary .mat-name { display: inline; }
     summary .mat-note {
       display: block;
       font-weight: 400;
       font-size: 0.78rem;
       color: var(--muted);
-      line-height: 1.4;
-      margin-top: 4px;
+      line-height: 1.45;
+      margin-top: 6px;
     }
     details p { margin: 8px 0 2px; font-size: 0.86rem; line-height: 1.5; color: var(--muted); }
     .swatch {
       position: relative;
-      width: min(240px, 80%);
-      margin: 12px auto 14px;
+      width: min(200px, 72%);
+      margin: 14px auto 10px;
       background: transparent;
     }
     .swatch .fill {
       position: absolute;
       inset: 0;
       background: #EFF0F1;
-      -webkit-mask-image: url("filamente/filament_mask.png");
-      mask-image: url("filamente/filament_mask.png");
-      -webkit-mask-size: 100.5%;
-      mask-size: 100.5%;
+      -webkit-mask-image: url("filamente/filament.png");
+      mask-image: url("filamente/filament.png");
+      -webkit-mask-size: contain;
+      mask-size: contain;
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
       -webkit-mask-position: center;
@@ -286,7 +291,7 @@
     <p class="lead" data-i18n="lead"></p>
 
     <article>
-      <img src="TechDraw.png" alt="">
+      <img src="TechDraw.png" alt="" onerror="this.remove()">
       <div class="copy">
         <h2 data-i18n="t1"></h2>
         <p data-i18n="d1"></p>
@@ -294,7 +299,7 @@
       </div>
     </article>
     <article>
-      <img src="Scan.png" alt="">
+      <img src="Scan.png" alt="" onerror="this.remove()">
       <div class="copy">
         <h2 data-i18n="t2"></h2>
         <p data-i18n="d2"></p>
@@ -302,7 +307,7 @@
       </div>
     </article>
     <article>
-      <img src="Geomerty.png" alt="">
+      <img src="Geomerty.png" alt="" onerror="this.remove()">
       <div class="copy">
         <h2 data-i18n="t3"></h2>
         <p data-i18n="d3"></p>
@@ -310,7 +315,7 @@
       </div>
     </article>
     <article>
-      <img src="prototyp.png" alt="">
+      <img src="prototyp.png" alt="" onerror="this.remove()">
       <div class="copy">
         <h2 data-i18n="t4"></h2>
         <p data-i18n="d4"></p>
@@ -351,7 +356,7 @@
         </summary>
         <div class="swatch" id="pla-swatch">
           <div class="fill" id="pla-fill"></div>
-          <img src="filamente/filament.png" alt="Filament">
+          <img src="filamente/filament_mask.png" alt="Filament">
         </div>
         <p class="color-label" id="pla-label">Tannengrün</p>
         <div class="chips" id="pla-chips"></div>
@@ -363,7 +368,7 @@
         </summary>
         <div class="swatch" id="petg-swatch">
           <div class="fill" id="petg-fill"></div>
-          <img src="filamente/filament.png" alt="Filament">
+          <img src="filamente/filament_mask.png" alt="Filament">
         </div>
         <p class="color-label" id="petg-label">Weiß</p>
         <div class="chips" id="petg-chips"></div>
@@ -375,7 +380,7 @@
         </summary>
         <div class="swatch" id="tpu-swatch">
           <div class="fill" id="tpu-fill"></div>
-          <img src="filamente/filament.png" alt="Filament">
+          <img src="filamente/filament_mask.png" alt="Filament">
         </div>
         <p class="color-label" id="tpu-label">Digitalblau</p>
         <div class="chips" id="tpu-chips"></div>
