@@ -40,7 +40,7 @@
       background-size: auto, 28px 28px, 28px 28px;
     }
     .top {
-      width: min(440px, calc(100% - 28px));
+      width: min(520px, calc(100% - 28px));
       display: flex;
       justify-content: flex-end;
       padding: 16px 0 0;
@@ -69,7 +69,7 @@
       color: #fff;
     }
     main {
-      width: min(440px, calc(100% - 28px));
+      width: min(520px, calc(100% - 28px));
       margin: 14px auto 28px;
       text-align: center;
       background: rgba(255,255,255,.78);
@@ -185,6 +185,38 @@
     }
     footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { color: var(--ink); }
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .stats div {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 10px 12px;
+      text-align: center;
+    }
+    .stats strong {
+      font-family: Orbitron, sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.06em;
+    }
+    .stats em {
+      font-style: normal;
+      font-family: Orbitron, sans-serif;
+      font-size: 1.15rem;
+    }
+    .stats p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+    }
+    @media (min-width: 900px) {
+      .top, main { width: min(640px, calc(100% - 48px)); }
+    }
   </style>
 </head>
 <body>
@@ -243,6 +275,16 @@
         <svg class="ext" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg>
       </a>
     </nav>
+    <div class="stats">
+      <div>
+        <strong id="stat-dl">0</strong><em>+</em>
+        <p data-i18n="statDl"></p>
+      </div>
+      <div>
+        <strong id="stat-cad">0</strong><em>+</em>
+        <p data-i18n="statCad"></p>
+      </div>
+    </div>
   </main>
   <footer>
     <span>© 2026 TinkerVision</span>
@@ -262,7 +304,9 @@
         contact: "Kontakt",
         contactSub: "Den besten Weg zur Kontaktaufnahme finden",
         services: "Leistungen",
-        servicesSub: "Scan, Konstruktion, Analyse, Sonderanfertigungen"
+        servicesSub: "Scan, Konstruktion, Analyse, Sonderanfertigungen",
+        statDl: "Digitale Downloads",
+        statCad: "Konstruktionen erstellt"
       },
       en: {
         slogan: "Ideas become geometry.",
@@ -275,7 +319,9 @@
         contact: "Contact",
         contactSub: "Find the best way to get in touch",
         services: "Services",
-        servicesSub: "Scan, design, analysis, custom parts"
+        servicesSub: "Scan, design, analysis, custom parts",
+        statDl: "Digital downloads",
+        statCad: "Designs completed"
       }
     };
     function applyLang(lang) {
@@ -295,6 +341,18 @@
     document.querySelectorAll("[data-set-lang]").forEach((btn) => {
       btn.addEventListener("click", () => applyLang(btn.getAttribute("data-set-lang")));
     });
+    function countUp(el, to, ms) {
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min(1, (now - start) / ms);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = String(Math.round(to * eased));
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    countUp(document.getElementById("stat-dl"), 1420, 1400);
+    countUp(document.getElementById("stat-cad"), 200, 1400);
   </script>
 </body>
 </html>
