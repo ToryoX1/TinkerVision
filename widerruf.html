@@ -1,25 +1,153 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("tv-theme") || "light");</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Widerrufsbelehrung – TinkerVision</title>
-  <link rel="icon" href="logo.jpg">
+  <title>TinkerVision — Widerruf</title>
+  <link rel="icon" href="emblem.png">
+  <link rel="apple-touch-icon" href="emblem.png">
+  <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:400,500,600" rel="stylesheet">
   <style>
-    body { font-family: "Segoe UI", system-ui, sans-serif; max-width: 720px; margin: 48px auto; padding: 0 20px; color: #111; line-height: 1.55; }
-    a { color: #111; }
-    h1 { font-size: 1.4rem; }
-    h2 { font-size: 1.1rem; margin-top: 1.8em; }
-    p, li { margin: 0.4em 0; }
-    .formular { border: 1px solid #ccc; padding: 1em; margin-top: 1em; background: #fafafa; }
+    :root {
+      --ink: #101114;
+      --muted: #6d6f78;
+      --line: #e4e5ea;
+      --bg0: #ececf1;
+      --card: rgba(255,255,255,.78);
+      --card-solid: #fff;
+      --card-border: #fff;
+      --glow: #ffffff;
+    }
+    html[data-theme="dark"] {
+      --ink: #f3f4f8;
+      --muted: #9aa0ab;
+      --line: #2c2e36;
+      --bg0: #0e0f12;
+      --card: rgba(22,24,29,.82);
+      --card-solid: #1c1e24;
+      --card-border: #2c2e36;
+      --glow: #16181d;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Outfit, system-ui, sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: var(--bg0);
+      background-image:
+        radial-gradient(ellipse 70% 45% at 50% 0%, var(--glow) 0%, transparent 70%),
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: auto, 28px 28px, 28px 28px;
+    }
+    .top {
+      width: min(560px, calc(100% - 28px));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0 0;
+    }
+    .back { color: var(--muted); text-decoration: none; font-size: 0.88rem; }
+    .back:hover { color: var(--ink); }
+    .tools { display: flex; align-items: center; gap: 10px; }
+    .ios-switch { position: relative; width: 51px; height: 31px; flex: 0 0 51px; }
+    .ios-switch input { opacity: 0; width: 0; height: 0; }
+    .ios-slider {
+      position: absolute; inset: 0; background: #e9e9eb; border-radius: 31px; transition: .2s;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+    }
+    .ios-slider:before {
+      content: ""; position: absolute; height: 27px; width: 27px; left: 2px; top: 2px;
+      background: #fff; border-radius: 50%; transition: .2s; box-shadow: 0 3px 8px rgba(0,0,0,.18);
+    }
+    .ios-switch input:checked + .ios-slider { background: #34c759; }
+    .ios-switch input:checked + .ios-slider:before { transform: translateX(20px); }
+    .lang {
+      display: inline-flex; border: 1px solid var(--line); border-radius: 999px;
+      overflow: hidden; background: var(--card-solid);
+    }
+    .lang button {
+      font-family: Outfit, sans-serif; font-size: 0.7rem; letter-spacing: 0.1em;
+      font-weight: 600; border: 0; background: transparent; color: var(--muted);
+      padding: 7px 12px; cursor: pointer;
+    }
+    .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+    main {
+      width: min(560px, calc(100% - 28px));
+      margin: 14px auto 28px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 28px 22px 22px;
+      box-shadow: 0 24px 50px rgba(16,17,20,.08);
+    }
+    @media (min-width: 900px) {
+      .top, main { width: min(720px, calc(100% - 48px)); }
+    }
+    .brand {
+      font-family: Orbitron, sans-serif; font-size: 1.5rem; letter-spacing: 0.24em;
+      font-weight: 700; margin: 0 0 10px; text-align: center;
+    }
+    h1 {
+      font-family: Orbitron, sans-serif; font-size: 0.95rem; letter-spacing: 0.16em;
+      margin: 0 0 6px; text-align: center;
+    }
+    .rule {
+      width: 28px; height: 2px; background: var(--ink); margin: 14px auto 18px;
+      opacity: .22; border-radius: 2px;
+    }
+    .note {
+      color: var(--muted); font-size: 0.82rem; text-align: center; margin: 0 0 16px;
+    }
+    .note[hidden] { display: none; }
+    h2 {
+      font-family: Outfit, sans-serif; font-size: 0.92rem; letter-spacing: 0.02em;
+      margin: 22px 0 8px; color: var(--ink);
+    }
+    p, li { font-size: 0.9rem; line-height: 1.55; }
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 0 0 10px; padding-left: 1.2em; }
+    a { color: var(--ink); }
+    .formular {
+      background: var(--card-solid); border: 1px solid var(--line);
+      border-radius: 14px; padding: 14px 14px 6px; margin: 10px 0 14px;
+    }
+    .stand { color: var(--muted); font-size: 0.8rem; margin-top: 18px; }
+    footer {
+      margin-top: auto; padding: 4px 16px 28px; color: var(--muted); font-size: 0.75rem;
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--ink); }
   </style>
 </head>
 <body>
-  <p><a href="index.html">← Zurück</a></p>
-  <h1>Widerrufsbelehrung</h1>
-  <p><strong>TinkerVision</strong></p>
+  <div class="top">
+    <a class="back" href="index.html" data-i18n="back"></a>
+    <div class="tools">
+      <label class="ios-switch" title="Dark Mode">
+        <input type="checkbox" data-theme-toggle>
+        <span class="ios-slider"></span>
+      </label>
+      <div class="lang" role="group">
+        <button type="button" data-set-lang="de" aria-pressed="true">DE</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+  <main>
+    <p class="brand">TinkerVision</p>
+    <h1 data-i18n="title"></h1>
+    <div class="rule" aria-hidden="true"></div>
+    <p class="note" id="en-note" hidden data-i18n="enNote"></p>
 
-  <h2>Widerrufsrecht</h2>
+    <h2>Widerrufsrecht</h2>
   <p>Verbrauchern steht ein gesetzliches Widerrufsrecht zu.</p>
   <p>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen.</p>
   <p>Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag des Vertragsschlusses.</p>
@@ -62,7 +190,67 @@
     <p>(*) Unzutreffendes streichen.</p>
   </div>
 
-  <p style="margin-top: 2em; font-size: 0.9em; color: #555;">Stand: Oktober 2026<br>
+  <p class="stand">Stand: Oktober 2026<br>
  </p>
+
+  </main>
+  <footer>
+    <a href="impressum.html" data-i18n="imprint"></a>
+    <a href="datenschutz.html" data-i18n="privacy"></a>
+    <a href="agb.html" data-i18n="terms"></a>
+    <a href="widerruf.html" data-i18n="withdrawal"></a>
+  </footer>
+  <script>
+    const T = {
+      de: {
+        back: "← Zurück",
+        title: 'Widerruf',
+        enNote: "",
+        imprint: "Impressum",
+        privacy: "Datenschutz",
+        terms: "AGB",
+        withdrawal: "Widerruf"
+      },
+      en: {
+        back: "← Back",
+        title: 'Withdrawal',
+        enNote: "The legally binding text is German.",
+        imprint: "Imprint",
+        privacy: "Privacy",
+        terms: "Terms",
+        withdrawal: "Withdrawal"
+      }
+    };
+    function applyLang(lang) {
+      const pack = T[lang] || T.de;
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (pack[key] !== undefined) el.textContent = pack[key];
+      });
+      document.querySelectorAll("[data-set-lang]").forEach((btn) => {
+        btn.setAttribute("aria-pressed", btn.getAttribute("data-set-lang") === lang ? "true" : "false");
+      });
+      const note = document.getElementById("en-note");
+      if (note) note.hidden = lang !== "en";
+      localStorage.setItem("tv-lang", lang);
+    }
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("tv-theme", theme);
+      document.querySelectorAll("[data-theme-toggle]").forEach((el) => {
+        el.checked = theme === "dark";
+      });
+    }
+    const start = localStorage.getItem("tv-lang") || (navigator.language || "de").slice(0, 2);
+    applyLang(start === "en" ? "en" : "de");
+    applyTheme(localStorage.getItem("tv-theme") || "light");
+    document.querySelectorAll("[data-set-lang]").forEach((btn) => {
+      btn.addEventListener("click", () => applyLang(btn.getAttribute("data-set-lang")));
+    });
+    document.querySelectorAll("[data-theme-toggle]").forEach((el) => {
+      el.addEventListener("change", () => applyTheme(el.checked ? "dark" : "light"));
+    });
+  </script>
 </body>
 </html>
