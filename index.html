@@ -426,8 +426,14 @@
       }
       requestAnimationFrame(tick);
     }
-    countUp(document.getElementById("stat-dl"), 422, 5000);
     countUp(document.getElementById("stat-cad"), 200, 5000);
+    fetch("stats.json", { cache: "no-store" })
+      .then((r) => r.ok ? r.json() : null)
+      .then((stats) => {
+        const n = stats && Number.isFinite(stats.total) ? stats.total : 422;
+        countUp(document.getElementById("stat-dl"), n, 5000);
+      })
+      .catch(() => countUp(document.getElementById("stat-dl"), 422, 5000));
   </script>
 </body>
 </html>
