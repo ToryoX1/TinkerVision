@@ -1,0 +1,23 @@
+name: download stats
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Summe schreiben
+        env:
+          CULTS_API_KEY: ${{ secrets.CULTS_API_KEY }}
+        run: python3 update-downloads.py
+      - name: stats.json committen
+        run: |
+          git config user.name "tinkervision-bot"
+          git config user.email "actions@github.com"
+          git add stats.json
+          git diff --cached --quiet || git commit -m "Update download stats"
+          git push
