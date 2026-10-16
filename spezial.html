@@ -75,13 +75,16 @@
     </a>
   </main>
   <footer>
-    <a href="impressum.html" data-i18n="imprint"></a>
-    <a href="datenschutz.html" data-i18n="privacy"></a>
+    <span>© 2026 TinkerVision</span>
+    <a href="impressum.html" data-i18n="imprint">Impressum</a>
+    <a href="datenschutz.html" data-i18n="privacy">Datenschutz</a>
+    <a href="agb.html" data-i18n="agb">AGB</a>
+    <a href="widerruf.html" data-i18n="widerruf">Widerruf</a>
   </footer>
   <script>
     const T = {
-      de: { back:"← Zurück", title:"Spezialanfertigungen", lead:"Konfigurierbare Einzelstücke. Preis steht fest, Anfrage direkt.", f1:"STL 7 €", f2:"Sonderanfertigung 20 €", f3:"Anfrage per Code", p1:"Tischtennis Netzlehre Vereinsedition", p1s:"15,25 cm Netzhöhe · Belagsdicke · Vereinsfarben", imprint:"Impressum", privacy:"Datenschutz" },
-      en: { back:"← Back", title:"Custom products", lead:"Configurable one-offs. Fixed price, enquire direct.", f1:"STL €7", f2:"Custom €20", f3:"Enquiry by code", p1:"Table tennis net gauge club edition", p1s:"15.25 cm net height · rubber thickness · club colours", imprint:"Imprint", privacy:"Privacy" }
+      de: { back:"← Zurück", title:"Spezialanfertigungen", lead:"Konfigurierbare Einzelstücke. Preis steht fest, Anfrage direkt.", f1:"STL 7 €", f2:"Sonderanfertigung 20 €", f3:"Anfrage per Code", p1:"Tischtennis Netzlehre Vereinsedition", p1s:"15,25 cm Netzhöhe · Belagsdicke · Vereinsfarben", imprint:"Impressum", privacy:"Datenschutz", agb:"AGB", widerruf:"Widerruf" },
+      en: { back:"← Back", title:"Custom products", lead:"Configurable one-offs. Fixed price, enquire direct.", f1:"STL €7", f2:"Custom €20", f3:"Enquiry by code", p1:"Table tennis net gauge club edition", p1s:"15.25 cm net height · rubber thickness · club colours", imprint:"Imprint", privacy:"Privacy", agb:"Terms", widerruf:"Withdrawal" }
     };
     function applyLang(lang) {
       const pack = T[lang] || T.de;
