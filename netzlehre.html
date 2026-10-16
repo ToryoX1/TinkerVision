@@ -7,7 +7,7 @@
   <title>TinkerVision — Netzlehre</title>
   <link rel="icon" href="emblem.png">
   <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
-  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:600|oswald:600|audiowide:400|anton:400|caveat:700|playfair-display:700" rel="stylesheet">
+  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:600|oswald:600|audiowide:400|anton:400|teko:600|righteous:400" rel="stylesheet">
   <style>
     :root { --ink:#101114; --muted:#6d6f78; --line:#e4e5ea; --bg0:#ececf1; --card:rgba(255,255,255,.78); --card-solid:#fff; --card-border:#fff; --glow:#fff; }
     html[data-theme="dark"] { --ink:#f3f4f8; --muted:#9aa0ab; --line:#2c2e36; --bg0:#0e0f12; --card:rgba(22,24,29,.82); --card-solid:#1c1e24; --card-border:#2c2e36; --glow:#16181d; }
@@ -26,8 +26,8 @@
     .lang { display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:var(--card-solid); }
     .lang button { font-family:Outfit,sans-serif; font-size:.7rem; letter-spacing:.1em; font-weight:600; border:0; background:transparent; color:var(--muted); padding:7px 12px; cursor:pointer; }
     .lang button[aria-pressed="true"] { background:var(--ink); color:#fff; }
-    main { width:min(560px, calc(100% - 28px)); margin:14px auto 28px; background:var(--card); border:1px solid var(--card-border); border-radius:28px; padding:24px 18px 20px; box-shadow:0 24px 50px rgba(16,17,20,.08); }
-    @media (min-width:900px) { .top, main { width:min(720px, calc(100% - 48px)); } }
+    main { width:min(560px, calc(100% - 28px)); margin:14px auto 28px; background:var(--card); border:1px solid var(--card-border); border-radius:28px; padding:28px 22px 24px; box-shadow:0 24px 50px rgba(16,17,20,.08); }
+    @media (min-width:900px) { .top, main { width:min(760px, calc(100% - 48px)); } }
     .brand { font-family:Orbitron,sans-serif; font-size:1.35rem; letter-spacing:.22em; font-weight:700; margin:0 0 8px; text-align:center; }
     h1 { font-family:Orbitron,sans-serif; font-size:.82rem; letter-spacing:.08em; margin:0; text-align:center; }
     .rule { width:28px; height:2px; background:var(--ink); margin:12px auto 14px; opacity:.22; border-radius:2px; }
@@ -47,8 +47,12 @@
     @keyframes settle { 0% { transform: scale(.975); } 60% { transform: scale(1.012); } 100% { transform: scale(1); } }
     @keyframes wipe { 0% { transform: translateX(-30px); opacity: 0; } 18% { opacity: .45; } 100% { transform: translateX(230px); opacity: 0; } }
     svg { width:auto; height:clamp(168px, 34vw, 230px); display:block; margin:0 auto; }
-    .stage { background:radial-gradient(ellipse at 50% 30%, #fff 0%, #e7e8ee 70%); border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin:0 -22px 8px; padding:10px 0; overflow:visible; }
-    .stage svg { width:calc(100% + 48px); max-width:none; height:auto; display:block; margin:0 -24px; }
+    .stage { background:var(--card-solid); border:1px solid var(--line); border-radius:18px; margin:0 0 16px; padding:16px 12px; }
+    .stage svg { width:100%; height:auto; display:block; margin:0 auto; }
+    @media (min-width:800px) {
+      .stage { margin:0 -8px 20px; padding:20px 16px; }
+      .stage svg { width:100%; }
+    }
     html[data-theme="dark"] .stage { background:radial-gradient(ellipse at 50% 30%, #2a2d36 0%, #14161b 72%); }
     label { display:block; font-size:.78rem; letter-spacing:.04em; color:var(--muted); margin:12px 0 6px; }
     input[type="text"] {
@@ -59,6 +63,7 @@
       width:100%; font-size:1rem; border:1px solid var(--line); border-radius:12px;
       padding:11px 12px; background:var(--card-solid); color:var(--ink); cursor:pointer;
     }
+    .textrow { display:grid; grid-template-columns:1fr 148px; gap:8px; align-items:center; }
     .submit {
       display:block; text-align:center; text-decoration:none; font-weight:700;
       background:#822ef5; color:#fff; border-radius:14px; padding:13px 16px; margin-top:14px;
@@ -111,7 +116,7 @@
       <div><b data-i18n="o3"></b><span data-i18n="o3s"></span></div>
     </div>
     <div class="stage">
-      <svg id="render" viewBox="575 805 1990 490" role="img" aria-label="Netzlehre">
+      <svg id="render" viewBox="1240 140 490 1990" role="img" aria-label="Netzlehre">
         <defs>
           <mask id="part">
             <path fill="#fff" d="M1466.2 439.2 L1465 448.8 L1465 1901.2 L1464.2 1907.9 L1462 1914.3 L1458.5 1920 L1453.7 1924.7 L1448 1928.3 L1441.7 1930.5 L1435 1931.2 L1355 1931.2 L1348.3 1930.5 L1342 1928.3 L1336.3 1924.7 L1331.5 1920 L1328 1914.3 L1325.8 1907.9 L1325 1901.2 L1325 423.8 L1324.6 420.4 L1323.5 417.2 L1321.7 414.4 L1319.3 412 L1316.5 410.2 L1313.3 409.1 L1310 408.8 L1300 408.8 L1296.7 408.4 L1293.5 407.3 L1290.7 405.5 L1288.3 403.1 L1286.5 400.3 L1285.4 397.1 L1285 393.8 L1285 198.8 L1285.8 192.1 L1288 185.7 L1291.5 180 L1296.3 175.3 L1302 171.7 L1308.3 169.5 L1315 168.8 L1655 168.8 L1661.7 169.5 L1668 171.7 L1673.7 175.3 L1678.5 180 L1682 185.7 L1684.2 192.1 L1685 198.8 L1685 1901.2 L1684.2 1907.9 L1682 1914.3 L1678.5 1920 L1673.7 1924.7 L1668 1928.3 L1661.7 1930.5 L1655 1931.2 L1575 1931.2 L1568.3 1930.5 L1562 1928.3 L1556.3 1924.7 L1551.5 1920 L1548 1914.3 L1545.8 1907.9 L1545 1901.2 L1545 448.8 L1543.8 439.2 L1540.4 430.2 L1534.9 422.2 L1527.7 415.8 L1519.2 411.4 L1509.8 409 L1500.2 409 L1490.8 411.4 L1482.3 415.8 L1475.1 422.2 L1469.6 430.2 L1466.2 439.2 Z"/>
@@ -123,27 +128,22 @@
             <path d="M0 0 L8 4 L0 8 z" fill="#6d6f78"/>
           </marker>
         </defs>
-        <g mask="url(#part)" transform="rotate(-90 1485 1050)">
+        <g mask="url(#part)" data-rot>
           <rect id="fillA" clip-path="url(#clipA)" x="1285" y="169" width="400" height="1762"/>
           <rect id="fillB" clip-path="url(#clipB)" x="1285" y="169" width="400" height="1762"/>
         </g>
-        <g transform="rotate(-90 1485 1050)">
+        <g data-rot>
           <image href="Netzlehre.svg" x="0" y="0" width="2970" height="2100"/>
           <text id="wish" x="1615" y="1135" text-anchor="middle" dominant-baseline="central" font-size="46" font-weight="700" fill="#F4F4F4" transform="rotate(90 1615 1135)">Tv DEIN VEREIN 2026</text>
-        </g>
-        <g fill="none" stroke="#6d6f78" stroke-width="3" font-family="Outfit, sans-serif" font-size="28" transform="rotate(-90 1485 1050)">
-          <line x1="1260" y1="169" x2="1260" y2="1931" marker-start="url(#arr)" marker-end="url(#arr)"/>
-          <text x="1235" y="1050" fill="#6d6f78" stroke="none" transform="rotate(-90 1235 1050)" text-anchor="middle">15,25 cm</text>
-          <line x1="1248" y1="410" x2="1305" y2="410" marker-end="url(#arr)"/>
-          <text x="1244" y="390" fill="#6d6f78" stroke="none">4 mm</text>
         </g>
       </svg>
     </div>
 
-    <label for="wish-in" data-i18n="wish"></label>
-    <input id="wish-in" type="text" maxlength="22" value="Tv DEIN VEREIN 2026" placeholder="Tv DEIN VEREIN 2026">
-    <label data-i18n="font"></label>
-    <select class="pick" id="font-pick"></select>
+    <label data-i18n="wish"></label>
+    <div class="textrow">
+      <input id="wish-in" type="text" maxlength="22" value="Tv DEIN VEREIN 2026" placeholder="Tv DEIN VEREIN 2026">
+      <select class="pick" id="font-pick" aria-label="Schrift"></select>
+    </div>
     <label data-i18n="mode"></label>
     <div class="modes">
       <button type="button" data-mode="2" aria-pressed="true" data-i18n="m2"></button>
@@ -200,9 +200,9 @@
   </footer>
   <script>
     const T = {
-      de: { back:"← Zurück", title:"Netzlehre Vereinsedition", o1:"ab 7 €", o1s:"3MF · Druck 20 €", o2:"Frei konfigurierbar", o2s:"2 oder 3 Farben · 6 Schriften", o3:"Anfrage einreichen", o3s:"Code in Betreff und Nachricht", hint:"Der Code steht in Betreff und Nachricht.", send:"Anfrage einreichen", mode:"Farben", m2:"2 Farben", m3:"3 Farben", c1:"Netzlehren Farbe", c2:"Textfarbe", c3:"Textfarbe", c1b:"Netzlehre Farbe oben", c2b:"Netzlehre Farbe unten", wish:"Text · lange Seite", font:"Schrift", opt:"Lieferung", optS:"3MF File zum selber Drucken · 7 €", optP:"Netzlehre Drucken lassen · 20 €", optB:"Netzlehre + 3MF File · 25 €", qty:"Anzahl", qtyNote:"+2,60 € je weitere Lehre, max. 8 pro Bestellung.", region:"Versandregion", regionOther:"Andere Region", terms:"Bestätigung bis 48 Std. Digitale Datei in 3 Tagen. Kleinserie 14 Tage zzgl. Versand. Geringfügige Abweichungen im üblichen Rahmen.", fn:"Nicht ITTF-zugelassen", imprint:"Impressum", privacy:"Datenschutz", agb:"AGB", widerruf:"Widerruf",
+      de: { back:"← Zurück", title:"Netzlehre Vereinsedition", o1:"ab 7 €", o1s:"Digital bis Fertigprodukt", o2:"bis zu 3 Vereinsfarben", o2s:"6 Schriftarten", o3:"In 5 Minuten", o3s:"zur Bestellung", hint:"Der Code steht in Betreff und Nachricht.", send:"Anfrage einreichen", mode:"Farben", m2:"2 Farben", m3:"3 Farben", c1:"Netzlehren Farbe", c2:"Textfarbe", c3:"Textfarbe", c1b:"Netzlehre Farbe oben", c2b:"Netzlehre Farbe unten", wish:"Text · lange Seite", font:"Schrift", opt:"Lieferung", optS:"3MF File zum selber Drucken · 7 €", optP:"Netzlehre Drucken lassen · 20 €", optB:"Netzlehre + 3MF File · 25 €", qty:"Anzahl", qtyNote:"+2,60 € je weitere Lehre, max. 8 pro Bestellung.", region:"Versandregion", regionOther:"Andere Region", terms:"Bestätigung bis 48 Std. Digitale Datei in 3 Tagen. Kleinserie 14 Tage zzgl. Versand. Geringfügige Abweichungen im üblichen Rahmen.", fn:"Nicht ITTF-zugelassen", imprint:"Impressum", privacy:"Datenschutz", agb:"AGB", widerruf:"Widerruf",
         subj:"Netzlehre", body:(c,n)=>`Kennung: ${c}\nProdukt: Tischtennis Netzlehre Vereinsedition\n${n}` },
-      en: { back:"← Back", title:"Net gauge club edition", o1:"from €7", o1s:"3MF · print €20", o2:"Free config", o2s:"2 or 3 colours · 6 typefaces", o3:"Send enquiry", o3s:"Code in subject and message", hint:"The code is in the subject and the message.", send:"Send enquiry", mode:"Colours", m2:"2 colours", m3:"3 colours", c1:"Gauge colour", c2:"Text colour", c3:"Text colour", c1b:"Gauge colour top", c2b:"Gauge colour bottom", wish:"Text · long side", font:"Typeface", opt:"Delivery", optS:"3MF file to print yourself · €7", optP:"Have the gauge printed · €20", optB:"Gauge + 3MF file · €25", qty:"Quantity", qtyNote:"+€2.60 per extra gauge, max. 8 per order.", region:"Shipping region", regionOther:"Other region", terms:"Confirmation within 48 hours. Digital file in 3 days. Small run 14 days plus shipping. Minor deviations within the usual range.", fn:"Not ITTF approved", imprint:"Imprint", privacy:"Privacy", agb:"Terms", widerruf:"Withdrawal",
+      en: { back:"← Back", title:"Net gauge club edition", o1:"from €7", o1s:"Digital to finished piece", o2:"up to 3 club colours", o2s:"6 typefaces", o3:"In 5 minutes", o3s:"to order", hint:"The code is in the subject and the message.", send:"Send enquiry", mode:"Colours", m2:"2 colours", m3:"3 colours", c1:"Gauge colour", c2:"Text colour", c3:"Text colour", c1b:"Gauge colour top", c2b:"Gauge colour bottom", wish:"Text · long side", font:"Typeface", opt:"Delivery", optS:"3MF file to print yourself · €7", optP:"Have the gauge printed · €20", optB:"Gauge + 3MF file · €25", qty:"Quantity", qtyNote:"+€2.60 per extra gauge, max. 8 per order.", region:"Shipping region", regionOther:"Other region", terms:"Confirmation within 48 hours. Digital file in 3 days. Small run 14 days plus shipping. Minor deviations within the usual range.", fn:"Not ITTF approved", imprint:"Imprint", privacy:"Privacy", agb:"Terms", widerruf:"Withdrawal",
         subj:"Net gauge", body:(c,n)=>`Code: ${c}\nProduct: table tennis net gauge club edition\n${n}` }
     };
     const FONTS = [
@@ -210,8 +210,8 @@
       { id:"OS", name:"Oswald", css:"Oswald, sans-serif" },
       { id:"AW", name:"Audiowide", css:"Audiowide, sans-serif" },
       { id:"AN", name:"Anton", css:"Anton, sans-serif" },
-      { id:"CV", name:"Caveat", css:"Caveat, cursive" },
-      { id:"PF", name:"Playfair", css:"'Playfair Display', serif" }
+      { id:"TK", name:"Teko", css:"Teko, sans-serif" },
+      { id:"RG", name:"Righteous", css:"Righteous, sans-serif" }
     ];
     let DB, lang = "de", mode = "2", c1 = "BK", c2 = "WH", c3 = "RD", opt = "S", font = "OR", qty = 1, region = "DE";
     function euro(n) {
@@ -275,7 +275,7 @@
       FONTS.forEach((f) => {
         const opt = document.createElement("option");
         opt.value = f.id;
-        opt.textContent = sample;
+        opt.textContent = f.name;
         opt.style.fontFamily = f.css;
         opt.selected = f.id === font;
         box.appendChild(opt);
@@ -356,7 +356,14 @@
     }));
     document.getElementById("qty-minus").addEventListener("click", () => { qty = Math.max(1, qty - 1); render(); });
     document.getElementById("qty-plus").addEventListener("click", () => { qty = Math.min(8, qty + 1); render(); });
-    document.getElementById("wish-in").addEventListener("input", render);
+    function orient() {
+      const wide = window.innerWidth >= 800;
+      const svg = document.getElementById("render");
+      svg.setAttribute("viewBox", wide ? "575 805 1990 490" : "1240 140 490 1990");
+      document.querySelectorAll("[data-rot]").forEach((g) => g.setAttribute("transform", wide ? "rotate(-90 1485 1050)" : ""));
+    }
+    orient();
+    window.addEventListener("resize", orient);
   </script>
 </body>
 </html>
