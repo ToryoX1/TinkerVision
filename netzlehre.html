@@ -7,7 +7,7 @@
   <title>TinkerVision — Netzlehre</title>
   <link rel="icon" href="emblem.png">
   <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
-  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:600|oswald:600|bebas-neue:400|barlow-condensed:700" rel="stylesheet">
+  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:600|oswald:600|bebas-neue:400|anton:400" rel="stylesheet">
   <style>
     :root { --ink:#101114; --muted:#6d6f78; --line:#e4e5ea; --bg0:#ececf1; --card:rgba(255,255,255,.78); --card-solid:#fff; --card-border:#fff; --glow:#fff; }
     html[data-theme="dark"] { --ink:#f3f4f8; --muted:#9aa0ab; --line:#2c2e36; --bg0:#0e0f12; --card:rgba(22,24,29,.82); --card-solid:#1c1e24; --card-border:#2c2e36; --glow:#16181d; }
@@ -57,8 +57,8 @@
     }
     .fonts { display:grid; grid-template-columns:1fr; gap:6px; }
     .fonts button {
-      font-size:.9rem; border:1px solid var(--line); background:var(--card-solid); color:var(--ink);
-      border-radius:10px; padding:10px 8px; cursor:pointer; letter-spacing:.02em;
+      font-size:1.05rem; border:1px solid var(--line); background:var(--card-solid); color:var(--ink);
+      border-radius:10px; padding:11px 8px; cursor:pointer; letter-spacing:.04em; line-height:1;
     }
     .fonts button[aria-pressed="true"] { background:var(--ink); color:#fff; }
     .modes, .opts { display:flex; gap:8px; flex-wrap:wrap; }
@@ -67,15 +67,12 @@
       color:var(--ink); border-radius:999px; padding:8px 12px; cursor:pointer; font-size:.82rem;
     }
     .modes button[aria-pressed="true"], .opts button[aria-pressed="true"] { background:var(--ink); color:#fff; }
-    .swatches { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; }
-    @media (min-width:700px) { .swatches { grid-template-columns:repeat(8, 1fr); } }
-    .swatch {
-      border:1px solid var(--line); background:var(--card-solid); border-radius:12px; padding:6px; cursor:pointer;
+    .colors { display:flex; flex-wrap:wrap; gap:8px; }
+    .colors button {
+      width:36px; height:36px; border-radius:50%; border:2px solid var(--line); cursor:pointer; padding:0;
     }
-    .swatch[aria-pressed="true"] { outline:2px solid var(--ink); }
-    .chips { display:flex; height:22px; border-radius:6px; overflow:hidden; }
-    .chips i { flex:1; display:block; }
-    .swatch small { display:block; text-align:center; font-size:.62rem; color:var(--muted); margin-top:4px; }
+    .colors button[aria-pressed="true"] { outline:2px solid var(--ink); outline-offset:2px; }
+    .color-row[hidden] { display:none; }
     .extra { margin-top:10px; }
     .qty { display:flex; align-items:center; gap:8px; }
     .qty button { width:36px; height:36px; border-radius:10px; border:1px solid var(--line); background:var(--card-solid); color:var(--ink); font-size:1.1rem; cursor:pointer; }
@@ -128,7 +125,7 @@
           <rect id="fillB" clip-path="url(#clipB)" x="1285" y="169" width="400" height="1762"/>
         </g>
         <image href="Netzlehre.svg" x="0" y="0" width="2970" height="2100"/>
-        <text id="wish" x="1615" y="1135" text-anchor="middle" font-size="46" font-weight="700" fill="#F4F4F4" transform="rotate(90 1615 1135)">Tv DEIN VEREIN 2026</text>
+        <text id="wish" x="1615" y="1135" text-anchor="middle" dominant-baseline="central" font-size="46" font-weight="700" fill="#F4F4F4" transform="rotate(90 1615 1135)">Tv DEIN VEREIN 2026</text>
         <g fill="none" stroke="#6d6f78" stroke-width="3" font-family="Outfit, sans-serif" font-size="28">
           <line x1="1260" y1="169" x2="1260" y2="1931" marker-start="url(#arr)" marker-end="url(#arr)"/>
           <text x="1235" y="1050" fill="#6d6f78" stroke="none" transform="rotate(-90 1235 1050)" text-anchor="middle">15,25 cm</text>
@@ -147,8 +144,18 @@
       <button type="button" data-mode="2" aria-pressed="true" data-i18n="m2"></button>
       <button type="button" data-mode="3" aria-pressed="false" data-i18n="m3"></button>
     </div>
-    <label data-i18n="combo"></label>
-    <div class="swatches" id="swatches"></div>
+    <div class="color-row">
+      <label data-i18n="c1"></label>
+      <div class="colors" id="c1"></div>
+    </div>
+    <div class="color-row">
+      <label data-i18n="c2"></label>
+      <div class="colors" id="c2"></div>
+    </div>
+    <div class="color-row" id="c3-row" hidden>
+      <label data-i18n="c3"></label>
+      <div class="colors" id="c3"></div>
+    </div>
     <label data-i18n="opt"></label>
     <div class="opts">
       <button type="button" data-opt="S" aria-pressed="true" data-i18n="optS"></button>
@@ -190,18 +197,18 @@
   </footer>
   <script>
     const T = {
-      de: { back:"← Zurück", title:"Netzlehre Vereinsedition", o1:"ab 7 €", o1s:"STL · Sonderanfertigung 20 €", o2:"32 Varianten", o2s:"2 oder 3 Farben · 4 Schriften", o3:"Jetzt anfragen", o3s:"Konfiguration per Code", hint:"Code anklicken öffnet die Anfrage mit dieser Kennung.", save:"Render speichern", mode:"Farbmodus", m2:"2 Farben", m3:"3 Farben", combo:"Kombination", wish:"Text · lange Seite", font:"Schrift", opt:"Lieferung", optS:"Nur STL · 7 €", optP:"Sonderanfertigung · 20 €", optB:"Sonderanfertigung & STL · +3,60 €", qty:"Anzahl", qtyNote:"Max. 8 pro Bestellung, gepolsterter Maxibrief.", region:"Versandregion", regionOther:"Andere Region", terms:"Bestätigung bis 48 Std. Digitale Datei in 3 Tagen. Kleinserie 14 Tage zzgl. Versand. Geringfügige Abweichungen im üblichen Rahmen.", fn:"Nicht ITTF-zugelassen", imprint:"Impressum", privacy:"Datenschutz", agb:"AGB", widerruf:"Widerruf",
+      de: { back:"← Zurück", title:"Netzlehre Vereinsedition", o1:"ab 7 €", o1s:"STL · Sonderanfertigung 20 €", o2:"Frei konfigurierbar", o2s:"2 oder 3 Farben · 4 Schriften", o3:"Jetzt anfragen", o3s:"Konfiguration per Code", hint:"Code anklicken öffnet die Anfrage mit dieser Kennung.", mode:"Farben", m2:"2 Farben", m3:"3 Farben", c1:"Farbe 1 · Lehre", c2:"Farbe 2 · Text", c3:"Farbe 3 · Text", wish:"Text · lange Seite", font:"Schrift", opt:"Lieferung", optS:"Nur STL · 7 €", optP:"Sonderanfertigung · 20 €", optB:"Sonderanfertigung & STL · +3,60 €", qty:"Anzahl", qtyNote:"Max. 8 pro Bestellung, gepolsterter Maxibrief.", region:"Versandregion", regionOther:"Andere Region", terms:"Bestätigung bis 48 Std. Digitale Datei in 3 Tagen. Kleinserie 14 Tage zzgl. Versand. Geringfügige Abweichungen im üblichen Rahmen.", fn:"Nicht ITTF-zugelassen", imprint:"Impressum", privacy:"Datenschutz", agb:"AGB", widerruf:"Widerruf",
         subj:"Netzlehre", body:(c,n)=>`Kennung: ${c}\nProdukt: Tischtennis Netzlehre Vereinsedition\n${n}` },
-      en: { back:"← Back", title:"Net gauge club edition", o1:"from €7", o1s:"STL · custom €20", o2:"32 variants", o2s:"2 or 3 colours · 4 typefaces", o3:"Send enquiry", o3s:"Configuration by code", hint:"Click the code to open the enquiry with this ID.", save:"Save render", mode:"Colour mode", m2:"2 colours", m3:"3 colours", combo:"Combination", wish:"Text · long side", font:"Typeface", opt:"Delivery", optS:"STL only · €7", optP:"Custom piece · €20", optB:"Custom piece & STL · +€3.60", qty:"Quantity", qtyNote:"Max. 8 per order, padded large letter.", region:"Shipping region", regionOther:"Other region", terms:"Confirmation within 48 hours. Digital file in 3 days. Small run 14 days plus shipping. Minor deviations within the usual range.", fn:"Not ITTF approved", imprint:"Imprint", privacy:"Privacy", agb:"Terms", widerruf:"Withdrawal",
+      en: { back:"← Back", title:"Net gauge club edition", o1:"from €7", o1s:"STL · custom €20", o2:"Free config", o2s:"2 or 3 colours · 4 typefaces", o3:"Send enquiry", o3s:"Configuration by code", hint:"Click the code to open the enquiry with this ID.", mode:"Colours", m2:"2 colours", m3:"3 colours", c1:"Colour 1 · gauge", c2:"Colour 2 · text", c3:"Colour 3 · text", wish:"Text · long side", font:"Typeface", opt:"Delivery", optS:"STL only · €7", optP:"Custom piece · €20", optB:"Custom piece & STL · +€3.60", qty:"Quantity", qtyNote:"Max. 8 per order, padded large letter.", region:"Shipping region", regionOther:"Other region", terms:"Confirmation within 48 hours. Digital file in 3 days. Small run 14 days plus shipping. Minor deviations within the usual range.", fn:"Not ITTF approved", imprint:"Imprint", privacy:"Privacy", agb:"Terms", widerruf:"Withdrawal",
         subj:"Net gauge", body:(c,n)=>`Code: ${c}\nProduct: table tennis net gauge club edition\n${n}` }
     };
     const FONTS = [
       { id:"OR", name:"Orbitron", css:"Orbitron, sans-serif" },
       { id:"OS", name:"Oswald", css:"Oswald, sans-serif" },
       { id:"BB", name:"Bebas", css:"'Bebas Neue', sans-serif" },
-      { id:"BA", name:"Barlow", css:"'Barlow Condensed', sans-serif" }
+      { id:"AN", name:"Anton", css:"Anton, sans-serif" }
     ];
-    let DB, lang = "de", mode = "2", combo = "01", opt = "S", font = "OR", qty = 1, region = "DE";
+    let DB, lang = "de", mode = "2", c1 = "BK", c2 = "WH", c3 = "RD", opt = "S", font = "OR", qty = 1, region = "DE";
     function euro(n) {
       return (lang === "en" ? "€" : "") + n.toFixed(2).replace(".", lang === "en" ? "." : ",") + (lang === "en" ? "" : " €");
     }
@@ -232,31 +239,21 @@
     }
     function hex(id) { return DB.colors[id].hex; }
     function name(id) { return DB.colors[id][lang]; }
-    function current() {
-      const list = mode === "3" ? DB.combos3 : DB.combos2;
-      return list.find((c) => c.id === combo) || list[0];
-    }
-    function slug(v) {
-      return (v || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8) || "X";
-    }
     function codeOf() {
-      const c = current();
-      return `${c.code}-${font}-${opt}`;
+      return mode === "3" ? `NL3-${c1}-${c2}-${c3}-${font}-${opt}` : `NL2-${c1}-${c2}-${font}-${opt}`;
     }
     function fit(el, text) {
       el.textContent = text;
       const target = 1100;
-      let size = 90;
+      let size = 78;
       el.setAttribute("font-size", size);
       const len = () => el.getComputedTextLength() || 1;
-      while (size > 18 && len() > target) { size -= 1; el.setAttribute("font-size", size); }
-      while (size < 90 && len() < target - 40) { size += 1; el.setAttribute("font-size", size); }
+      while (size > 22 && len() > target) { size -= 1; el.setAttribute("font-size", size); }
     }
     function paint() {
-      const c = current();
-      const a = mode === "3" ? hex(c.a) : hex(c.main);
-      const b = mode === "3" ? hex(c.b) : hex(c.main);
-      const t = hex(c.text);
+      const a = hex(c1);
+      const b = mode === "3" ? hex(c2) : hex(c1);
+      const t = mode === "3" ? hex(c3) : hex(c2);
       const face = FONTS.find((f) => f.id === font) || FONTS[0];
       document.getElementById("fillA").setAttribute("fill", a);
       document.getElementById("fillB").setAttribute("fill", b);
@@ -264,18 +261,6 @@
       wish.setAttribute("fill", t);
       wish.setAttribute("font-family", face.css);
       fit(wish, document.getElementById("wish-in").value || "Tv DEIN VEREIN 2026");
-      if (paint.lastA !== a || paint.lastB !== b || paint.lastT !== t) {
-        const sweep = document.getElementById("sweep");
-        const stage = document.querySelector(".stage");
-        if (sweep && stage) {
-          sweep.style.animation = "none";
-          stage.classList.remove("pulse");
-          void sweep.offsetWidth;
-          sweep.style.animation = "wipe .6s ease";
-          stage.classList.add("pulse");
-        }
-      }
-      paint.lastA = a; paint.lastB = b; paint.lastT = t;
     }
     function renderFonts() {
       const box = document.getElementById("fonts");
@@ -285,38 +270,46 @@
         btn.type = "button";
         btn.textContent = "Tv DEIN VEREIN 2026";
         btn.style.fontFamily = f.css;
+        btn.style.fontSize = "1.15rem";
         btn.setAttribute("aria-pressed", f.id === font ? "true" : "false");
         btn.addEventListener("click", () => { font = f.id; render(); });
         box.appendChild(btn);
       });
     }
-    function renderSwatches() {
-      const box = document.getElementById("swatches");
-      const list = mode === "3" ? DB.combos3 : DB.combos2;
-      box.innerHTML = "";
-      list.forEach((c) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "swatch";
-        btn.setAttribute("aria-pressed", c.id === combo ? "true" : "false");
-        const chips = mode === "3"
-          ? `<i style="background:${hex(c.a)}"></i><i style="background:${hex(c.b)}"></i><i style="background:${hex(c.text)}"></i>`
-          : `<i style="background:${hex(c.main)}"></i><i style="background:${hex(c.text)}"></i>`;
-        btn.innerHTML = `<span class="chips">${chips}</span><small>${c.id}</small>`;
-        btn.addEventListener("click", () => { combo = c.id; render(); });
-        box.appendChild(btn);
+    function renderColors() {
+      const ids = Object.keys(DB.colors);
+      ["c1", "c2", "c3"].forEach((slot) => {
+        const box = document.getElementById(slot);
+        const cur = slot === "c1" ? c1 : slot === "c2" ? c2 : c3;
+        box.innerHTML = "";
+        ids.forEach((id) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.title = name(id);
+          btn.style.background = hex(id);
+          btn.setAttribute("aria-pressed", id === cur ? "true" : "false");
+          btn.addEventListener("click", () => {
+            if (slot === "c1") c1 = id;
+            else if (slot === "c2") c2 = id;
+            else c3 = id;
+            render();
+          });
+          box.appendChild(btn);
+        });
       });
+      document.getElementById("c3-row").hidden = mode !== "3";
+      const pack = T[lang];
+      document.querySelector("[data-i18n='c2']").textContent = mode === "3" ? (lang === "en" ? "Colour 2 · right" : "Farbe 2 · rechts") : pack.c2;
     }
     function render() {
       if (!DB) return;
       paint();
-      renderSwatches();
+      renderColors();
       renderFonts();
       const code = codeOf();
-      const c = current();
       const detail = mode === "3"
-        ? `${c.code} · ${name(c.a)} / ${name(c.b)} / ${name(c.text)}`
-        : `${c.code} · ${name(c.main)} / ${name(c.text)}`;
+        ? `${name(c1)} / ${name(c2)} / ${name(c3)}`
+        : `${name(c1)} / ${name(c2)}`;
       const wish = document.getElementById("wish-in").value || "Tv DEIN VEREIN 2026";
       const optName = DB.options[opt][lang];
       const q = quote();
@@ -343,7 +336,6 @@
     document.querySelectorAll("[data-theme-toggle]").forEach((el) => el.addEventListener("change", () => applyTheme(el.checked ? "dark" : "light")));
     document.querySelectorAll("[data-mode]").forEach((b) => b.addEventListener("click", () => {
       mode = b.getAttribute("data-mode");
-      combo = "01";
       document.querySelectorAll("[data-mode]").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
       render();
     }));
