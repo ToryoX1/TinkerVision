@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("tv-theme") || "light");</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TinkerVision — Netzlehre</title>
+  <link rel="icon" href="emblem.png">
+  <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:600|oswald:600|bebas-neue:400|barlow-condensed:700" rel="stylesheet">
+  <style>
+    :root { --ink:#101114; --muted:#6d6f78; --line:#e4e5ea; --bg0:#ececf1; --card:rgba(255,255,255,.78); --card-solid:#fff; --card-border:#fff; --glow:#fff; }
+    html[data-theme="dark"] { --ink:#f3f4f8; --muted:#9aa0ab; --line:#2c2e36; --bg0:#0e0f12; --card:rgba(22,24,29,.82); --card-solid:#1c1e24; --card-border:#2c2e36; --glow:#16181d; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; padding:0; }
+    body { font-family:Outfit,system-ui,sans-serif; color:var(--ink); min-height:100vh; display:flex; flex-direction:column; align-items:center; background:var(--bg0); background-image:radial-gradient(ellipse 70% 45% at 50% 0%, var(--glow) 0%, transparent 70%), linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size:auto,28px 28px,28px 28px; }
+    .top { width:min(560px, calc(100% - 28px)); display:flex; justify-content:space-between; align-items:center; padding:16px 0 0; }
+    .back { color:var(--muted); text-decoration:none; font-size:.88rem; }
+    .tools { display:flex; align-items:center; gap:10px; }
+    .ios-switch { position:relative; width:51px; height:31px; }
+    .ios-switch input { opacity:0; width:0; height:0; }
+    .ios-slider { position:absolute; inset:0; background:#e9e9eb; border-radius:31px; }
+    .ios-slider:before { content:""; position:absolute; height:27px; width:27px; left:2px; top:2px; background:#fff; border-radius:50%; transition:.2s; box-shadow:0 3px 8px rgba(0,0,0,.18); }
+    .ios-switch input:checked + .ios-slider { background:#34c759; }
+    .ios-switch input:checked + .ios-slider:before { transform:translateX(20px); }
+    .lang { display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:var(--card-solid); }
+    .lang button { font-family:Outfit,sans-serif; font-size:.7rem; letter-spacing:.1em; font-weight:600; border:0; background:transparent; color:var(--muted); padding:7px 12px; cursor:pointer; }
+    .lang button[aria-pressed="true"] { background:var(--ink); color:#fff; }
+    main { width:min(560px, calc(100% - 28px)); margin:14px auto 28px; background:var(--card); border:1px solid var(--card-border); border-radius:28px; padding:24px 18px 20px; box-shadow:0 24px 50px rgba(16,17,20,.08); }
+    @media (min-width:900px) { .top, main { width:min(720px, calc(100% - 48px)); } }
+    .brand { font-family:Orbitron,sans-serif; font-size:1.35rem; letter-spacing:.22em; font-weight:700; margin:0 0 8px; text-align:center; }
+    h1 { font-family:Orbitron,sans-serif; font-size:.82rem; letter-spacing:.08em; margin:0; text-align:center; }
+    .rule { width:28px; height:2px; background:var(--ink); margin:12px auto 14px; opacity:.22; border-radius:2px; }
+    .offer { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin:0 0 14px; }
+    .offer div { background:var(--card-solid); border:1px solid var(--line); border-radius:14px; padding:10px 8px; text-align:center; }
+    .offer b { display:block; font-family:Orbitron,sans-serif; font-size:.78rem; letter-spacing:.04em; }
+    .offer span { display:block; color:var(--muted); font-size:.68rem; margin-top:3px; line-height:1.3; }
+    .code {
+      display:inline-block; font-family:Orbitron,sans-serif; font-size:.92rem; letter-spacing:.08em;
+      background:var(--ink); color:#fff; text-decoration:none; border-radius:999px; padding:10px 16px;
+    }
+    .code:hover { opacity:.88; }
+    .code-hint { color:var(--muted); font-size:.75rem; margin:6px 0 0; }
+    #fillA, #fillB, #abbr, #wish { transition: fill .5s cubic-bezier(.2,.7,.2,1); }
+    #sweep { pointer-events: none; }
+    .stage.pulse svg { animation: settle .5s ease; }
+    @keyframes settle { 0% { transform: scale(.975); } 60% { transform: scale(1.012); } 100% { transform: scale(1); } }
+    @keyframes wipe { 0% { transform: translateX(-30px); opacity: 0; } 18% { opacity: .45; } 100% { transform: translateX(230px); opacity: 0; } }
+    svg { width:min(280px, 100%); height:auto; display:block; margin:0 auto; }
+    .stage { background:radial-gradient(ellipse at 50% 30%, #fff 0%, #e7e8ee 70%); border:1px solid var(--line); border-radius:18px; padding:16px 12px 10px; margin:0 0 6px; }
+    html[data-theme="dark"] .stage { background:radial-gradient(ellipse at 50% 30%, #2a2d36 0%, #14161b 72%); }
+    .render-btn { display:block; margin:8px auto 0; font-family:Outfit,sans-serif; font-size:.78rem; border:1px solid var(--line); background:var(--card-solid); color:var(--ink); border-radius:999px; padding:7px 14px; cursor:pointer; }
+    label { display:block; font-size:.78rem; letter-spacing:.04em; color:var(--muted); margin:12px 0 6px; }
+    input[type="text"] {
+      width:100%; font-family:Outfit,sans-serif; font-size:1rem; border:1px solid var(--line);
+      border-radius:12px; padding:11px 12px; background:var(--card-solid); color:var(--ink);
+    }
+    .fonts { display:grid; grid-template-columns:repeat(2, 1fr); gap:6px; }
+    .fonts button {
+      font-size:.78rem; border:1px solid var(--line); background:var(--card-solid); color:var(--ink);
+      border-radius:10px; padding:8px 4px; cursor:pointer;
+    }
+    .fonts button[aria-pressed="true"] { background:var(--ink); color:#fff; }
+    .modes, .opts { display:flex; gap:8px; flex-wrap:wrap; }
+    .modes button, .opts button {
+      font-family:Outfit,sans-serif; border:1px solid var(--line); background:var(--card-solid);
+      color:var(--ink); border-radius:999px; padding:8px 12px; cursor:pointer; font-size:.82rem;
+    }
+    .modes button[aria-pressed="true"], .opts button[aria-pressed="true"] { background:var(--ink); color:#fff; }
+    .swatches { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; }
+    @media (min-width:700px) { .swatches { grid-template-columns:repeat(8, 1fr); } }
+    .swatch {
+      border:1px solid var(--line); background:var(--card-solid); border-radius:12px; padding:6px; cursor:pointer;
+    }
+    .swatch[aria-pressed="true"] { outline:2px solid var(--ink); }
+    .chips { display:flex; height:22px; border-radius:6px; overflow:hidden; }
+    .chips i { flex:1; display:block; }
+    .swatch small { display:block; text-align:center; font-size:.62rem; color:var(--muted); margin-top:4px; }
+    .extra { margin-top:10px; }
+    .qty { display:flex; align-items:center; gap:8px; }
+    .qty button { width:36px; height:36px; border-radius:10px; border:1px solid var(--line); background:var(--card-solid); color:var(--ink); font-size:1.1rem; cursor:pointer; }
+    .qty strong { min-width:24px; text-align:center; }
+    .price { margin-top:14px; padding:12px 14px; border-radius:14px; background:var(--card-solid); border:1px solid var(--line); }
+    .price b { font-family:Orbitron,sans-serif; font-size:1.15rem; letter-spacing:.04em; }
+    .price p { margin:4px 0 0; color:var(--muted); font-size:.78rem; }
+    .note { margin:14px 0 0; text-align:center; font-size:.72rem; color:var(--muted); }
+    .qty + .note { margin:6px 0 0; text-align:left; }
+    .note a { color:var(--muted); }
+    footer { margin-top:auto; padding:8px 16px 28px; color:var(--muted); font-size:.75rem; display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+    footer a { color:var(--muted); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <a class="back" href="spezial.html" data-i18n="back"></a>
+    <div class="tools">
+      <label class="ios-switch"><input type="checkbox" data-theme-toggle><span class="ios-slider"></span></label>
+      <div class="lang">
+        <button type="button" data-set-lang="de" aria-pressed="true">DE</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+  <main>
+    <p class="brand">TinkerVision</p>
+    <h1 data-i18n="title"></h1>
+    <div class="rule"></div>
+    <div class="offer">
+      <div><b data-i18n="o1"></b><span data-i18n="o1s"></span></div>
+      <div><b data-i18n="o2"></b><span data-i18n="o2s"></span></div>
+      <div><b data-i18n="o3"></b><span data-i18n="o3s"></span></div>
+    </div>
+    <div class="stage">
+      <svg id="render" viewBox="1240 140 490 1990" role="img" aria-label="Netzlehre">
+        <defs>
+          <mask id="part">
+            <path fill="#fff" d="M1466.2 439.2 L1465 448.8 L1465 1901.2 L1464.2 1907.9 L1462 1914.3 L1458.5 1920 L1453.7 1924.7 L1448 1928.3 L1441.7 1930.5 L1435 1931.2 L1355 1931.2 L1348.3 1930.5 L1342 1928.3 L1336.3 1924.7 L1331.5 1920 L1328 1914.3 L1325.8 1907.9 L1325 1901.2 L1325 423.8 L1324.6 420.4 L1323.5 417.2 L1321.7 414.4 L1319.3 412 L1316.5 410.2 L1313.3 409.1 L1310 408.8 L1300 408.8 L1296.7 408.4 L1293.5 407.3 L1290.7 405.5 L1288.3 403.1 L1286.5 400.3 L1285.4 397.1 L1285 393.8 L1285 198.8 L1285.8 192.1 L1288 185.7 L1291.5 180 L1296.3 175.3 L1302 171.7 L1308.3 169.5 L1315 168.8 L1655 168.8 L1661.7 169.5 L1668 171.7 L1673.7 175.3 L1678.5 180 L1682 185.7 L1684.2 192.1 L1685 198.8 L1685 1901.2 L1684.2 1907.9 L1682 1914.3 L1678.5 1920 L1673.7 1924.7 L1668 1928.3 L1661.7 1930.5 L1655 1931.2 L1575 1931.2 L1568.3 1930.5 L1562 1928.3 L1556.3 1924.7 L1551.5 1920 L1548 1914.3 L1545.8 1907.9 L1545 1901.2 L1545 448.8 L1543.8 439.2 L1540.4 430.2 L1534.9 422.2 L1527.7 415.8 L1519.2 411.4 L1509.8 409 L1500.2 409 L1490.8 411.4 L1482.3 415.8 L1475.1 422.2 L1469.6 430.2 L1466.2 439.2 Z"/>
+            <path fill="#000" d="M1364.1 225.9 L1365 218.8 L1364.1 211.6 L1361.6 204.8 L1357.5 198.9 L1352 194.1 L1345.6 190.7 L1338.6 189 L1331.4 189 L1324.4 190.7 L1318 194.1 L1312.5 198.9 L1308.4 204.8 L1305.9 211.6 L1305 218.8 L1305.9 225.9 L1308.4 232.7 L1312.5 238.6 L1318 243.4 L1324.4 246.8 L1331.4 248.5 L1338.6 248.5 L1345.6 246.8 L1352 243.4 L1357.5 238.6 L1361.6 232.7 L1364.1 225.9 Z"/>
+          </mask>
+          <clipPath id="clipA"><rect x="1240" y="140" width="245" height="1990"/></clipPath>
+          <clipPath id="clipB"><rect x="1485" y="140" width="245" height="1990"/></clipPath>
+          <marker id="arr" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L8 4 L0 8 z" fill="#6d6f78"/>
+          </marker>
+        </defs>
+        <g mask="url(#part)">
+          <rect id="fillA" clip-path="url(#clipA)" x="1285" y="169" width="400" height="1762"/>
+          <rect id="fillB" clip-path="url(#clipB)" x="1285" y="169" width="400" height="1762"/>
+        </g>
+        <image href="Netzlehre.svg" x="0" y="0" width="2970" height="2100"/>
+        <text id="wish" x="1605" y="520" text-anchor="middle" font-size="46" font-weight="700" fill="#F4F4F4" transform="rotate(90 1605 520)">Verein 1924</text>
+        <g fill="none" stroke="#6d6f78" stroke-width="3" font-family="Outfit, sans-serif" font-size="28">
+          <line x1="1260" y1="169" x2="1260" y2="1931" marker-start="url(#arr)" marker-end="url(#arr)"/>
+          <text x="1235" y="1050" fill="#6d6f78" stroke="none" transform="rotate(-90 1235 1050)" text-anchor="middle">15,25 cm</text>
+          <line x1="1248" y1="410" x2="1305" y2="410" marker-end="url(#arr)"/>
+          <text x="1244" y="390" fill="#6d6f78" stroke="none">4 mm</text>
+        </g>
+      </svg>
+      <button class="render-btn" type="button" id="save-render" data-i18n="save"></button>
+    </div>
+
+    <label for="wish-in" data-i18n="wish"></label>
+    <input id="wish-in" type="text" maxlength="32" placeholder="Vereinsname + Gründungsjahr">
+    <label data-i18n="font"></label>
+    <div class="fonts" id="fonts"></div>
+    <label data-i18n="mode"></label>
+    <div class="modes">
+      <button type="button" data-mode="2" aria-pressed="true" data-i18n="m2"></button>
+      <button type="button" data-mode="3" aria-pressed="false" data-i18n="m3"></button>
+    </div>
+    <label data-i18n="combo"></label>
+    <div class="swatches" id="swatches"></div>
+    <label data-i18n="opt"></label>
+    <div class="opts">
+      <button type="button" data-opt="S" aria-pressed="true" data-i18n="optS"></button>
+      <button type="button" data-opt="P" aria-pressed="false" data-i18n="optP"></button>
+      <button type="button" data-opt="B" aria-pressed="false" data-i18n="optB"></button>
+    </div>
+    <div class="extra" id="extra" hidden>
+      <label data-i18n="qty"></label>
+      <div class="qty">
+        <button type="button" id="qty-minus" aria-label="-">−</button>
+        <strong id="qty-val">1</strong>
+        <button type="button" id="qty-plus" aria-label="+">+</button>
+      </div>
+      <p class="note" data-i18n="qtyNote"></p>
+      <label data-i18n="region"></label>
+      <div class="modes">
+        <button type="button" data-region="DE" aria-pressed="true">DE · 2,90 €</button>
+        <button type="button" data-region="EU" aria-pressed="false">EU · 6,50 €</button>
+        <button type="button" data-region="XX" aria-pressed="false" data-i18n="regionOther"></button>
+      </div>
+    </div>
+    <div class="price">
+      <b id="price">7,00 €</b>
+      <p id="price-note"></p>
+    </div>
+    <div class="code-wrap">
+      <a class="code" id="code" href="#">NL2-01-TTC-OR-S</a>
+      <p class="code-hint" data-i18n="hint"></p>
+    </div>
+    <p class="note" data-i18n="terms"></p>
+    <p class="note"><a href="non-ittf.html" data-i18n="fn"></a></p>
+  </main>
+  <footer>
+    <a href="impressum.html" data-i18n="imprint"></a>
+    <a href="datenschutz.html" data-i18n="privacy"></a>
+  </footer>
+  <script>
+    const T = {
+      de: { back:"← Zurück", title:"Netzlehre Vereinsedition", o1:"ab 7 €", o1s:"STL · Sonderanfertigung 20 €", o2:"32 Varianten", o2s:"2 oder 3 Farben · 4 Schriften", o3:"Jetzt anfragen", o3s:"Konfiguration per Code", hint:"Code anklicken öffnet die Anfrage mit dieser Kennung.", save:"Render speichern", mode:"Farbmodus", m2:"2 Farben", m3:"3 Farben", combo:"Kombination", wish:"Text · lange Seite", font:"Schrift", opt:"Lieferung", optS:"Nur STL · 7 €", optP:"Sonderanfertigung · 20 €", optB:"Sonderanfertigung & STL · +3,60 €", qty:"Anzahl", qtyNote:"Max. 8 pro Bestellung, gepolsterter Maxibrief.", region:"Versandregion", regionOther:"Andere Region", terms:"Bestätigung bis 48 Std. Digitale Datei in 3 Tagen. Kleinserie 14 Tage zzgl. Versand. Geringfügige Abweichungen im üblichen Rahmen.", fn:"Nicht ITTF-zugelassen", imprint:"Impressum", privacy:"Datenschutz",
+        subj:"Netzlehre", body:(c,n)=>`Kennung: ${c}\nProdukt: Tischtennis Netzlehre Vereinsedition\n${n}` },
+      en: { back:"← Back", title:"Net gauge club edition", o1:"from €7", o1s:"STL · custom €20", o2:"32 variants", o2s:"2 or 3 colours · 4 typefaces", o3:"Send enquiry", o3s:"Configuration by code", hint:"Click the code to open the enquiry with this ID.", save:"Save render", mode:"Colour mode", m2:"2 colours", m3:"3 colours", combo:"Combination", wish:"Text · long side", font:"Typeface", opt:"Delivery", optS:"STL only · €7", optP:"Custom piece · €20", optB:"Custom piece & STL · +€3.60", qty:"Quantity", qtyNote:"Max. 8 per order, padded large letter.", region:"Shipping region", regionOther:"Other region", terms:"Confirmation within 48 hours. Digital file in 3 days. Small run 14 days plus shipping. Minor deviations within the usual range.", fn:"Not ITTF approved", imprint:"Imprint", privacy:"Privacy",
+        subj:"Net gauge", body:(c,n)=>`Code: ${c}\nProduct: table tennis net gauge club edition\n${n}` }
+    };
+    const FONTS = [
+      { id:"OR", name:"Orbitron", css:"Orbitron, sans-serif" },
+      { id:"OS", name:"Oswald", css:"Oswald, sans-serif" },
+      { id:"BB", name:"Bebas", css:"'Bebas Neue', sans-serif" },
+      { id:"BA", name:"Barlow", css:"'Barlow Condensed', sans-serif" }
+    ];
+    let DB, lang = "de", mode = "2", combo = "01", opt = "S", font = "OR", qty = 1, region = "DE";
+    function euro(n) {
+      return (lang === "en" ? "€" : "") + n.toFixed(2).replace(".", lang === "en" ? "." : ",") + (lang === "en" ? "" : " €");
+    }
+    function quote() {
+      if (opt === "S") return { total: 7, note: lang === "en" ? "STL file, no shipping" : "STL-Datei, kein Versand" };
+      const goods = 20 + Math.max(0, qty - 1) * 2 + (opt === "B" ? 3.6 : 0);
+      const ship = region === "DE" ? 2.9 : region === "EU" ? 6.5 : null;
+      const bits = [`${qty}× ${euro(20)}`];
+      if (qty > 1) bits.push(`+${qty - 1}× ${euro(2)}`);
+      if (opt === "B") bits.push(lang === "en" ? "+ STL 3.60" : "+ STL 3,60");
+      const shipName = region === "DE" ? (lang === "en" ? "shipping DE" : "Versand DE") : (lang === "en" ? "shipping EU" : "Versand EU");
+      if (ship == null) return { total: goods, note: bits.join(" · ") + (lang === "en" ? " · shipping by region" : " · Versand je nach Region") };
+      return { total: goods + ship, note: bits.join(" · ") + ` · ${shipName} ${euro(ship)}` };
+    }
+    function applyLang(next) {
+      lang = next === "en" ? "en" : "de";
+      const pack = T[lang];
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach((el) => { const k = el.getAttribute("data-i18n"); if (pack[k]) el.textContent = pack[k]; });
+      document.querySelectorAll("[data-set-lang]").forEach((b) => b.setAttribute("aria-pressed", b.getAttribute("data-set-lang") === lang ? "true" : "false"));
+      localStorage.setItem("tv-lang", lang);
+      render();
+    }
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("tv-theme", theme);
+      document.querySelectorAll("[data-theme-toggle]").forEach((el) => el.checked = theme === "dark");
+    }
+    function hex(id) { return DB.colors[id].hex; }
+    function name(id) { return DB.colors[id][lang]; }
+    function current() {
+      const list = mode === "3" ? DB.combos3 : DB.combos2;
+      return list.find((c) => c.id === combo) || list[0];
+    }
+    function slug(v) {
+      return (v || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8) || "X";
+    }
+    function codeOf() {
+      const c = current();
+      return `${c.code}-${font}-${opt}`;
+    }
+    function fit(el, text, maxW, maxSize, minSize) {
+      el.textContent = text;
+      let size = maxSize;
+      el.setAttribute("font-size", size);
+      while (size > minSize && el.getComputedTextLength() > maxW) {
+        size -= 0.5;
+        el.setAttribute("font-size", size);
+      }
+    }
+    function paint() {
+      const c = current();
+      const a = mode === "3" ? hex(c.a) : hex(c.main);
+      const b = mode === "3" ? hex(c.b) : hex(c.main);
+      const t = hex(c.text);
+      const face = FONTS.find((f) => f.id === font) || FONTS[0];
+      document.getElementById("fillA").setAttribute("fill", a);
+      document.getElementById("fillB").setAttribute("fill", b);
+      const wish = document.getElementById("wish");
+      wish.setAttribute("fill", t);
+      wish.setAttribute("font-family", face.css);
+      fit(wish, document.getElementById("wish-in").value || (lang === "en" ? "Club 1924" : "Verein 1924"), 900, 44, 22);
+      if (paint.lastA !== a || paint.lastB !== b || paint.lastT !== t) {
+        const sweep = document.getElementById("sweep");
+        const stage = document.querySelector(".stage");
+        sweep.style.animation = "none";
+        stage.classList.remove("pulse");
+        void sweep.offsetWidth;
+        sweep.style.animation = "wipe .6s ease";
+        stage.classList.add("pulse");
+      }
+      paint.lastA = a; paint.lastB = b; paint.lastT = t;
+    }
+    function renderFonts() {
+      const box = document.getElementById("fonts");
+      box.innerHTML = "";
+      FONTS.forEach((f) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = f.name;
+        btn.style.fontFamily = f.css;
+        btn.setAttribute("aria-pressed", f.id === font ? "true" : "false");
+        btn.addEventListener("click", () => { font = f.id; render(); });
+        box.appendChild(btn);
+      });
+    }
+    function renderSwatches() {
+      const box = document.getElementById("swatches");
+      const list = mode === "3" ? DB.combos3 : DB.combos2;
+      box.innerHTML = "";
+      list.forEach((c) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "swatch";
+        btn.setAttribute("aria-pressed", c.id === combo ? "true" : "false");
+        const chips = mode === "3"
+          ? `<i style="background:${hex(c.a)}"></i><i style="background:${hex(c.b)}"></i><i style="background:${hex(c.text)}"></i>`
+          : `<i style="background:${hex(c.main)}"></i><i style="background:${hex(c.text)}"></i>`;
+        btn.innerHTML = `<span class="chips">${chips}</span><small>${c.id}</small>`;
+        btn.addEventListener("click", () => { combo = c.id; render(); });
+        box.appendChild(btn);
+      });
+    }
+    function render() {
+      if (!DB) return;
+      paint();
+      renderSwatches();
+      renderFonts();
+      const code = codeOf();
+      const c = current();
+      const detail = mode === "3"
+        ? `${c.code} · ${name(c.a)} / ${name(c.b)} / ${name(c.text)}`
+        : `${c.code} · ${name(c.main)} / ${name(c.text)}`;
+      const wish = document.getElementById("wish-in").value || "—";
+      const optName = DB.options[opt][lang];
+      const q = quote();
+      document.getElementById("extra").hidden = opt === "S";
+      document.getElementById("qty-val").textContent = String(qty);
+      document.getElementById("price").textContent = opt !== "S" && region === "XX"
+        ? euro(q.total) + (lang === "en" ? " + shipping" : " zzgl. Versand")
+        : euro(q.total);
+      document.getElementById("price-note").textContent = q.note;
+      const note = `${detail}\nText: ${wish}\nSchrift: ${FONTS.find((f)=>f.id===font).name}\nOption: ${optName}\nAnzahl: ${opt === "S" ? 1 : qty}\nRegion: ${opt === "S" ? "—" : region}\nPreis: ${euro(q.total)}\n${q.note}`;
+      const pack = T[lang];
+      const subject = `${pack.subj} ${code}`;
+      const message = pack.body(code, note);
+      const link = document.getElementById("code");
+      link.textContent = code;
+      link.href = `kontakt.html?subject=${encodeURIComponent(subject)}&message=${encodeURIComponent(message)}`;
+    }
+    fetch("netzlehre-db.json").then((r) => r.json()).then((db) => {
+      DB = db;
+      applyLang((localStorage.getItem("tv-lang") || "de") === "en" ? "en" : "de");
+    });
+    applyTheme(localStorage.getItem("tv-theme") || "light");
+    document.querySelectorAll("[data-set-lang]").forEach((b) => b.addEventListener("click", () => applyLang(b.getAttribute("data-set-lang"))));
+    document.querySelectorAll("[data-theme-toggle]").forEach((el) => el.addEventListener("change", () => applyTheme(el.checked ? "dark" : "light")));
+    document.querySelectorAll("[data-mode]").forEach((b) => b.addEventListener("click", () => {
+      mode = b.getAttribute("data-mode");
+      combo = "01";
+      document.querySelectorAll("[data-mode]").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+      render();
+    }));
+    document.querySelectorAll("[data-opt]").forEach((b) => b.addEventListener("click", () => {
+      opt = b.getAttribute("data-opt");
+      document.querySelectorAll("[data-opt]").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+      render();
+    }));
+    document.querySelectorAll("[data-region]").forEach((b) => b.addEventListener("click", () => {
+      region = b.getAttribute("data-region");
+      document.querySelectorAll("[data-region]").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+      render();
+    }));
+    document.getElementById("qty-minus").addEventListener("click", () => { qty = Math.max(1, qty - 1); render(); });
+    document.getElementById("qty-plus").addEventListener("click", () => { qty = Math.min(8, qty + 1); render(); });
+    document.getElementById("wish-in").addEventListener("input", render);
+    document.getElementById("save-render").addEventListener("click", () => {
+      const svg = document.getElementById("render");
+      const xml = new XMLSerializer().serializeToString(svg);
+      const blob = new Blob([xml], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = 1040;
+        canvas.height = 1200;
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#f3f4f8";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 40, 40, 960, 1108);
+        const a = document.createElement("a");
+        a.href = canvas.toDataURL("image/png");
+        a.download = codeOf() + ".png";
+        a.click();
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
+    });
+  </script>
+</body>
+</html>
