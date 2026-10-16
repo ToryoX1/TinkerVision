@@ -1,0 +1,62 @@
+{
+  "product": "NL",
+  "nameDe": "Tischtennis Netzlehre Vereinsedition",
+  "nameEn": "Table tennis net gauge club edition",
+  "measures": {
+    "netHeightMm": 152.5,
+    "rubberMaxMm": 4,
+    "rubberPipsMm": 2
+  },
+  "options": {
+    "S": { "de": "STL-Datei", "en": "STL file" },
+    "P": { "de": "Produkt per Versand", "en": "Product by post" },
+    "B": { "de": "STL und Produkt", "en": "STL and product" }
+  },
+  "colors": {
+    "BK": { "de": "Schwarz", "en": "Black", "hex": "#161616" },
+    "WH": { "de": "Weiß", "en": "White", "hex": "#F4F4F4" },
+    "RD": { "de": "Rot", "en": "Red", "hex": "#C8102E" },
+    "BL": { "de": "Blau", "en": "Blue", "hex": "#003594" },
+    "GR": { "de": "Grün", "en": "Green", "hex": "#009639" },
+    "YE": { "de": "Gelb", "en": "Yellow", "hex": "#F3E500" },
+    "OR": { "de": "Orange", "en": "Orange", "hex": "#FF7F32" },
+    "NV": { "de": "Navy", "en": "Navy", "hex": "#0A2540" },
+    "GD": { "de": "Gold", "en": "Gold", "hex": "#C5A46E" }
+  },
+  "combos2": [
+    { "id": "01", "code": "NL2-01", "main": "BK", "text": "WH" },
+    { "id": "02", "code": "NL2-02", "main": "WH", "text": "BK" },
+    { "id": "03", "code": "NL2-03", "main": "BL", "text": "WH" },
+    { "id": "04", "code": "NL2-04", "main": "RD", "text": "WH" },
+    { "id": "05", "code": "NL2-05", "main": "GR", "text": "WH" },
+    { "id": "06", "code": "NL2-06", "main": "NV", "text": "WH" },
+    { "id": "07", "code": "NL2-07", "main": "NV", "text": "GD" },
+    { "id": "08", "code": "NL2-08", "main": "BK", "text": "GD" },
+    { "id": "09", "code": "NL2-09", "main": "YE", "text": "BK" },
+    { "id": "10", "code": "NL2-10", "main": "OR", "text": "BK" },
+    { "id": "11", "code": "NL2-11", "main": "RD", "text": "YE" },
+    { "id": "12", "code": "NL2-12", "main": "BL", "text": "YE" },
+    { "id": "13", "code": "NL2-13", "main": "GR", "text": "YE" },
+    { "id": "14", "code": "NL2-14", "main": "WH", "text": "RD" },
+    { "id": "15", "code": "NL2-15", "main": "WH", "text": "BL" },
+    { "id": "16", "code": "NL2-16", "main": "BK", "text": "YE" }
+  ],
+  "combos3": [
+    { "id": "01", "code": "NL3-01", "a": "BK", "b": "WH", "text": "RD" },
+    { "id": "02", "code": "NL3-02", "a": "BL", "b": "WH", "text": "BK" },
+    { "id": "03", "code": "NL3-03", "a": "RD", "b": "WH", "text": "BK" },
+    { "id": "04", "code": "NL3-04", "a": "GR", "b": "WH", "text": "BK" },
+    { "id": "05", "code": "NL3-05", "a": "NV", "b": "GD", "text": "WH" },
+    { "id": "06", "code": "NL3-06", "a": "BK", "b": "RD", "text": "WH" },
+    { "id": "07", "code": "NL3-07", "a": "BL", "b": "YE", "text": "BK" },
+    { "id": "08", "code": "NL3-08", "a": "RD", "b": "YE", "text": "BK" },
+    { "id": "09", "code": "NL3-09", "a": "GR", "b": "YE", "text": "BK" },
+    { "id": "10", "code": "NL3-10", "a": "NV", "b": "WH", "text": "GD" },
+    { "id": "11", "code": "NL3-11", "a": "OR", "b": "BK", "text": "WH" },
+    { "id": "12", "code": "NL3-12", "a": "BK", "b": "BL", "text": "WH" },
+    { "id": "13", "code": "NL3-13", "a": "RD", "b": "BK", "text": "WH" },
+    { "id": "14", "code": "NL3-14", "a": "GR", "b": "BK", "text": "WH" },
+    { "id": "15", "code": "NL3-15", "a": "WH", "b": "NV", "text": "GD" },
+    { "id": "16", "code": "NL3-16", "a": "YE", "b": "BK", "text": "RD" }
+  ]
+}
