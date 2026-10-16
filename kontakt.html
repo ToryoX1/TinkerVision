@@ -312,7 +312,7 @@
         message: "Nachricht",
         send: "Absenden",
         mailto: "Direkt an tinkervision.de@protonmail.com",
-        sent: "Nachricht unterwegs. Bitte beim ersten Mal den Bestätigungslink in Proton Mail öffnen.",
+        sent: "Nachricht unterwegs.",
         imprint: "Impressum",
         privacy: "Datenschutz"
       },
@@ -325,7 +325,7 @@
         message: "Message",
         send: "Send",
         mailto: "Email tinkervision.de@protonmail.com",
-        sent: "Message on its way. The first time, open the confirmation link in Proton Mail.",
+        sent: "Message on its way.",
         imprint: "Imprint",
         privacy: "Privacy"
       }
@@ -350,6 +350,9 @@
     if (new URLSearchParams(location.search).get("sent") === "1") {
       document.getElementById("sent").classList.add("on");
     }
+    const q = new URLSearchParams(location.search);
+    if (q.get("subject")) document.querySelector("[name=_subject]").value = q.get("subject");
+    if (q.get("message")) document.getElementById("message").value = q.get("message");
   </script>
 </body>
 </html>
