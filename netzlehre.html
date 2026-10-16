@@ -7,7 +7,7 @@
   <title>TinkerVision — Netzlehre</title>
   <link rel="icon" href="emblem.png">
   <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
-  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:600|oswald:600|bebas-neue:400|anton:400|permanent-marker:400|playfair-display:700" rel="stylesheet">
+  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:600|oswald:600|audiowide:400|anton:400|caveat:700|playfair-display:700" rel="stylesheet">
   <style>
     :root { --ink:#101114; --muted:#6d6f78; --line:#e4e5ea; --bg0:#ececf1; --card:rgba(255,255,255,.78); --card-solid:#fff; --card-border:#fff; --glow:#fff; }
     html[data-theme="dark"] { --ink:#f3f4f8; --muted:#9aa0ab; --line:#2c2e36; --bg0:#0e0f12; --card:rgba(22,24,29,.82); --card-solid:#1c1e24; --card-border:#2c2e36; --glow:#16181d; }
@@ -47,8 +47,8 @@
     @keyframes settle { 0% { transform: scale(.975); } 60% { transform: scale(1.012); } 100% { transform: scale(1); } }
     @keyframes wipe { 0% { transform: translateX(-30px); opacity: 0; } 18% { opacity: .45; } 100% { transform: translateX(230px); opacity: 0; } }
     svg { width:auto; height:clamp(168px, 34vw, 230px); display:block; margin:0 auto; }
-    .stage { background:radial-gradient(ellipse at 50% 30%, #fff 0%, #e7e8ee 70%); border:1px solid var(--line); border-radius:18px; padding:12px; margin:0 auto 6px; overflow-x:auto; }
-    .stage svg { width:auto; height:clamp(168px, 34vw, 230px); display:block; margin:0 auto; }
+    .stage { background:radial-gradient(ellipse at 50% 30%, #fff 0%, #e7e8ee 70%); border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin:0 -22px 8px; padding:10px 0; overflow:visible; }
+    .stage svg { width:calc(100% + 48px); max-width:none; height:auto; display:block; margin:0 -24px; }
     html[data-theme="dark"] .stage { background:radial-gradient(ellipse at 50% 30%, #2a2d36 0%, #14161b 72%); }
     label { display:block; font-size:.78rem; letter-spacing:.04em; color:var(--muted); margin:12px 0 6px; }
     input[type="text"] {
@@ -61,7 +61,7 @@
     }
     .submit {
       display:block; text-align:center; text-decoration:none; font-weight:700;
-      background:#7A2E8A; color:#fff; border-radius:14px; padding:13px 16px; margin-top:14px;
+      background:#822ef5; color:#fff; border-radius:14px; padding:13px 16px; margin-top:14px;
     }
     .submit:hover { filter:brightness(1.08); }
     .modes, .opts { display:flex; gap:8px; flex-wrap:wrap; }
@@ -182,7 +182,7 @@
         <button type="button" data-region="XX" aria-pressed="false" data-i18n="regionOther"></button>
       </div>
     </div>
-    <div class="price">
+    <div class="price" hidden>
       <b id="price">7,00 €</b>
       <p id="price-note"></p>
     </div>
@@ -208,9 +208,9 @@
     const FONTS = [
       { id:"OR", name:"Orbitron", css:"Orbitron, sans-serif" },
       { id:"OS", name:"Oswald", css:"Oswald, sans-serif" },
-      { id:"BB", name:"Bebas", css:"'Bebas Neue', sans-serif" },
+      { id:"AW", name:"Audiowide", css:"Audiowide, sans-serif" },
       { id:"AN", name:"Anton", css:"Anton, sans-serif" },
-      { id:"PM", name:"Marker", css:"'Permanent Marker', cursive" },
+      { id:"CV", name:"Caveat", css:"Caveat, cursive" },
       { id:"PF", name:"Playfair", css:"'Playfair Display', serif" }
     ];
     let DB, lang = "de", mode = "2", c1 = "BK", c2 = "WH", c3 = "RD", opt = "S", font = "OR", qty = 1, region = "DE";
