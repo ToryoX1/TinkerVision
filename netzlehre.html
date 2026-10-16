@@ -46,9 +46,9 @@
     .stage.pulse svg { animation: settle .5s ease; }
     @keyframes settle { 0% { transform: scale(.975); } 60% { transform: scale(1.012); } 100% { transform: scale(1); } }
     @keyframes wipe { 0% { transform: translateX(-30px); opacity: 0; } 18% { opacity: .45; } 100% { transform: translateX(230px); opacity: 0; } }
-    svg { width:min(280px, 100%); height:auto; display:block; margin:0 auto; }
-    .stage { background:radial-gradient(ellipse at 50% 30%, #fff 0%, #e7e8ee 70%); border:1px solid var(--line); border-radius:18px; padding:16px 12px 10px; margin:0 auto 6px; max-width:380px; }
-    .stage svg { width:100%; height:auto; display:block; }
+    svg { width:auto; height:300px; display:block; margin:0 auto; }
+    .stage { background:radial-gradient(ellipse at 50% 30%, #fff 0%, #e7e8ee 70%); border:1px solid var(--line); border-radius:18px; padding:14px 18px 12px; margin:0 auto 6px; width:fit-content; }
+    .stage svg { width:auto; height:300px; display:block; margin:0 auto; }
     html[data-theme="dark"] .stage { background:radial-gradient(ellipse at 50% 30%, #2a2d36 0%, #14161b 72%); }
     label { display:block; font-size:.78rem; letter-spacing:.04em; color:var(--muted); margin:12px 0 6px; }
     input[type="text"] {
