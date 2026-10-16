@@ -7,7 +7,7 @@
   <title>TinkerVision — Netzlehre</title>
   <link rel="icon" href="emblem.png">
   <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
-  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:600|oswald:600|bebas-neue:400|anton:400" rel="stylesheet">
+  <link href="https://fonts.bunny.net/css?family=orbitron:700|outfit:600|oswald:600|bebas-neue:400|anton:400|permanent-marker:400|playfair-display:700" rel="stylesheet">
   <style>
     :root { --ink:#101114; --muted:#6d6f78; --line:#e4e5ea; --bg0:#ececf1; --card:rgba(255,255,255,.78); --card-solid:#fff; --card-border:#fff; --glow:#fff; }
     html[data-theme="dark"] { --ink:#f3f4f8; --muted:#9aa0ab; --line:#2c2e36; --bg0:#0e0f12; --card:rgba(22,24,29,.82); --card-solid:#1c1e24; --card-border:#2c2e36; --glow:#16181d; }
@@ -46,21 +46,24 @@
     .stage.pulse svg { animation: settle .5s ease; }
     @keyframes settle { 0% { transform: scale(.975); } 60% { transform: scale(1.012); } 100% { transform: scale(1); } }
     @keyframes wipe { 0% { transform: translateX(-30px); opacity: 0; } 18% { opacity: .45; } 100% { transform: translateX(230px); opacity: 0; } }
-    svg { width:100%; height:auto; display:block; margin:0 auto; }
-    .stage { background:radial-gradient(ellipse at 50% 30%, #fff 0%, #e7e8ee 70%); border:1px solid var(--line); border-radius:18px; padding:14px 18px 12px; margin:0 auto 6px; width:fit-content; }
-    .stage svg { width:100%; height:auto; display:block; margin:0 auto; }
+    svg { width:auto; height:clamp(168px, 34vw, 230px); display:block; margin:0 auto; }
+    .stage { background:radial-gradient(ellipse at 50% 30%, #fff 0%, #e7e8ee 70%); border:1px solid var(--line); border-radius:18px; padding:12px; margin:0 auto 6px; overflow-x:auto; }
+    .stage svg { width:auto; height:clamp(168px, 34vw, 230px); display:block; margin:0 auto; }
     html[data-theme="dark"] .stage { background:radial-gradient(ellipse at 50% 30%, #2a2d36 0%, #14161b 72%); }
     label { display:block; font-size:.78rem; letter-spacing:.04em; color:var(--muted); margin:12px 0 6px; }
     input[type="text"] {
       width:100%; font-family:Outfit,sans-serif; font-size:1rem; border:1px solid var(--line);
       border-radius:12px; padding:11px 12px; background:var(--card-solid); color:var(--ink);
     }
-    .fonts { display:grid; grid-template-columns:1fr; gap:6px; }
-    .fonts button {
-      font-size:1.05rem; border:1px solid var(--line); background:var(--card-solid); color:var(--ink);
-      border-radius:10px; padding:11px 8px; cursor:pointer; letter-spacing:.04em; line-height:1;
+    select.pick {
+      width:100%; font-size:1rem; border:1px solid var(--line); border-radius:12px;
+      padding:11px 12px; background:var(--card-solid); color:var(--ink); cursor:pointer;
     }
-    .fonts button[aria-pressed="true"] { background:var(--ink); color:#fff; }
+    .submit {
+      display:block; text-align:center; text-decoration:none; font-weight:700;
+      background:#7A2E8A; color:#fff; border-radius:14px; padding:13px 16px; margin-top:14px;
+    }
+    .submit:hover { filter:brightness(1.08); }
     .modes, .opts { display:flex; gap:8px; flex-wrap:wrap; }
     .modes button, .opts button {
       font-family:Outfit,sans-serif; border:1px solid var(--line); background:var(--card-solid);
@@ -140,7 +143,7 @@
     <label for="wish-in" data-i18n="wish"></label>
     <input id="wish-in" type="text" maxlength="22" value="Tv DEIN VEREIN 2026" placeholder="Tv DEIN VEREIN 2026">
     <label data-i18n="font"></label>
-    <div class="fonts" id="fonts"></div>
+    <select class="pick" id="font-pick"></select>
     <label data-i18n="mode"></label>
     <div class="modes">
       <button type="button" data-mode="2" aria-pressed="true" data-i18n="m2"></button>
@@ -159,11 +162,11 @@
       <div class="colors" id="c3"></div>
     </div>
     <label data-i18n="opt"></label>
-    <div class="opts">
-      <button type="button" data-opt="S" aria-pressed="true" data-i18n="optS"></button>
-      <button type="button" data-opt="P" aria-pressed="false" data-i18n="optP"></button>
-      <button type="button" data-opt="B" aria-pressed="false" data-i18n="optB"></button>
-    </div>
+    <select class="pick" id="opt-pick">
+      <option value="S" data-i18n="optS">3MF File zum selber Drucken · 7 €</option>
+      <option value="P" data-i18n="optP">Netzlehre Drucken lassen · 20 €</option>
+      <option value="B" data-i18n="optB">Netzlehre + 3MF File · 25 €</option>
+    </select>
     <div class="extra" id="extra" hidden>
       <label data-i18n="qty"></label>
       <div class="qty">
@@ -183,10 +186,8 @@
       <b id="price">7,00 €</b>
       <p id="price-note"></p>
     </div>
-    <div class="code-wrap">
-      <a class="code" id="code" href="#">NL2-01-OR-S</a>
-      <p class="code-hint" data-i18n="hint"></p>
-    </div>
+    <a class="submit" id="code" href="#" data-i18n="send">Anfrage einreichen</a>
+    <p class="code-hint" data-i18n="hint"></p>
     <p class="note" data-i18n="terms"></p>
     <p class="note"><a href="non-ittf.html" data-i18n="fn"></a></p>
   </main>
@@ -199,28 +200,31 @@
   </footer>
   <script>
     const T = {
-      de: { back:"← Zurück", title:"Netzlehre Vereinsedition", o1:"ab 7 €", o1s:"STL · Sonderanfertigung 20 €", o2:"Frei konfigurierbar", o2s:"2 oder 3 Farben · 4 Schriften", o3:"Jetzt anfragen", o3s:"Konfiguration per Code", hint:"Code anklicken öffnet die Anfrage mit dieser Kennung.", mode:"Farben", m2:"2 Farben", m3:"3 Farben", c1:"Farbe 1 · Lehre", c2:"Farbe 2 · Text", c3:"Farbe 3 · Text", wish:"Text · lange Seite", font:"Schrift", opt:"Lieferung", optS:"Nur STL · 7 €", optP:"Sonderanfertigung · 20 €", optB:"Sonderanfertigung & STL · +3,60 €", qty:"Anzahl", qtyNote:"Max. 8 pro Bestellung, gepolsterter Maxibrief.", region:"Versandregion", regionOther:"Andere Region", terms:"Bestätigung bis 48 Std. Digitale Datei in 3 Tagen. Kleinserie 14 Tage zzgl. Versand. Geringfügige Abweichungen im üblichen Rahmen.", fn:"Nicht ITTF-zugelassen", imprint:"Impressum", privacy:"Datenschutz", agb:"AGB", widerruf:"Widerruf",
+      de: { back:"← Zurück", title:"Netzlehre Vereinsedition", o1:"ab 7 €", o1s:"3MF · Druck 20 €", o2:"Frei konfigurierbar", o2s:"2 oder 3 Farben · 6 Schriften", o3:"Anfrage einreichen", o3s:"Code in Betreff und Nachricht", hint:"Der Code steht in Betreff und Nachricht.", send:"Anfrage einreichen", mode:"Farben", m2:"2 Farben", m3:"3 Farben", c1:"Netzlehren Farbe", c2:"Textfarbe", c3:"Textfarbe", c1b:"Netzlehre Farbe oben", c2b:"Netzlehre Farbe unten", wish:"Text · lange Seite", font:"Schrift", opt:"Lieferung", optS:"3MF File zum selber Drucken · 7 €", optP:"Netzlehre Drucken lassen · 20 €", optB:"Netzlehre + 3MF File · 25 €", qty:"Anzahl", qtyNote:"+2,60 € je weitere Lehre, max. 8 pro Bestellung.", region:"Versandregion", regionOther:"Andere Region", terms:"Bestätigung bis 48 Std. Digitale Datei in 3 Tagen. Kleinserie 14 Tage zzgl. Versand. Geringfügige Abweichungen im üblichen Rahmen.", fn:"Nicht ITTF-zugelassen", imprint:"Impressum", privacy:"Datenschutz", agb:"AGB", widerruf:"Widerruf",
         subj:"Netzlehre", body:(c,n)=>`Kennung: ${c}\nProdukt: Tischtennis Netzlehre Vereinsedition\n${n}` },
-      en: { back:"← Back", title:"Net gauge club edition", o1:"from €7", o1s:"STL · custom €20", o2:"Free config", o2s:"2 or 3 colours · 4 typefaces", o3:"Send enquiry", o3s:"Configuration by code", hint:"Click the code to open the enquiry with this ID.", mode:"Colours", m2:"2 colours", m3:"3 colours", c1:"Colour 1 · gauge", c2:"Colour 2 · text", c3:"Colour 3 · text", wish:"Text · long side", font:"Typeface", opt:"Delivery", optS:"STL only · €7", optP:"Custom piece · €20", optB:"Custom piece & STL · +€3.60", qty:"Quantity", qtyNote:"Max. 8 per order, padded large letter.", region:"Shipping region", regionOther:"Other region", terms:"Confirmation within 48 hours. Digital file in 3 days. Small run 14 days plus shipping. Minor deviations within the usual range.", fn:"Not ITTF approved", imprint:"Imprint", privacy:"Privacy", agb:"Terms", widerruf:"Withdrawal",
+      en: { back:"← Back", title:"Net gauge club edition", o1:"from €7", o1s:"3MF · print €20", o2:"Free config", o2s:"2 or 3 colours · 6 typefaces", o3:"Send enquiry", o3s:"Code in subject and message", hint:"The code is in the subject and the message.", send:"Send enquiry", mode:"Colours", m2:"2 colours", m3:"3 colours", c1:"Gauge colour", c2:"Text colour", c3:"Text colour", c1b:"Gauge colour top", c2b:"Gauge colour bottom", wish:"Text · long side", font:"Typeface", opt:"Delivery", optS:"3MF file to print yourself · €7", optP:"Have the gauge printed · €20", optB:"Gauge + 3MF file · €25", qty:"Quantity", qtyNote:"+€2.60 per extra gauge, max. 8 per order.", region:"Shipping region", regionOther:"Other region", terms:"Confirmation within 48 hours. Digital file in 3 days. Small run 14 days plus shipping. Minor deviations within the usual range.", fn:"Not ITTF approved", imprint:"Imprint", privacy:"Privacy", agb:"Terms", widerruf:"Withdrawal",
         subj:"Net gauge", body:(c,n)=>`Code: ${c}\nProduct: table tennis net gauge club edition\n${n}` }
     };
     const FONTS = [
       { id:"OR", name:"Orbitron", css:"Orbitron, sans-serif" },
       { id:"OS", name:"Oswald", css:"Oswald, sans-serif" },
       { id:"BB", name:"Bebas", css:"'Bebas Neue', sans-serif" },
-      { id:"AN", name:"Anton", css:"Anton, sans-serif" }
+      { id:"AN", name:"Anton", css:"Anton, sans-serif" },
+      { id:"PM", name:"Marker", css:"'Permanent Marker', cursive" },
+      { id:"PF", name:"Playfair", css:"'Playfair Display', serif" }
     ];
     let DB, lang = "de", mode = "2", c1 = "BK", c2 = "WH", c3 = "RD", opt = "S", font = "OR", qty = 1, region = "DE";
     function euro(n) {
       return (lang === "en" ? "€" : "") + n.toFixed(2).replace(".", lang === "en" ? "." : ",") + (lang === "en" ? "" : " €");
     }
     function quote() {
-      if (opt === "S") return { total: 7, note: lang === "en" ? "STL file, no shipping" : "STL-Datei, kein Versand" };
-      const goods = 20 + Math.max(0, qty - 1) * 2 + (opt === "B" ? 3.6 : 0);
+      if (opt === "S") return { total: 7, note: lang === "en" ? "3MF file, no shipping" : "3MF-Datei, kein Versand" };
+      const base = opt === "B" ? 25 : 20;
+      const extra = Math.max(0, qty - 1) * 2.6;
+      const goods = base + extra;
       const ship = region === "DE" ? 2.9 : region === "EU" ? 6.5 : null;
-      const bits = [`${qty}× ${euro(20)}`];
-      if (qty > 1) bits.push(`+${qty - 1}× ${euro(2)}`);
-      if (opt === "B") bits.push(lang === "en" ? "+ STL 3.60" : "+ STL 3,60");
+      const bits = [`${qty}× ${euro(base)}`];
+      if (qty > 1) bits.push(`+${qty - 1}× ${euro(2.6)}`);
       const shipName = region === "DE" ? (lang === "en" ? "shipping DE" : "Versand DE") : (lang === "en" ? "shipping EU" : "Versand EU");
       if (ship == null) return { total: goods, note: bits.join(" · ") + (lang === "en" ? " · shipping by region" : " · Versand je nach Region") };
       return { total: goods + ship, note: bits.join(" · ") + ` · ${shipName} ${euro(ship)}` };
@@ -247,7 +251,7 @@
     function fit(el, text) {
       el.textContent = text;
       const target = 1100;
-      let size = 78;
+      let size = 86;
       el.setAttribute("font-size", size);
       const len = () => el.getComputedTextLength() || 1;
       while (size > 22 && len() > target) { size -= 1; el.setAttribute("font-size", size); }
@@ -265,18 +269,18 @@
       fit(wish, document.getElementById("wish-in").value || "Tv DEIN VEREIN 2026");
     }
     function renderFonts() {
-      const box = document.getElementById("fonts");
+      const box = document.getElementById("font-pick");
+      const sample = document.getElementById("wish-in").value || "Tv DEIN VEREIN 2026";
       box.innerHTML = "";
       FONTS.forEach((f) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.textContent = "Tv DEIN VEREIN 2026";
-        btn.style.fontFamily = f.css;
-        btn.style.fontSize = "1.15rem";
-        btn.setAttribute("aria-pressed", f.id === font ? "true" : "false");
-        btn.addEventListener("click", () => { font = f.id; render(); });
-        box.appendChild(btn);
+        const opt = document.createElement("option");
+        opt.value = f.id;
+        opt.textContent = sample;
+        opt.style.fontFamily = f.css;
+        opt.selected = f.id === font;
+        box.appendChild(opt);
       });
+      box.style.fontFamily = (FONTS.find((f) => f.id === font) || FONTS[0]).css;
     }
     function renderColors() {
       const ids = Object.keys(DB.colors);
@@ -301,7 +305,9 @@
       });
       document.getElementById("c3-row").hidden = mode !== "3";
       const pack = T[lang];
-      document.querySelector("[data-i18n='c2']").textContent = mode === "3" ? (lang === "en" ? "Colour 2 · right" : "Farbe 2 · rechts") : pack.c2;
+      document.querySelector("[data-i18n='c1']").textContent = mode === "3" ? pack.c1b : pack.c1;
+      document.querySelector("[data-i18n='c2']").textContent = mode === "3" ? pack.c2b : pack.c2;
+      document.querySelector("[data-i18n='c3']").textContent = pack.c3;
     }
     function render() {
       if (!DB) return;
@@ -313,7 +319,7 @@
         ? `${name(c1)} / ${name(c2)} / ${name(c3)}`
         : `${name(c1)} / ${name(c2)}`;
       const wish = document.getElementById("wish-in").value || "Tv DEIN VEREIN 2026";
-      const optName = DB.options[opt][lang];
+      const optName = T[lang]["opt" + opt];
       const q = quote();
       document.getElementById("extra").hidden = opt === "S";
       document.getElementById("qty-val").textContent = String(qty);
@@ -326,7 +332,7 @@
       const subject = `${pack.subj} ${code}`;
       const message = pack.body(code, note);
       const link = document.getElementById("code");
-      link.textContent = code;
+      link.textContent = pack.send;
       link.href = `kontakt.html?subject=${encodeURIComponent(subject)}&message=${encodeURIComponent(message)}`;
     }
     fetch("netzlehre-db.json").then((r) => r.json()).then((db) => {
@@ -341,11 +347,8 @@
       document.querySelectorAll("[data-mode]").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
       render();
     }));
-    document.querySelectorAll("[data-opt]").forEach((b) => b.addEventListener("click", () => {
-      opt = b.getAttribute("data-opt");
-      document.querySelectorAll("[data-opt]").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
-      render();
-    }));
+    document.getElementById("font-pick").addEventListener("change", (e) => { font = e.target.value; render(); });
+    document.getElementById("opt-pick").addEventListener("change", (e) => { opt = e.target.value; render(); });
     document.querySelectorAll("[data-region]").forEach((b) => b.addEventListener("click", () => {
       region = b.getAttribute("data-region");
       document.querySelectorAll("[data-region]").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
