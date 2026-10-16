@@ -46,9 +46,9 @@
     .stage.pulse svg { animation: settle .5s ease; }
     @keyframes settle { 0% { transform: scale(.975); } 60% { transform: scale(1.012); } 100% { transform: scale(1); } }
     @keyframes wipe { 0% { transform: translateX(-30px); opacity: 0; } 18% { opacity: .45; } 100% { transform: translateX(230px); opacity: 0; } }
-    svg { width:auto; height:300px; display:block; margin:0 auto; }
+    svg { width:100%; height:auto; display:block; margin:0 auto; }
     .stage { background:radial-gradient(ellipse at 50% 30%, #fff 0%, #e7e8ee 70%); border:1px solid var(--line); border-radius:18px; padding:14px 18px 12px; margin:0 auto 6px; width:fit-content; }
-    .stage svg { width:auto; height:300px; display:block; margin:0 auto; }
+    .stage svg { width:100%; height:auto; display:block; margin:0 auto; }
     html[data-theme="dark"] .stage { background:radial-gradient(ellipse at 50% 30%, #2a2d36 0%, #14161b 72%); }
     label { display:block; font-size:.78rem; letter-spacing:.04em; color:var(--muted); margin:12px 0 6px; }
     input[type="text"] {
@@ -108,7 +108,7 @@
       <div><b data-i18n="o3"></b><span data-i18n="o3s"></span></div>
     </div>
     <div class="stage">
-      <svg id="render" viewBox="1240 140 490 1990" role="img" aria-label="Netzlehre">
+      <svg id="render" viewBox="575 805 1990 490" role="img" aria-label="Netzlehre">
         <defs>
           <mask id="part">
             <path fill="#fff" d="M1466.2 439.2 L1465 448.8 L1465 1901.2 L1464.2 1907.9 L1462 1914.3 L1458.5 1920 L1453.7 1924.7 L1448 1928.3 L1441.7 1930.5 L1435 1931.2 L1355 1931.2 L1348.3 1930.5 L1342 1928.3 L1336.3 1924.7 L1331.5 1920 L1328 1914.3 L1325.8 1907.9 L1325 1901.2 L1325 423.8 L1324.6 420.4 L1323.5 417.2 L1321.7 414.4 L1319.3 412 L1316.5 410.2 L1313.3 409.1 L1310 408.8 L1300 408.8 L1296.7 408.4 L1293.5 407.3 L1290.7 405.5 L1288.3 403.1 L1286.5 400.3 L1285.4 397.1 L1285 393.8 L1285 198.8 L1285.8 192.1 L1288 185.7 L1291.5 180 L1296.3 175.3 L1302 171.7 L1308.3 169.5 L1315 168.8 L1655 168.8 L1661.7 169.5 L1668 171.7 L1673.7 175.3 L1678.5 180 L1682 185.7 L1684.2 192.1 L1685 198.8 L1685 1901.2 L1684.2 1907.9 L1682 1914.3 L1678.5 1920 L1673.7 1924.7 L1668 1928.3 L1661.7 1930.5 L1655 1931.2 L1575 1931.2 L1568.3 1930.5 L1562 1928.3 L1556.3 1924.7 L1551.5 1920 L1548 1914.3 L1545.8 1907.9 L1545 1901.2 L1545 448.8 L1543.8 439.2 L1540.4 430.2 L1534.9 422.2 L1527.7 415.8 L1519.2 411.4 L1509.8 409 L1500.2 409 L1490.8 411.4 L1482.3 415.8 L1475.1 422.2 L1469.6 430.2 L1466.2 439.2 Z"/>
@@ -120,13 +120,15 @@
             <path d="M0 0 L8 4 L0 8 z" fill="#6d6f78"/>
           </marker>
         </defs>
-        <g mask="url(#part)">
+        <g mask="url(#part)" transform="rotate(-90 1485 1050)">
           <rect id="fillA" clip-path="url(#clipA)" x="1285" y="169" width="400" height="1762"/>
           <rect id="fillB" clip-path="url(#clipB)" x="1285" y="169" width="400" height="1762"/>
         </g>
-        <image href="Netzlehre.svg" x="0" y="0" width="2970" height="2100"/>
-        <text id="wish" x="1615" y="1135" text-anchor="middle" dominant-baseline="central" font-size="46" font-weight="700" fill="#F4F4F4" transform="rotate(90 1615 1135)">Tv DEIN VEREIN 2026</text>
-        <g fill="none" stroke="#6d6f78" stroke-width="3" font-family="Outfit, sans-serif" font-size="28">
+        <g transform="rotate(-90 1485 1050)">
+          <image href="Netzlehre.svg" x="0" y="0" width="2970" height="2100"/>
+          <text id="wish" x="1615" y="1135" text-anchor="middle" dominant-baseline="central" font-size="46" font-weight="700" fill="#F4F4F4" transform="rotate(90 1615 1135)">Tv DEIN VEREIN 2026</text>
+        </g>
+        <g fill="none" stroke="#6d6f78" stroke-width="3" font-family="Outfit, sans-serif" font-size="28" transform="rotate(-90 1485 1050)">
           <line x1="1260" y1="169" x2="1260" y2="1931" marker-start="url(#arr)" marker-end="url(#arr)"/>
           <text x="1235" y="1050" fill="#6d6f78" stroke="none" transform="rotate(-90 1235 1050)" text-anchor="middle">15,25 cm</text>
           <line x1="1248" y1="410" x2="1305" y2="410" marker-end="url(#arr)"/>
