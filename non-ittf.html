@@ -65,7 +65,7 @@
       de: {
         back: "← Zurück",
         title: "Nicht ITTF-zugelassen",
-        body: "Dieses Produkt entspricht exakt den Maßen der ITTF-Standards. Es ist nicht von der ITTF oder einer anderen Stelle genehmigt und daher nur für den privaten Gebrauch geeignet.",
+        body: "Dieses Produkt entspricht exakt den Maßen der ITTF-Standards, zum Prüfen der vorgegebenen Netzhöhe von 15,25 cm und der maximal zulässigen Belagdicke mit Schwamm von 4 mm. Es ist jedoch <strong>NICHT</strong> von der ITTF oder einer anderen Stelle genehmigt und daher nur für den privaten Gebrauch geeignet.",
         imprint: "Impressum",
         privacy: "Datenschutz",
         agb: "AGB",
@@ -74,7 +74,7 @@
       en: {
         back: "← Back",
         title: "Not ITTF approved",
-        body: "This product matches the ITTF standard dimensions exactly. It is not approved by the ITTF or any other body and is therefore suitable for private use only.",
+        body: "This product matches the ITTF standard dimensions exactly, for checking the specified net height of 15.25 cm and the maximum permitted rubber thickness with sponge of 4 mm. It is, however, <strong>NOT</strong> approved by the ITTF or any other body and is therefore suitable for private use only.",
         imprint: "Imprint",
         privacy: "Privacy",
         agb: "Terms",
@@ -84,7 +84,7 @@
     function applyLang(lang) {
       const pack = T[lang] || T.de;
       document.documentElement.lang = lang;
-      document.querySelectorAll("[data-i18n]").forEach((el) => { const k = el.getAttribute("data-i18n"); if (pack[k]) el.textContent = pack[k]; });
+      document.querySelectorAll("[data-i18n]").forEach((el) => { const k = el.getAttribute("data-i18n"); if (pack[k]) el.innerHTML = pack[k]; });
       document.querySelectorAll("[data-set-lang]").forEach((b) => b.setAttribute("aria-pressed", b.getAttribute("data-set-lang") === lang ? "true" : "false"));
       localStorage.setItem("tv-lang", lang);
     }
