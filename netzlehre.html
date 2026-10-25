@@ -33,7 +33,7 @@
     .rule { width:28px; height:2px; background:var(--ink); margin:12px auto 14px; opacity:.22; border-radius:2px; }
     .offer { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin:0 0 14px; }
     .offer div { background:var(--card-solid); border:1px solid var(--line); border-radius:14px; padding:10px 8px; text-align:center; }
-    .offer b { display:block; font-family:Orbitron,sans-serif; font-size:.78rem; letter-spacing:.04em; }
+    .offer b { display:block; font-family:Outfit,sans-serif; font-size:.82rem; font-weight:600; }
     .offer span { display:block; color:var(--muted); font-size:.68rem; margin-top:3px; line-height:1.3; }
     .code {
       display:inline-block; font-family:Orbitron,sans-serif; font-size:.92rem; letter-spacing:.08em;
@@ -54,7 +54,8 @@
       .stage svg { width:100%; }
     }
     html[data-theme="dark"] .stage { background:radial-gradient(ellipse at 50% 30%, #2a2d36 0%, #14161b 72%); }
-    label { display:block; font-size:.78rem; letter-spacing:.04em; color:var(--muted); margin:12px 0 6px; }
+    label { display:block; font-size:.78rem; letter-spacing:.04em; color:var(--muted); margin:18px 0 6px; }
+    .block { margin-top:8px; }
     input[type="text"] {
       width:100%; font-family:Outfit,sans-serif; font-size:1rem; border:1px solid var(--line);
       border-radius:12px; padding:11px 12px; background:var(--card-solid); color:var(--ink);
@@ -141,9 +142,10 @@
 
     <label data-i18n="wish"></label>
     <div class="textrow">
-      <input id="wish-in" type="text" maxlength="22" value="Tv DEIN VEREIN 2026" placeholder="Tv DEIN VEREIN 2026">
+      <input id="wish-in" type="text" maxlength="36" value="Tv DEIN VEREIN 2026" placeholder="Vereinsname 2026">
       <select class="pick" id="font-pick" aria-label="Schrift"></select>
     </div>
+
     <label data-i18n="mode"></label>
     <div class="modes">
       <button type="button" data-mode="2" aria-pressed="true" data-i18n="m2"></button>
@@ -187,7 +189,6 @@
       <p id="price-note"></p>
     </div>
     <a class="submit" id="code" href="#" data-i18n="send">Anfrage einreichen</a>
-    <p class="code-hint" data-i18n="hint"></p>
     <p class="note" data-i18n="terms"></p>
     <p class="note"><a href="non-ittf.html" data-i18n="fn"></a></p>
   </main>
@@ -249,12 +250,14 @@
       return mode === "3" ? `NL3-${c1}-${c2}-${c3}-${font}-${opt}` : `NL2-${c1}-${c2}-${font}-${opt}`;
     }
     function fit(el, text) {
-      el.textContent = text;
-      const target = 1100;
-      let size = 86;
+      el.textContent = text || " ";
+      const target = 1080;
+      let size = 92;
       el.setAttribute("font-size", size);
       const len = () => el.getComputedTextLength() || 1;
-      while (size > 22 && len() > target) { size -= 1; el.setAttribute("font-size", size); }
+      while (size > 16 && len() > target) { size -= 1; el.setAttribute("font-size", size); }
+      while (size < 92 && len() < target - 60) { size += 1; el.setAttribute("font-size", size); }
+      if (size > 84) { size = 84; el.setAttribute("font-size", size); }
     }
     function paint() {
       const a = hex(c1);
@@ -363,6 +366,7 @@
       document.querySelectorAll("[data-rot]").forEach((g) => g.setAttribute("transform", wide ? "rotate(-90 1485 1050)" : ""));
     }
     orient();
+    document.getElementById("wish-in").addEventListener("input", render);
     window.addEventListener("resize", orient);
   </script>
 </body>
